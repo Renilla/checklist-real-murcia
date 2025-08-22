@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Checklist Cromos Real Murcia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #800000;
+    }
+    .collection {
+      background: #fff;
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #f9f9f9;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checklist Cromos Real Murcia</h1>
+  <div id="collections"></div>
+
+  <script>
+    // --- Definición de colecciones y cromos ---
+    const colecciones = {
+      "Liga Este 2007/08": [
+        "Escudo",
+        "Jugador A",
+        "Jugador B",
+        "Jugador C"
+      ],
+      "Megacracks 2007/08": [
+        "Escudo",
+        "Jugador D",
+        "Jugador E"
+      ]
+    };
+
+    const contenedor = document.getElementById('collections');
+
+    // Cargar progreso guardado (si existe)
+    const progresoGuardado = JSON.parse(localStorage.getItem('checklistMurciaColecciones')) || {};
+
+    Object.keys(colecciones).forEach(nombreColeccion => {
+      const div = document.createElement('div');
+      div.className = 'collection';
+
+      const titulo = document.createElement('h2');
+      titulo.textContent = nombreColeccion;
+      div.appendChild(titulo);
+
+      const lista = document.createElement('ul');
+
+      colecciones[nombreColeccion].forEach((cromo, index) => {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = progresoGuardado[nombreColeccion]?.[index] || false;
+
+        checkbox.addEventListener('change', () => {
+          if (!progresoGuardado[nombreColeccion]) {
+            progresoGuardado[nombreColeccion] = {};
+          }
+          progresoGuardado[nombreColeccion][index] = checkbox.checked;
+          localStorage.setItem('checklistMurciaColecciones', JSON.stringify(progresoGuardado));
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(document.createTextNode(cromo));
+        lista.appendChild(li);
+      });
+
+      div.appendChild(lista);
+      contenedor.appendChild(div);
+    });
+  </script>
+</body>
+</html>
