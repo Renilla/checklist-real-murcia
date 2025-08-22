@@ -14,6 +14,20 @@
     h1 {
       text-align: center;
       color: #800000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .title-icon {
+      width: 50px;
+      height: 65px;
+      vertical-align: middle;
+    }
+    .global-progress {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 15px;
     }
     .collection {
       background: #fff;
@@ -37,8 +51,8 @@
       flex-shrink: 0;
     }
     .collection-image {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       object-fit: cover;
       border-radius: 4px;
       margin: 0 10px;
@@ -89,23 +103,86 @@
   </style>
 </head>
 <body>
-  <h1>Checklist Cromos Real Murcia</h1>
+  <h1>
+    <img src="images/icono-principal.jpg" alt="Icono" class="title-icon">
+    Checklist Cromos Real Murcia
+    <div class="global-progress" id="global-progress-svg"></div>
+  </h1>
+
   <div id="collections"></div>
 
   <script>
-    // Datos de las colecciones con imágenes
     const colecciones = {
+      "Megacracks 2004/05": {
+        cromos: ["Escudo Real Murcia", "Acciari"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Megacracks 2005/06": {
+        cromos: ["Escudo Real Murcia"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Megacracks 2006/07": {
+        cromos: ["Escudo Real Murcia"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Las Fichas de la Liga 2007": {
+        cromos: ["Escudo Murcia", "Plantilla Murcia", "Notario", "Juanma", "Marañón", "Ochoa", "Paco Peña", "Cuadrado",
+        "Ramón", "Pignol", "Abel", "Pablo Ruiz", "Samuel", "Jofre", "Pedro León", "Iván Alonso", "Aranda", "Antoñito",
+        "Tato", "Richi", "Gallardo", "A. Martín"],
+        portada: "images/ligaeste2007-08.png"
+      },
       "Liga Este 2007/08": {
-        cromos: ["Escudo", "Jugador A", "Jugador B", "Jugador C"],
-        portada: "images/ligaeste2007-08.jpg"
+        cromos: ["Escudo", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", 
+        "César Arzo", "Paco Peña", "Marañón", "Abel", "Bruno", "Pablo García", "Richi", "Pedro León", "Gallardo",
+        "De Lucas", "Jofre", "Regueiro", "Iván Alonso", "Iñigo Vélez", "Henok Goitom", "Mejía", "Curro Torres", 
+        "Baiano", "Movilla", "De Coz", "Kabous", "Rosinei"],
+        portada: "images/ligaeste2007-08.png"
       },
       "Megacracks 2007/08": {
-        cromos: ["Escudo", "Jugador D", "Jugador E"],
-        portada: "images/megacracks2007-08.jpg"
+        cromos: ["Escudo", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", "César Arzo", "Paco Peña", "Marañón",
+        "Curro Torres", "Abel", "Pablo García", "De Lucas", "Richi", "Pedro León", "Regueiro", "Gallardo", "Jofre",
+        "Iñigo Vélez", "Henok Goitom", "Iván Alonso", "Mejía", "Baiano", "Movilla"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Ediciones Estadio Liga 2007/08": {
+        cromos: ["Escudo", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", "Paco Peña",
+        "Marañón", "César Arzo", "Richi", "De Lucas", "Regueiro", "Bruno", "Pedro León", "Gallardo", "Jofre", "Iván Alonso",
+        "Henok Goitom", "Mejía", "Baiano"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Las Fichas de la Liga 2008": {
+        cromos: ["Escudo", "Plantilla", "Himno", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Marañón",
+        "Cuadrado", "Ochoa", "Paco Peña", "César Arzo", "Mejía", "Abel", "Pablo García", "Bruno", "De Lucas", "Richi",
+        "Gallardo", "Baiano", "Jofre", "Iván Alonso", "Henok Goitom", "Iñigo Vélez", "Iban Cuadrado El Capitán Horizontal/Security Horizontal/Security Vertical/Vertical",
+        "Notario El Crack Horizontal/Security Horizontal/Security Vertical/Vertical", "Iván Alonso El Mejor Horizontal/Security Horizontal/Security Vertical/Vertical",
+        "Curro Torres", "Regueiro", "Movilla", "Notario TOP Platinum/Brillantes/Security Horizontal/Security Vertical",
+        "Paco Peña TOP Platinum/Brillantes/Security Horizontal/Security Vertical", "Regueiro TOP Platinum/Brillantes/Security Horizontal/Security Vertical",
+        "De Coz", "Rosinei", "Aquino"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Panini Play Liga 2007/08": {
+        cromos: ["Notario", "Curro Torres", "Mejía", "César Arzo", "Pablo García", "Movilla", "De Lucas", "Regueiro",
+        "Henok Goitom", "Baiano", "Iván Alonso"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Liga Este 2008/09": {
+        cromos: ["Escudo Real Murcia Liga Adelante"],
+        portada: "images/ligaeste2007-08.png"
+      },
+      "Megacracks 2008/09": {
+        cromos: ["Escudo Real Murcia", "Iván Alonso"],
+        portada: "images/megacracks2007-08.png"
+      },
+      "Las Fichas de la Liga 2009": {
+        cromos: ["Escudo Murcia", "Plantilla Murcia", "Alberto", "Paco Peña", "Lillo", "Ochoa", "De Coz", "Mejía", "Cuellar",
+        "Guerrero", "Núñez", "Bruno", "Dialiba", "Capdevila", "De Lucas", "Aquino", "Despotovic", "Iván Alonso", "Sikora",
+        "Elia", "Marañón", "Movilla", "Montoro"],
+        portada: "images/ligaeste2007-08.png"
       }
     };
 
     const contenedor = document.getElementById('collections');
+    const globalProgressContainer = document.getElementById('global-progress-svg');
     const progresoGuardado = JSON.parse(localStorage.getItem('checklistMurciaColecciones')) || {};
 
     function calcularPorcentaje(nombreColeccion) {
@@ -114,20 +191,36 @@
       return (marcados / total) * 100;
     }
 
-    function crearSVGPorcentaje(porcentaje) {
-      const radius = 23;
+    function calcularPorcentajeGlobal() {
+      let total = 0, marcados = 0;
+      Object.keys(colecciones).forEach(nombre => {
+        total += colecciones[nombre].cromos.length;
+        marcados += Object.values(progresoGuardado[nombre] || {}).filter(v => v).length;
+      });
+      return total ? (marcados / total) * 100 : 0;
+    }
+
+    function crearSVGPorcentaje(porcentaje, tamaño = 50) {
+      const radius = tamaño/2 - 2;
       const circumference = 2 * Math.PI * radius;
       const offset = circumference - (porcentaje / 100) * circumference;
 
       return `
-        <svg class="progress-circle">
-          <circle cx="25" cy="25" r="${radius}" stroke="#ccc" stroke-width="4" fill="none"/>
-          <circle cx="25" cy="25" r="${radius}" stroke="#800000" stroke-width="4" fill="none"
-            stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" transform="rotate(-90 25 25)" />
+        <svg class="progress-circle" width="${tamaño}" height="${tamaño}">
+          <circle cx="${tamaño/2}" cy="${tamaño/2}" r="${radius}" stroke="#ccc" stroke-width="4" fill="none"/>
+          <circle cx="${tamaño/2}" cy="${tamaño/2}" r="${radius}" stroke="#800000" stroke-width="4" fill="none"
+            stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" transform="rotate(-90 ${tamaño/2} ${tamaño/2})" />
           <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="15" fill="#800000">${Math.round(porcentaje)}%</text>
         </svg>
       `;
     }
+
+    function actualizarProgresoGlobal() {
+      globalProgressContainer.innerHTML = crearSVGPorcentaje(calcularPorcentajeGlobal(), 70);
+    }
+
+    // Numeración global
+    let globalIndex = 1;
 
     Object.keys(colecciones).forEach(nombreColeccion => {
       const data = colecciones[nombreColeccion];
@@ -167,11 +260,13 @@
 
           li.classList.toggle('checked', checkbox.checked);
           svgContainer.innerHTML = crearSVGPorcentaje(calcularPorcentaje(nombreColeccion));
+          actualizarProgresoGlobal();
         });
 
         li.appendChild(checkbox);
         const span = document.createElement('span');
-        span.textContent = cromo;
+        span.textContent = `${globalIndex++}. ${cromo}`;
+        span.style.fontWeight = 'bold';
         li.appendChild(span);
         ul.appendChild(li);
       });
@@ -188,6 +283,8 @@
       collectionDiv.appendChild(body);
       contenedor.appendChild(collectionDiv);
     });
+
+    actualizarProgresoGlobal();
   </script>
 </body>
 </html>
