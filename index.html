@@ -11,30 +11,50 @@
       margin: auto;
       padding: 20px;
     }
-    h1, h2 {
+    h1 {
       text-align: center;
       color: #800000;
     }
     .collection {
       background: #fff;
-      margin: 20px 0;
+      margin: 15px 0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .collection-header {
       padding: 15px;
-      border-radius: 5px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      background: #f9f9f9;
-      margin: 8px 0;
-      padding: 10px;
-      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #e0e0e0;
       display: flex;
+      justify-content: space-between;
       align-items: center;
     }
-    input[type="checkbox"] {
-      margin-right: 10px;
+    .collection-header:hover {
+      background: #d0d0d0;
+    }
+    .collection-body {
+      display: none;
+      padding: 10px 15px;
+      background: #fafafa;
+    }
+    .collection-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .collection-body li {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+    .arrow.open {
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -59,19 +79,22 @@
     };
 
     const contenedor = document.getElementById('collections');
-
-    // Cargar progreso guardado (si existe)
     const progresoGuardado = JSON.parse(localStorage.getItem('checklistMurciaColecciones')) || {};
 
     Object.keys(colecciones).forEach(nombreColeccion => {
-      const div = document.createElement('div');
-      div.className = 'collection';
+      // Crear contenedor de colección
+      const collectionDiv = document.createElement('div');
+      collectionDiv.className = 'collection';
 
-      const titulo = document.createElement('h2');
-      titulo.textContent = nombreColeccion;
-      div.appendChild(titulo);
+      // Cabecera
+      const header = document.createElement('div');
+      header.className = 'collection-header';
+      header.innerHTML = `<span>${nombreColeccion}</span> <span class="arrow">▶</span>`;
 
-      const lista = document.createElement('ul');
+      // Cuerpo (cromos)
+      const body = document.createElement('div');
+      body.className = 'collection-body';
+      const ul = document.createElement('ul');
 
       colecciones[nombreColeccion].forEach((cromo, index) => {
         const li = document.createElement('li');
@@ -89,11 +112,21 @@
 
         li.appendChild(checkbox);
         li.appendChild(document.createTextNode(cromo));
-        lista.appendChild(li);
+        ul.appendChild(li);
       });
 
-      div.appendChild(lista);
-      contenedor.appendChild(div);
+      body.appendChild(ul);
+
+      // Evento para abrir/cerrar
+      header.addEventListener('click', () => {
+        const arrow = header.querySelector('.arrow');
+        body.style.display = body.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('open');
+      });
+
+      collectionDiv.appendChild(header);
+      collectionDiv.appendChild(body);
+      contenedor.appendChild(collectionDiv);
     });
   </script>
 </body>
