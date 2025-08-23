@@ -111,7 +111,29 @@
 
   <div id="collections"></div>
 
-  <script>
+  <!-- Script principal convertido a módulo para usar Firebase -->
+  <script type="module">
+    // --- Firebase ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEWxXIHlD8ezQTdklpvys2FNjFu5bqd2s",
+      authDomain: "checklist-real-murcia.firebaseapp.com",
+      databaseURL: "https://checklist-real-murcia-default-rtdb.firebaseio.com",
+      projectId: "checklist-real-murcia",
+      storageBucket: "checklist-real-murcia.firebasestorage.app",
+      messagingSenderId: "760418626321",
+      appId: "1:760418626321:web:5aa01ddfd53e9be79bbab0",
+      measurementId: "G-DWVT87PSEZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+
+    // --- Tu código original (sin cambios visuales) ---
     const colecciones = {
       "Megacracks 2004/05": {
         cromos: ["Escudo Real Murcia", "Acciari"],
@@ -183,7 +205,20 @@
 
     const contenedor = document.getElementById('collections');
     const globalProgressContainer = document.getElementById('global-progress-svg');
-    const progresoGuardado = JSON.parse(localStorage.getItem('checklistMurciaColecciones')) || {};
+
+    // Sustituye localStorage por Firebase
+    let progresoGuardado = {};
+
+    async function cargarProgreso() {
+      const snapshot = await get(ref(db, 'checklistMurciaColecciones'));
+      if (snapshot.exists()) {
+        progresoGuardado = snapshot.val();
+      }
+    }
+
+    async function guardarProgreso() {
+      await set(ref(db, 'checklistMurciaColecciones'), progresoGuardado);
+    }
 
     function calcularPorcentaje(nombreColeccion) {
       const total = colecciones[nombreColeccion].cromos.length;
@@ -216,75 +251,84 @@
     }
 
     function actualizarProgresoGlobal() {
-      globalProgressContainer.innerHTML = crearSVGPorcentaje(calcularPorcentajeGlobal(), 70);
+      globalProgressContainer.innerHTML = crearSVGPorcentaje(calcularPorcentajeGlobal(), 50);
     }
 
-    // Numeración global
-    let globalIndex = 1;
+    // Inicialización respetando tu lógica original
+    async function init() {
+      await cargarProgreso();
 
-    Object.keys(colecciones).forEach(nombreColeccion => {
-      const data = colecciones[nombreColeccion];
-      const collectionDiv = document.createElement('div');
-      collectionDiv.className = 'collection';
+      // Numeración global
+      let globalIndex = 1;
 
-      const porcentaje = calcularPorcentaje(nombreColeccion);
-      const header = document.createElement('div');
-      header.className = 'collection-header';
-      header.innerHTML = `
-        <span class="progress-svg">${crearSVGPorcentaje(porcentaje)}</span>
-        <img class="collection-image" src="${data.portada}" alt="${nombreColeccion}">
-        <span class="collection-title">${nombreColeccion}</span>
-        <span class="arrow">▶</span>
-      `;
-      const svgContainer = header.querySelector('.progress-svg');
+      Object.keys(colecciones).forEach(nombreColeccion => {
+        const data = colecciones[nombreColeccion];
+        const collectionDiv = document.createElement('div');
+        collectionDiv.className = 'collection';
 
-      const body = document.createElement('div');
-      body.className = 'collection-body';
-      const ul = document.createElement('ul');
+        const porcentaje = calcularPorcentaje(nombreColeccion);
+        const header = document.createElement('div');
+        header.className = 'collection-header';
+        header.innerHTML = `
+          <span class="progress-svg">${crearSVGPorcentaje(porcentaje)}</span>
+          <img class="collection-image" src="${data.portada}" alt="${nombreColeccion}">
+          <span class="collection-title">${nombreColeccion}</span>
+          <span class="arrow">▶</span>
+        `;
+        const svgContainer = header.querySelector('.progress-svg');
 
-      data.cromos.forEach((cromo, index) => {
-        const li = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = progresoGuardado[nombreColeccion]?.[index] || false;
+        const body = document.createElement('div');
+        body.className = 'collection-body';
+        const ul = document.createElement('ul');
 
-        if (checkbox.checked) li.classList.add('checked');
+        data.cromos.forEach((cromo, index) => {
+          const li = document.createElement('li');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = progresoGuardado[nombreColeccion]?.[index] || false;
 
-        li.addEventListener('click', () => {
-          checkbox.checked = !checkbox.checked;
-          if (!progresoGuardado[nombreColeccion]) {
-            progresoGuardado[nombreColeccion] = {};
-          }
-          progresoGuardado[nombreColeccion][index] = checkbox.checked;
-          localStorage.setItem('checklistMurciaColecciones', JSON.stringify(progresoGuardado));
+          if (checkbox.checked) li.classList.add('checked');
 
-          li.classList.toggle('checked', checkbox.checked);
-          svgContainer.innerHTML = crearSVGPorcentaje(calcularPorcentaje(nombreColeccion));
-          actualizarProgresoGlobal();
+          li.addEventListener('click', async () => {
+            checkbox.checked = !checkbox.checked;
+            if (!progresoGuardado[nombreColeccion]) {
+              progresoGuardado[nombreColeccion] = {};
+            }
+            progresoGuardado[nombreColeccion][index] = checkbox.checked;
+
+            li.classList.toggle('checked', checkbox.checked);
+            svgContainer.innerHTML = crearSVGPorcentaje(calcularPorcentaje(nombreColeccion));
+            actualizarProgresoGlobal();
+
+            // Guardar en Firebase
+            await guardarProgreso();
+          });
+
+          li.appendChild(checkbox);
+          const span = document.createElement('span');
+          span.textContent = `${globalIndex++}. ${cromo}`;
+          span.style.fontWeight = 'bold';
+          li.appendChild(span);
+          ul.appendChild(li);
         });
 
-        li.appendChild(checkbox);
-        const span = document.createElement('span');
-        span.textContent = `${globalIndex++}. ${cromo}`;
-        span.style.fontWeight = 'bold';
-        li.appendChild(span);
-        ul.appendChild(li);
+        body.appendChild(ul);
+
+        header.addEventListener('click', () => {
+          const arrow = header.querySelector('.arrow');
+          body.style.display = body.style.display === 'block' ? 'none' : 'block';
+          arrow.classList.toggle('open');
+        });
+
+        collectionDiv.appendChild(header);
+        collectionDiv.appendChild(body);
+        contenedor.appendChild(collectionDiv);
       });
 
-      body.appendChild(ul);
+      actualizarProgresoGlobal();
+    }
 
-      header.addEventListener('click', () => {
-        const arrow = header.querySelector('.arrow');
-        body.style.display = body.style.display === 'block' ? 'none' : 'block';
-        arrow.classList.toggle('open');
-      });
-
-      collectionDiv.appendChild(header);
-      collectionDiv.appendChild(body);
-      contenedor.appendChild(collectionDiv);
-    });
-
-    actualizarProgresoGlobal();
+    init();
   </script>
 </body>
 </html>
