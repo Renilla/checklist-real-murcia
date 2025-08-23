@@ -52,7 +52,7 @@
     }
     .collection-image {
       width: 60px;
-      height: 60px;
+      height: 80px;
       object-fit: cover;
       border-radius: 4px;
       margin: 0 10px;
@@ -104,7 +104,7 @@
 </head>
 <body>
   <h1>
-    <img src="images/icono-principal.jpg" alt="Icono" class="title-icon">
+    <img src="imagesCromos/icono-principal.jpg" alt="Icono" class="title-icon">
     Checklist Cromos Real Murcia
     <div class="global-progress" id="global-progress-svg"></div>
   </h1>
@@ -113,42 +113,49 @@
 
   <script>
     const colecciones = {
+      "Liga Este 2003/04": {
+        cromos: ["Escudo", "Entrenador Joaquín Peiro", "Valero", "Maciel", "Pedro Largo", "Cuadrado", "Carrero", 
+        "Clavero", "Juanma", "Acciari", "Julio Álvarez", "Albiol", "Setvalls", "Gomez", "Isach", "Richi",
+        "David Karanka", "Luis García", "Quintana", "Sánchez Broto", "Míchel", "Fredi", "Roberto", "Loeschbor", 
+        "Carreras", "Roteta", "Esnaider", "Juanmi", "Jensen", "Alineación Murcia La Razón", "Cuadrado Nutella"],
+        portada: "imagesAlbumes/ligaeste2003-04.png"
+      },
       "Megacracks 2004/05": {
         cromos: ["Escudo Real Murcia", "Acciari"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/megacracks2007-08.png"
       },
       "Megacracks 2005/06": {
         cromos: ["Escudo Real Murcia"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/megacracks2007-08.png"
       },
       "Megacracks 2006/07": {
         cromos: ["Escudo Real Murcia"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/megacracks2007-08.png"
       },
       "Las Fichas de la Liga 2007": {
         cromos: ["Escudo Murcia", "Plantilla Murcia", "Notario", "Juanma", "Marañón", "Ochoa", "Paco Peña", "Cuadrado",
         "Ramón", "Pignol", "Abel", "Pablo Ruiz", "Samuel", "Jofre", "Pedro León", "Iván Alonso", "Aranda", "Antoñito",
         "Tato", "Richi", "Gallardo", "A. Martín"],
-        portada: "images/ligaeste2007-08.png"
+        portada: "imagesAlbumes/fichasLiga2007.png"
       },
       "Liga Este 2007/08": {
         cromos: ["Escudo", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", 
         "César Arzo", "Paco Peña", "Marañón", "Abel", "Bruno", "Pablo García", "Richi", "Pedro León", "Gallardo",
         "De Lucas", "Jofre", "Regueiro", "Iván Alonso", "Iñigo Vélez", "Henok Goitom", "Mejía", "Curro Torres", 
         "Baiano", "Movilla", "De Coz", "Kabous", "Rosinei"],
-        portada: "images/ligaeste2007-08.png"
+        portada: "imagesAlbumes/ligaeste2007-08.png"
       },
       "Megacracks 2007/08": {
         cromos: ["Escudo", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", "César Arzo", "Paco Peña", "Marañón",
         "Curro Torres", "Abel", "Pablo García", "De Lucas", "Richi", "Pedro León", "Regueiro", "Gallardo", "Jofre",
         "Iñigo Vélez", "Henok Goitom", "Iván Alonso", "Mejía", "Baiano", "Movilla"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/megacracks2007-08.png"
       },
       "Ediciones Estadio Liga 2007/08": {
         cromos: ["Escudo", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Cuadrado", "Ochoa", "Paco Peña",
         "Marañón", "César Arzo", "Richi", "De Lucas", "Regueiro", "Bruno", "Pedro León", "Gallardo", "Jofre", "Iván Alonso",
         "Henok Goitom", "Mejía", "Baiano"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/estadio2007-08.png"
       },
       "Las Fichas de la Liga 2008": {
         cromos: ["Escudo", "Plantilla", "Himno", "Entrenador Lucas Alcaraz", "Notario", "Carini", "Pignol", "Marañón",
@@ -158,26 +165,26 @@
         "Curro Torres", "Regueiro", "Movilla", "Notario TOP Platinum/Brillantes/Security Horizontal/Security Vertical",
         "Paco Peña TOP Platinum/Brillantes/Security Horizontal/Security Vertical", "Regueiro TOP Platinum/Brillantes/Security Horizontal/Security Vertical",
         "De Coz", "Rosinei", "Aquino"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/fichasLiga2008.png"
       },
       "Panini Play Liga 2007/08": {
         cromos: ["Notario", "Curro Torres", "Mejía", "César Arzo", "Pablo García", "Movilla", "De Lucas", "Regueiro",
         "Henok Goitom", "Baiano", "Iván Alonso"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/playLiga2007-08.png"
       },
       "Liga Este 2008/09": {
         cromos: ["Escudo Real Murcia Liga Adelante"],
-        portada: "images/ligaeste2007-08.png"
+        portada: "imagesAlbumes/ligaeste2008-09.png"
       },
       "Megacracks 2008/09": {
         cromos: ["Escudo Real Murcia", "Iván Alonso"],
-        portada: "images/megacracks2007-08.png"
+        portada: "imagesAlbumes/megacracks2008-09.png"
       },
       "Las Fichas de la Liga 2009": {
         cromos: ["Escudo Murcia", "Plantilla Murcia", "Alberto", "Paco Peña", "Lillo", "Ochoa", "De Coz", "Mejía", "Cuellar",
         "Guerrero", "Núñez", "Bruno", "Dialiba", "Capdevila", "De Lucas", "Aquino", "Despotovic", "Iván Alonso", "Sikora",
         "Elia", "Marañón", "Movilla", "Montoro"],
-        portada: "images/ligaeste2007-08.png"
+        portada: "imagesAlbumes/ligaeste2007-08.png"
       }
     };
 
