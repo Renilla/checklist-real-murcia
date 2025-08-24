@@ -7,7 +7,7 @@
     "theme_color": "#ffffff",
     "icons": [
       {
-        "src": "imagesCromos/icono-principal.jpg",
+        "src": "imagesCromos/icono.jpg",
         "sizes": "180x180",
         "type": "image/jpeg"
       }
