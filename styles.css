@@ -354,6 +354,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  margin-top: 70px;
 }
 .title-icon {
   width: 50px;
@@ -435,4 +436,29 @@ h1 {
 }
 .arrow.open {
   transform: rotate(90deg);
+}
+
+body {
+  position: relative; /* necesario para posicionar el perfil dentro del body */
+  text-align: center; /* mantiene centrado el resto del contenido */
+}
+
+.profile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.8); /* opcional: fondo semitransparente */
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
