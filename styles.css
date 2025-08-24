@@ -437,12 +437,12 @@ h1 {
 .arrow.open {
   transform: rotate(90deg);
 }
-
+/*
 body {
-  position: relative; /* necesario para posicionar el perfil dentro del body */
-  text-align: center; /* mantiene centrado el resto del contenido */
+  position: relative;
+  text-align: center;
 }
-
+*/
 .profile {
   position: absolute;
   top: 10px;
