@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login con Google</title>
+</head>
+<body>
+  <h1>Bienvenido</h1>
+  <button id="google-login">Iniciar sesión con Google</button>
+
+  <script type="module">
+    import { auth, GoogleAuthProvider, signInWithPopup } from './firebase.js';
+
+    document.getElementById("google-login").addEventListener("click", async () => {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        // Usuario autenticado
+        window.location.href = "checklist.html";
+      } catch (error) {
+        console.error("Error en el login:", error);
+      }
+    });
+  </script>
+</body>
+</html>
