@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Chechlist Cromos Real Murcia</title>
+  <title>Registro - Chechlist Cromos Real Murcia</title>
   
   <link rel="icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
   <link rel="shortcut icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
   <link rel="apple-touch-icon" href="imagesCromos/icono-principal.jpg">
   
-  <meta property="og:title" content="Login - Chechlist Cromos Real Murcia">
-  <meta property="og:description" content="Inicia sesión para contar tus cromos del Real Murcia">
+  <meta property="og:title" content="Registro - Chechlist Cromos Real Murcia">
+  <meta property="og:description" content="Regístrate para contar tus cromos del Real Murcia">
   <meta property="og:image" content="imagesCromos/icono-principal.jpg">
   <meta property="og:url" content="">
   <meta property="og:type" content="website">
@@ -26,28 +26,23 @@
 </head>
 <body>
   <div class="container">
-    <!-- Auth Section -->
+    <!-- Registration Section -->
     <div id="auth" class="card">
-      <h2 id="auth-title">Iniciar Sesión</h2>
+      <h2 id="auth-title">Registro</h2>
       <form id="auth-form">
         <input type="text" id="username" placeholder="Usuario" required>
         <input type="password" id="password" placeholder="Contraseña" required>
-        <div class="remember-session">
-          <label for="remember-session">
-            <input type="checkbox" id="remember-session" checked>
-            <span class="checkmark"></span>
-            Recordar sesión
-          </label>
-        </div>
-        <button type="submit" id="auth-button">Entrar</button>
+        <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required>
+        <div id="password-error" class="error-message hidden"></div>
+        <button type="submit" id="auth-button">Registrar</button>
       </form>
-      <p id="toggle-auth">¿No tienes cuenta? <a href="registro.html" id="toggle-link">Regístrate</a></p>
+      <p id="toggle-auth">¿Ya tienes cuenta? <a href="index.html" id="toggle-link">Inicia Sesión</a></p>
     </div>
   </div>
   
   <!-- Toast Notifications Container -->
   <div id="toast-container" class="toast-container"></div>
-  
+
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -64,128 +59,16 @@
       measurementId: "G-DWVT87PSEZ"
     };
 
-    // Initialize Firebase
+    // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
 
+    // Referencia global a la base de datos
+    const database = firebase.database();
     let dbRef = firebase.database().ref();
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Verificar si ya hay una sesión activa
-      const savedSession = getSavedSession();
-      if (savedSession) {
-        validateAndRedirect(savedSession);
-      } else {
-        setupAuth();
-      }
+      setupRegistration();
     });
-
-    // Funciones para manejar cookies de sesión
-    function setCookie(name, value, days = 30) {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-    }
-
-    function getCookie(name) {
-      const nameEQ = name + "=";
-      const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) {
-          try {
-            return JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
-          } catch (error) {
-            console.error('Error parsing cookie:', error);
-            return null;
-          }
-        }
-      }
-      return null;
-    }
-
-    function deleteCookie(name) {
-      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
-    }
-
-    function saveSession(username, password) {
-      setCookie('checklist_realmurcia_session', { username, password });
-    }
-
-    function getSavedSession() {
-      return getCookie('checklist_realmurcia_session');
-    }
-
-    function clearSession() {
-      deleteCookie('checklist_realmurcia_session');
-    }
-
-    async function validateAndRedirect(savedSession) {
-      try {
-        const snapshot = await dbRef.child('users/' + savedSession.username).get();
-        const userData = snapshot.val();
-        
-        if (userData && userData.password === savedSession.password) {
-          // Sesión válida, redirigir a checklist.html
-          window.location.href = 'checklist.html';
-          return;
-        }
-      } catch (error) {
-        console.error('Error validando sesión guardada:', error);
-        clearSession();
-      }
-      
-      // Si no hay sesión válida, mostrar login
-      setupAuth();
-    }
-
-    function setupAuth() {
-      const form = document.getElementById('auth-form');
-
-      // Clear any existing event handlers
-      form.onsubmit = null;
-
-      form.onsubmit = async e => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const rememberSession = document.getElementById('remember-session').checked;
-
-        // Disable form during submission
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Entrando...';
-
-        try {
-          const snapshot = await dbRef.child('users/' + username).get();
-          const userData = snapshot.val();
-
-          if (!userData || userData.password !== password) {
-            showToast('Usuario o contraseña inválidos', 'error');
-            return;
-          }
-          
-          // Guardar sesión en cookies solo si está marcado "Recordar sesión"
-          if (rememberSession) {
-            saveSession(username, password);
-          } else {
-            // Si no está marcado, limpiar cualquier sesión anterior
-            clearSession();
-          }
-          
-          // Redirigir a checklist.html después del login exitoso
-          window.location.href = 'checklist.html';
-        } catch (error) {
-          console.error('Error durante el login:', error);
-          showToast('Error durante el inicio de sesión. Por favor, intenta de nuevo.', 'error');
-        } finally {
-          // Re-enable form
-          submitButton.disabled = false;
-          submitButton.textContent = originalText;
-        }
-      };
-    }
 
     // Toast Notification System
     function showToast(message, type = 'info', duration = 4000) {
@@ -251,6 +134,91 @@
             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
           </svg>`;
       }
+    }
+
+    function setupRegistration() {
+      const form = document.getElementById('auth-form');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const passwordError = document.getElementById('password-error');
+
+      // Validación en tiempo real de las contraseñas
+      function validatePasswords() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        
+        if (confirmPassword && password !== confirmPassword) {
+          passwordError.textContent = 'Las contraseñas no coinciden';
+          passwordError.classList.remove('hidden');
+          return false;
+        } else {
+          passwordError.classList.add('hidden');
+          return true;
+        }
+      }
+
+      // Event listeners para validación en tiempo real
+      passwordInput.addEventListener('input', validatePasswords);
+      confirmPasswordInput.addEventListener('input', validatePasswords);
+
+      form.onsubmit = async e => {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        // Validaciones
+        if (!username) {
+          showToast('Por favor, introduce un nombre de usuario', 'error');
+          return;
+        }
+
+        if (username.length < 3) {
+          showToast('El nombre de usuario debe tener al menos 3 caracteres', 'error');
+          return;
+        }
+
+        if (password.length < 6) {
+          showToast('La contraseña debe tener al menos 6 caracteres', 'error');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showToast('Las contraseñas no coinciden', 'error');
+          return;
+        }
+
+        try {
+          // Verificar si el usuario ya existe
+          const snapshot = await dbRef.child('users/' + username).get();
+          const userData = snapshot.val();
+
+          if (userData) {
+            showToast('El nombre de usuario ya existe. Por favor, elige otro.', 'error');
+            return;
+          }
+
+          // Crear nuevo usuario
+          const newUser = { 
+            password, 
+            ridden: [],
+            createdAt: new Date().toISOString()
+          };
+          
+          await dbRef.child('users/' + username).set(newUser);
+          
+          // Redirigir al login con mensaje de éxito
+          showToast('¡Registro exitoso! Ahora puedes iniciar sesión.', 'success');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1500);
+          
+        } catch (error) {
+          console.error('Error durante el registro:', error);
+          showToast('Error durante el registro. Por favor, intenta de nuevo.', 'error');
+        }
+      };
     }
   </script>
 </body>

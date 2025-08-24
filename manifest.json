@@ -1,0 +1,16 @@
+{
+    "name": "Checklist Real Murcia",
+    "short_name": "Checklist Real Murcia",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+      {
+        "src": "imagesCromos/icono-principal.jpg",
+        "sizes": "180x180",
+        "type": "image/jpeg"
+      }
+    ]
+  }
+  
