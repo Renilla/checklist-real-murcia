@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Chechlist Cromos Real Murcia</title>
+  <title>Login - Contador Montañas Rusas - PortAventura</title>
   
-  <link rel="icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
-  <link rel="shortcut icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
-  <link rel="apple-touch-icon" href="imagesCromos/icono.jpg">
+  <link rel="icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="apple-touch-icon" href="mclovin.jpg">
   
-  <meta property="og:title" content="Login - Chechlist Cromos Real Murcia">
-  <meta property="og:description" content="Inicia sesión para contar tus cromos del Real Murcia">
-  <meta property="og:image" content="imagesCromos/icono-principal.jpg">
+  <meta property="og:title" content="Login - Contador Montañas Rusas - PortAventura">
+  <meta property="og:description" content="Inicia sesión para contar tus montañas rusas en PortAventura">
+  <meta property="og:image" content="mclovin.jpg">
   <meta property="og:url" content="">
   <meta property="og:type" content="website">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Checklist Real Murcia">
+  <meta name="apple-mobile-web-app-title" content="Peroleta a PA">
 
-  <link rel="apple-touch-icon" href="imagesCromos/icono-principal.jpg">
+  <link rel="apple-touch-icon" href="mclovin.jpg">
   <link rel="manifest" href="/manifest.json">
   
   <link rel="stylesheet" href="styles.css">
@@ -109,15 +109,15 @@
     }
 
     function saveSession(username, password) {
-      setCookie('checklist_realmurcia_session', { username, password });
+      setCookie('portaventura_session', { username, password });
     }
 
     function getSavedSession() {
-      return getCookie('checklist_realmurcia_session');
+      return getCookie('portaventura_session');
     }
 
     function clearSession() {
-      deleteCookie('checklist_realmurcia_session');
+      deleteCookie('portaventura_session');
     }
 
     async function validateAndRedirect(savedSession) {

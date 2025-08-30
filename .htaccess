@@ -1,0 +1,29 @@
+# Redirecciones para páginas protegidas
+# Si el usuario accede directamente a estas páginas sin autenticación,
+# serán redirigidos a login.html
+
+# Redirigir index.html a login.html si no hay sesión (manejado por JavaScript)
+# No es necesario redirección automática ya que el JavaScript se encarga de la verificación
+
+# Configuración para archivos estáticos
+<Files "*.html">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</Files>
+
+# Configuración para archivos JavaScript y CSS
+<Files "*.js">
+    Header set Cache-Control "public, max-age=31536000"
+</Files>
+
+<Files "*.css">
+    Header set Cache-Control "public, max-age=31536000"
+</Files>
+
+# Configuración para archivos JSON
+<Files "*.json">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</Files> 

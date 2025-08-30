@@ -1,13 +1,13 @@
 {
-    "name": "Checklist Real Murcia",
-    "short_name": "Checklist Real Murcia",
+    "name": "Peroleta a PA",
+    "short_name": "Peroleta a PA",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "icons": [
       {
-        "src": "imagesCromos/icono.jpg",
+        "src": "mclovin.jpg",
         "sizes": "180x180",
         "type": "image/jpeg"
       }
