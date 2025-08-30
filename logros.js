@@ -173,9 +173,14 @@ function renderAchievements() {
     let medalClass = 'locked';
     let medalIcon = '🔒';
     let medalText = 'Bloqueado';
-    let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro
-    
-    if (rideCount >= 3) {
+    let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro, 4 = diamante
+
+    if (rideCount >= 4) {
+      medalClass = 'diamond';
+      medalIcon = '💎';
+      medalText = 'Diamante';
+      priority = 4;
+    } else if (rideCount >= 3) {
       medalClass = 'gold';
       medalIcon = '🥇';
       medalText = 'Oro';
@@ -250,6 +255,7 @@ function renderAchievementStats() {
   let bronzeMedals = 0;
   let silverMedals = 0;
   let goldMedals = 0;
+  let diamondMedals = 0;
   
   achievementsWithMapping.forEach(attraction => {
     const originalIndex = attractions.findIndex(a => a.name === attraction.name);
@@ -257,7 +263,9 @@ function renderAchievementStats() {
     
     if (rideCount >= 1) {
       unlockedAchievements++;
-      if (rideCount >= 3) {
+      if (rideCount >= 4) {
+        diamondMedals++;
+      } else if (rideCount >= 3) {
         goldMedals++;
       } else if (rideCount >= 2) {
         silverMedals++;
@@ -282,6 +290,13 @@ function renderAchievementStats() {
       <div class="stat-info">
         <div class="stat-value">${completionPercentage}%</div>
         <div class="stat-label">Progreso total</div>
+      </div>
+    </div>
+    <div class="achievement-stat">
+      <div class="stat-icon">💎</div>
+      <div class="stat-info">
+        <div class="stat-value">${diamondMedals}</div>
+        <div class="stat-label">Medallas de diamante</div>
       </div>
     </div>
     <div class="achievement-stat">
