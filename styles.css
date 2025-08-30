@@ -2261,6 +2261,12 @@ input:focus {
   border: 2px solid #FFD700;
 }
 
+.achievement-medal.diamond {
+  background: linear-gradient(135deg, #32aecd, #0b87b8);
+  color: white;
+  border: 2px solid #32a9cd;
+}
+
 .medal-icon {
   font-size: 20px;
   line-height: 1;
