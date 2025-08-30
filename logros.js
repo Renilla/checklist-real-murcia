@@ -217,8 +217,8 @@ function renderAchievements() {
     // Si uno está bloqueado y otro no, el desbloqueado va primero
     if (a.priority === 0 && b.priority > 0) return 1;
     if (a.priority > 0 && b.priority === 0) return -1;
-    // Si ambos están desbloqueados, ordenar por prioridad (oro > plata > bronce)
-    return b.priority - a.priority;
+    // Si ambos están desbloqueados, ordenar por prioridad (diamante > oro > plata > bronce)
+    if (a.priority > 0 && b.priority > 0) return b.priority - a.priority;
   });
   
   // Renderizar logros ordenados
