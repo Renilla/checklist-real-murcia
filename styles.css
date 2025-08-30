@@ -279,14 +279,14 @@ button.danger:hover {
 }
 
 #toggle-link {
-  color: var(--primary-blue);
+  color: var(--murcia-red);
   cursor: pointer;
   font-weight: 500;
   transition: color var(--transition-fast);
 }
 
 #toggle-link:hover {
-  color: #0056CC;
+  color: var(--murcia-red-darker);
   text-decoration: underline;
 }
 
@@ -319,8 +319,9 @@ header h1 {
   letter-spacing: -0.3px;
 }
 
+/*Por Aquí*/
 .gradient-title {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, #007AFF 100%);
+  background: linear-gradient(135deg, var(--murcia-red-darker) 0%, var(--murcia-red) 50%, var(--murcia-red-darker) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1037,7 +1038,7 @@ header h1 {
 /* Focus States for Accessibility */
 button:focus,
 input:focus {
-  outline: 2px solid var(--primary-blue);
+  outline: 2px solid var(--murcia-red);
   outline-offset: 2px;
 }
 
