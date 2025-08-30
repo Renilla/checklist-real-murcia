@@ -175,12 +175,7 @@ function renderAchievements() {
     let medalText = 'Bloqueado';
     let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro
     
-    if (rideCount >= 4) {
-      medalClass = 'diamond';
-      medalIcon = '💎​';
-      medalText = 'Diamante';
-      priority = 4;
-    } else if (rideCount >= 3) {
+    if (rideCount >= 3) {
       medalClass = 'gold';
       medalIcon = '🥇';
       medalText = 'Oro';
