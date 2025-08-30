@@ -2246,7 +2246,7 @@ input:focus {
 .achievement-medal.bronze {
   background: linear-gradient(135deg, #CD7F32, #B8860B);
   color: white;
-  border: 2px solid #CD7F32;
+  border: 2px solid #cd7032;
 }
 
 .achievement-medal.silver {
