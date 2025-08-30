@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rankings - PortAventura</title>
+  
+  <link rel="icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="apple-touch-icon" href="mclovin.jpg">
+  
+  <meta property="og:title" content="Rankings - PortAventura">
+  <meta property="og:description" content="Rankings detallados de montañas rusas.">
+  <meta property="og:image" content="mclovin.jpg">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="website">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Peroleta a PA">
+
+  <link rel="apple-touch-icon" href="mclovin.jpg">
+  <link rel="manifest" href="/manifest.json">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+
+    <!-- Rankings Section -->
+    <div id="rankings-app">
+      <header>
+        <div class="header-left">
+          <button id="back-button" class="back-button" title="Volver">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+            </svg>
+          </button>
+          <h1 class="gradient-title">Rankings</h1>
+        </div>
+        <button id="logout-rankings">Cerrar Sesión</button>
+      </header>
+      
+      <!-- User Profile -->
+      <div id="user-profile-rankings" class="floating-user-profile">
+        <div class="user-avatar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="user-name-display" id="user-name-display-rankings"></span>
+      </div>
+
+      <!-- Rankings Content -->
+      <div class="rankings-content">
+        <!-- Overall Ranking -->
+        <section class="ranking-section card">
+          <h3>🏆 Ranking General</h3>
+          <div class="ranking-description">
+            <p>Ranking basado en puntos totales y bonificaciones</p>
+          </div>
+          <ol id="overall-ranking-list" class="ranking-list"></ol>
+        </section>
+
+        <!-- Most Ridden Attractions Chart -->
+        <section class="ranking-section card">
+          <h3>📊 Atracciones Más Montadas</h3>
+          <div class="ranking-description">
+            <p>Gráfico de barras de las atracciones con más visitas</p>
+          </div>
+          <div id="attractions-chart" class="chart-container">
+            <canvas id="attractions-chart-canvas"></canvas>
+          </div>
+        </section>
+
+        <!-- Individual Player Attractions Chart -->
+        <section class="ranking-section card">
+          <h3>👤 Atracciones Favoritas del Jugador</h3>
+          <div class="ranking-description">
+            <p>Selecciona un usuario para ver en qué atracciones ha montado más veces</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 1em;">
+            <label for="player-select"><strong>Jugador:</strong></label>
+            <select id="player-select"></select>
+          </div>
+          <div id="player-attractions-chart" class="chart-container">
+            <canvas id="player-attractions-chart-canvas"></canvas>
+          </div>
+        </section>
+
+        <!-- Crown Leaders -->
+        <section class="ranking-section card">
+          <h3>👑 Líderes de Coronas</h3>
+          <div class="ranking-description">
+            <p>Jugadores con más coronas (sin empates)</p>
+          </div>
+          <ol id="crown-leaders-list" class="ranking-list"></ol>
+        </section>
+
+        <!-- Most Active Players -->
+        <section class="ranking-section card">
+          <h3>🎢 Jugadores Más Activos</h3>
+          <div class="ranking-description">
+            <p>Jugadores con más veces montadas en total</p>
+          </div>
+          <ol id="active-players-list" class="ranking-list"></ol>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Profile Modal -->
+  <div id="profile-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Personalizar Perfil</h3>
+        <button id="close-modal" class="close-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="profile-username">Nombre de usuario</label>
+            <input type="text" id="profile-username" placeholder="Tu nombre de usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="profile-password">Nueva contraseña</label>
+            <input type="password" id="profile-password" placeholder="Deja vacío para mantener la actual">
+          </div>
+          <div class="form-group">
+            <label for="profile-confirm-password">Confirmar nueva contraseña</label>
+            <input type="password" id="profile-confirm-password" placeholder="Confirma la nueva contraseña">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="save-button">Guardar Cambios</button>
+            <button type="button" class="delete-button" id="delete-account">Eliminar Cuenta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Confirmation Modal -->
+  <div id="delete-confirm-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content confirm-modal">
+      <div class="modal-header">
+        <h3>Confirmar Eliminación</h3>
+        <button id="close-delete-modal" class="close-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="confirm-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="#FF3B30"/>
+          </svg>
+        </div>
+        <div class="confirm-message">
+          <h4>¿Estás seguro?</h4>
+          <p>Esta acción eliminará permanentemente tu cuenta y todos tus datos. Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="confirm-actions">
+          <button type="button" class="cancel-button" id="cancel-delete">Cancelar</button>
+          <button type="button" class="confirm-delete-button" id="confirm-delete">Eliminar Cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification Modal -->
+  <div id="success-notification-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content notification-modal">
+      <div class="modal-body">
+        <div class="notification-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#34C759"/>
+          </svg>
+        </div>
+        <div class="notification-message">
+          <h4>¡Éxito!</h4>
+          <p id="notification-text">Cuenta eliminada correctamente</p>
+        </div>
+        <div class="notification-actions">
+          <button type="button" class="notification-button" id="close-notification">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast Notifications Container -->
+  <div id="toast-container" class="toast-container"></div>
+  
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Configuración de Firebase (pública)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBCEfobCtOUfle9_xE48EMu9n4ffqPDllQ",
+      authDomain: "peroleta-a-pa.firebaseapp.com",
+      projectId: "peroleta-a-pa",
+      storageBucket: "peroleta-a-pa.firebasestorage.app",
+      messagingSenderId: "664339716070",
+      appId: "1:664339716070:web:f5aa481bb8aea948ab6827"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  
+  <script src="rankings.js"></script>
+</body>
+</html> 
