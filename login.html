@@ -126,8 +126,8 @@
         const userData = snapshot.val();
         
         if (userData && userData.password === savedSession.password) {
-          // Sesión válida, redirigir a checklist.html
-          window.location.href = 'checklist.html';
+          // Sesión válida, redirigir a index.html
+          window.location.href = 'index.html';
           return;
         }
       } catch (error) {
@@ -174,7 +174,7 @@
             clearSession();
           }
           
-          // Redirigir a checklist.html después del login exitoso
+          // Redirigir a index.html después del login exitoso
           window.location.href = 'index.html';
         } catch (error) {
           console.error('Error durante el login:', error);
