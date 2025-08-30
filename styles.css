@@ -1,4 +1,4 @@
-/* iOS-style Design for PortAventura App */
+/* iOS-style Design for Checklist Cromos Real Murcia App */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -15,6 +15,8 @@
   --text-secondary: #8E8E93;
   --text-tertiary: #C7C7CC;
   --border-color: #C6C6C8;
+  --murcia-red: #800000;
+  --murcia-red-darker: #4b0000;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-medium: rgba(0, 0, 0, 0.15);
   
@@ -110,7 +112,7 @@ body {
   font-size: 28px;
   font-weight: 600;
   margin-bottom: var(--spacing-xl);
-  color: var(--text-primary);
+  color: var(--murcia-red);
   letter-spacing: -0.5px;
 }
 
@@ -138,9 +140,9 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="password"]:focus {
   outline: none;
-  border-color: var(--primary-blue);
+  border-color: var(--murcia-red);
   background: var(--background-secondary);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  box-shadow: var(--murcia-red-darker);
 }
 
 input::placeholder {
@@ -181,8 +183,8 @@ input::placeholder {
 }
 
 .remember-session input[type="checkbox"]:checked + .checkmark {
-  background: var(--primary-blue);
-  border-color: var(--primary-blue);
+  background: var(--murcia-red);
+  border-color: var(--murcia-red);
 }
 
 .remember-session input[type="checkbox"]:checked + .checkmark::after {
@@ -198,12 +200,12 @@ input::placeholder {
 }
 
 .remember-session:hover .checkmark {
-  border-color: var(--primary-blue);
+  border-color: var(--murcia-red);
 }
 
 /* Button Design */
 button {
-  background: var(--primary-blue);
+  background: var(--murcia-red);
   color: white;
   border: none;
   padding: var(--spacing-md) var(--spacing-xl);
@@ -218,9 +220,9 @@ button {
 }
 
 button:hover {
-  background: #0056CC;
+  background: var(--murcia-red-darker);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+  box-shadow: var(--murcia-red);
 }
 
 button:active {
@@ -245,12 +247,12 @@ button:active {
 
 button.secondary {
   background: var(--background-tertiary);
-  color: var(--primary-blue);
-  border: 2px solid var(--primary-blue);
+  color: var(--murcia-red);
+  border: 2px solid var(--murcia-red);
 }
 
 button.secondary:hover {
-  background: var(--primary-blue);
+  background: var(--murcia-red);
   color: white;
 }
 
