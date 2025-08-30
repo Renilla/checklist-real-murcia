@@ -3,45 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Chechlist Cromos Real Murcia</title>
+  <title>Contador Montañas Rusas - PortAventura</title>
   
-  <link rel="icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
-  <link rel="shortcut icon" type="image/jpeg" href="imagesCromos/icono-principal.jpg">
-  <link rel="apple-touch-icon" href="imagesCromos/icono.jpg">
+  <link rel="icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="mclovin.jpg">
+  <link rel="apple-touch-icon" href="mclovin.jpg">
   
-  <meta property="og:title" content="Login - Chechlist Cromos Real Murcia">
-  <meta property="og:description" content="Inicia sesión para contar tus cromos del Real Murcia">
-  <meta property="og:image" content="imagesCromos/icono-principal.jpg">
+  <meta property="og:title" content="Contador Montañas Rusas - PortAventura">
+  <meta property="og:description" content="Contador de quien tiene mas cojones.">
+  <meta property="og:image" content="mclovin.jpg">
   <meta property="og:url" content="">
   <meta property="og:type" content="website">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Checklist Real Murcia">
+  <meta name="apple-mobile-web-app-title" content="Peroleta a PA">
 
-  <link rel="apple-touch-icon" href="imagesCromos/icono-principal.jpg">
+  <!-- Icono para la pantalla de inicio (180x180 recomendado) -->
+  <link rel="apple-touch-icon" href="mclovin.jpg">
+
+  <!-- Manifest básico para Android y soporte general -->
   <link rel="manifest" href="/manifest.json">
   
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <!-- Auth Section -->
-    <div id="auth" class="card">
-      <h2 id="auth-title">Iniciar Sesión</h2>
-      <form id="auth-form">
-        <input type="text" id="username" placeholder="Usuario" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
-        <div class="remember-session">
-          <label for="remember-session">
-            <input type="checkbox" id="remember-session" checked>
-            <span class="checkmark"></span>
-            Recordar sesión
-          </label>
+    <!-- Loading Section -->
+    <div id="loading" class="card">
+      <div class="loading-spinner"></div>
+      <p>Verificando sesión...</p>
+    </div>
+
+    <!-- Floating User Profile (outside app to prevent flickering) -->
+    <div id="user-profile" class="floating-user-profile" style="visibility: hidden;">
+      <div class="user-avatar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="user-name-display" id="user-name-display"></span>
+    </div>
+
+    <!-- Main App Section -->
+    <div id="app" class="hidden">
+      <header>
+        <h1 class="gradient-title">Peroleta a PA</h1>
+        <button id="logout">Cerrar Sesión</button>
+      </header>
+      <section class="stats">
+        <div id="count-graphic" class="card">
+          <div class="progress-header">
+            <h3>Progreso Personal</h3>
+            <button id="achievements-button" class="achievements-btn" title="Ver Logros Detallados">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15.09 8.26L22 9L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+          <div id="progress-bar"><div id="progress-fill"></div></div>
+          <p><span id="total-points">0</span> puntos</p>
+          <p class="rides-info"><span id="ridden-count">0</span> atracciones de <span id="total-attractions">0</span></p>
+          <div class="achievements">
+            <span class="achievement">👑 <span id="crowns-count">0</span></span>
+            <span class="achievement">🤝 <span id="handshakes-count">0</span></span>
+          </div>
+          
+          <!-- Category Progress -->
+          <div class="category-progress">
+            <h4>Progreso por Categorías</h4>
+            <div id="category-stats"></div>
+          </div>
         </div>
-        <button type="submit" id="auth-button">Entrar</button>
-      </form>
-      <p id="toggle-auth">¿No tienes cuenta? <a href="registro.html" id="toggle-link">Regístrate</a></p>
+        <div id="standing" class="card">
+          <div class="ranking-header">
+            <h3>Ranking Usuarios</h3>
+            <button id="ranking-button" class="ranking-btn" title="Ver Rankings Detallados">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17ZM19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+          <ol id="ranking-list"></ol>
+        </div>
+      </section>
+      <section id="attractions-list" class="card">
+        <div class="attractions-header">
+          <h3>Lista de Atracciones</h3>
+          <button id="help-button" class="help-btn" title="Ver Instrucciones">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <div id="categories-container"></div>
+      </section>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profile-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Personalizar Perfil</h3>
+          <button id="close-modal" class="close-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="profile-form">
+            <div class="form-group">
+              <label for="profile-username">Nombre de usuario</label>
+              <input type="text" id="profile-username" placeholder="Tu nombre de usuario" required>
+            </div>
+            <div class="form-group">
+              <label for="profile-password">Nueva contraseña</label>
+              <input type="password" id="profile-password" placeholder="Deja vacío para mantener la actual">
+            </div>
+            <div class="form-group">
+              <label for="profile-confirm-password">Confirmar nueva contraseña</label>
+              <input type="password" id="profile-confirm-password" placeholder="Confirma la nueva contraseña">
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="save-button">Guardar Cambios</button>
+              <button type="button" class="delete-button" id="delete-account">Eliminar Cuenta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div id="delete-confirm-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content confirm-modal">
+        <div class="modal-header">
+          <h3>Confirmar Eliminación</h3>
+          <button id="close-delete-modal" class="close-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="confirm-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="#FF3B30"/>
+            </svg>
+          </div>
+          <div class="confirm-message">
+            <h4>¿Estás seguro?</h4>
+            <p>Esta acción eliminará permanentemente tu cuenta y todos tus datos. Esta acción no se puede deshacer.</p>
+          </div>
+          <div class="confirm-actions">
+            <button type="button" class="cancel-button" id="cancel-delete">Cancelar</button>
+            <button type="button" class="confirm-delete-button" id="confirm-delete">Eliminar Cuenta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Notification Modal -->
+    <div id="success-notification-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content notification-modal">
+        <div class="modal-body">
+          <div class="notification-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#34C759"/>
+            </svg>
+          </div>
+          <div class="notification-message">
+            <h4>¡Éxito!</h4>
+            <p id="notification-text">Cuenta eliminada correctamente</p>
+          </div>
+          <div class="notification-actions">
+            <button type="button" class="notification-button" id="close-notification">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>¿Cómo Funciona?</h3>
+          <button id="close-help-modal" class="close-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="help-section">
+            <h4>Sistema de Puntos</h4>
+            <p>Cada atracción tiene un valor en puntos. Solo obtienes puntos cuando realmente te montas en la atracción (no solo por marcarla).</p>
+            <ul>
+              <li><strong>Puntos base:</strong> Cada atracción vale entre 1-5 puntos según su intensidad</li>
+              <li><strong>Bonus por liderazgo:</strong> Si eres el que más veces se ha montado en una atracción, duplicas los puntos</li>
+              <li><strong>Empates:</strong> Si varios usuarios empatan en el liderazgo, todos duplican los puntos</li>
+            </ul>
+          </div>
+          
+          <div class="help-section">
+            <h4>Coronas y Handshakes</h4>
+            <p>Estos indicadores muestran tu liderazgo en las atracciones:</p>
+            <ul>
+              <li><strong>👑 Corona:</strong> Eres el único líder de una atracción (nadie más se ha montado tantas veces)</li>
+              <li><strong>🤝 Handshake:</strong> Empatas con otros usuarios en el liderazgo de una atracción</li>
+            </ul>
+          </div>
+          
+          <div class="help-section">
+            <h4>Contadores de Veces Montado</h4>
+            <p>Los badges de colores muestran cuántas veces te has montado en cada atracción:</p>
+            <ul>
+              <li><strong>Bronce (×1):</strong> Primera vez montado</li>
+              <li><strong>Plata (×2):</strong> Segunda vez montado</li>
+              <li><strong>Oro (×3+):</strong> Tercera vez o más</li>
+            </ul>
+          </div>
+          
+          <div class="help-section">
+            <h4>Logros</h4>
+            <p>Completa desafíos específicos para desbloquear logros:</p>
+            <ul>
+              <li><strong>Logros por categoría:</strong> Monta todas las atracciones de una categoría</li>
+              <li><strong>Logros de liderazgo:</strong> Sé líder en múltiples atracciones</li>
+              <li><strong>Logros de variedad:</strong> Monta atracciones de diferentes categorías</li>
+            </ul>
+          </div>
+          
+          <div class="help-section">
+            <h4>💡 Consejos</h4>
+            <ul>
+              <li>Usa los botones + y - para ajustar el número de veces que te has montado</li>
+              <li>Las categorías se pueden colapsar haciendo clic en el encabezado</li>
+              <li>Tu progreso se guarda automáticamente</li>
+              <li>Compara tu progreso con otros usuarios en el ranking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -64,194 +271,14 @@
       measurementId: "G-DWVT87PSEZ"
     };
 
-    // Initialize Firebase
+    // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
 
-    let dbRef = firebase.database().ref();
-
-    window.addEventListener('DOMContentLoaded', () => {
-      // Verificar si ya hay una sesión activa
-      const savedSession = getSavedSession();
-      if (savedSession) {
-        validateAndRedirect(savedSession);
-      } else {
-        setupAuth();
-      }
-    });
-
-    // Funciones para manejar cookies de sesión
-    function setCookie(name, value, days = 30) {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-    }
-
-    function getCookie(name) {
-      const nameEQ = name + "=";
-      const ca = document.cookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) {
-          try {
-            return JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
-          } catch (error) {
-            console.error('Error parsing cookie:', error);
-            return null;
-          }
-        }
-      }
-      return null;
-    }
-
-    function deleteCookie(name) {
-      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
-    }
-
-    function saveSession(username, password) {
-      setCookie('checklist_realmurcia_session', { username, password });
-    }
-
-    function getSavedSession() {
-      return getCookie('checklist_realmurcia_session');
-    }
-
-    function clearSession() {
-      deleteCookie('checklist_realmurcia_session');
-    }
-
-    async function validateAndRedirect(savedSession) {
-      try {
-        const snapshot = await dbRef.child('users/' + savedSession.username).get();
-        const userData = snapshot.val();
-        
-        if (userData && userData.password === savedSession.password) {
-          // Sesión válida, redirigir a checklist.html
-          window.location.href = 'checklist.html';
-          return;
-        }
-      } catch (error) {
-        console.error('Error validando sesión guardada:', error);
-        clearSession();
-      }
-      
-      // Si no hay sesión válida, mostrar login
-      setupAuth();
-    }
-
-    function setupAuth() {
-      const form = document.getElementById('auth-form');
-
-      // Clear any existing event handlers
-      form.onsubmit = null;
-
-      form.onsubmit = async e => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const rememberSession = document.getElementById('remember-session').checked;
-
-        // Disable form during submission
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Entrando...';
-
-        try {
-          const snapshot = await dbRef.child('users/' + username).get();
-          const userData = snapshot.val();
-
-          if (!userData || userData.password !== password) {
-            showToast('Usuario o contraseña inválidos', 'error');
-            return;
-          }
-          
-          // Guardar sesión en cookies solo si está marcado "Recordar sesión"
-          if (rememberSession) {
-            saveSession(username, password);
-          } else {
-            // Si no está marcado, limpiar cualquier sesión anterior
-            clearSession();
-          }
-          
-          // Redirigir a checklist.html después del login exitoso
-          window.location.href = 'checklist.html';
-        } catch (error) {
-          console.error('Error durante el login:', error);
-          showToast('Error durante el inicio de sesión. Por favor, intenta de nuevo.', 'error');
-        } finally {
-          // Re-enable form
-          submitButton.disabled = false;
-          submitButton.textContent = originalText;
-        }
-      };
-    }
-
-    // Toast Notification System
-    function showToast(message, type = 'info', duration = 4000) {
-      const container = document.getElementById('toast-container');
-      
-      // Create toast element
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      
-      // Get icon based on type
-      const icon = getToastIcon(type);
-      
-      toast.innerHTML = `
-        <div class="toast-icon">
-          ${icon}
-        </div>
-        <div class="toast-message">${message}</div>
-        <button class="toast-close" onclick="this.parentElement.remove()">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
-          </svg>
-        </button>
-      `;
-      
-      // Add to container
-      container.appendChild(toast);
-      
-      // Trigger animation
-      setTimeout(() => {
-        toast.classList.add('show');
-      }, 10);
-      
-      // Auto remove after duration
-      setTimeout(() => {
-        if (toast.parentElement) {
-          toast.classList.remove('show');
-          setTimeout(() => {
-            if (toast.parentElement) {
-              toast.remove();
-            }
-          }, 400);
-        }
-      }, duration);
-    }
-
-    function getToastIcon(type) {
-      switch (type) {
-        case 'success':
-          return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="currentColor"/>
-          </svg>`;
-        case 'error':
-          return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
-          </svg>`;
-        case 'warning':
-          return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 21H23L12 2L1 21ZM13 18H11V16H13V18ZM13 14H11V12H13V14Z" fill="currentColor"/>
-          </svg>`;
-        case 'info':
-        default:
-          return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="currentColor"/>
-          </svg>`;
-      }
-    }
+    // Referencia global a la base de datos para usar en script.js
+    const database = firebase.database();
   </script>
+
+  <!-- Tu script debe ir al final -->
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>

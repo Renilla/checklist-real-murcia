@@ -1,4 +1,4 @@
-/* iOS-style Design for PortAventura App */
+/* iOS-style Design for Checklist Real Murcia App */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -321,6 +321,39 @@ button.danger:hover {
     transform: translateY(30px);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Focus States for Accessibility */
 button:focus,
