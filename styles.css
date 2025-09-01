@@ -317,6 +317,8 @@ header h1 {
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.3px;
+  line-height: 1.2; /* Ajusta la altura de línea */
+  margin: 0; /* Evita márgenes que desplacen el texto */
 }
 
 .gradient-title {
@@ -420,7 +422,7 @@ header h1 {
 .user-name-display {
   font-weight: 500;
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
 }
 
