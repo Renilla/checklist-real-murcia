@@ -330,6 +330,12 @@ header h1 {
   font-weight: bold;
 }
 
+.title-icon {
+  width: 50px;
+  height: 65px;
+  vertical-align: middle;
+}
+
 @keyframes gradientShift {
   0%, 100% {
     background-position: 0% 50%;
