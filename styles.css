@@ -1206,7 +1206,7 @@ input:focus {
 .category-progress h4 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   margin-bottom: var(--spacing-md);
 }
 
@@ -1405,7 +1405,7 @@ input:focus {
 
 .modal-header h3 {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--murcia-red);
   margin: 0;
 }
