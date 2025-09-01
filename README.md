@@ -1,4 +1,4 @@
-# PortAventura - Contador de Montañas Rusas
+# Checklist de Cromos del Real Murcia
 
 ## Cambios Recientes - Separación del Login
 
@@ -26,11 +26,11 @@ Se ha implementado la separación del formulario de login en un archivo HTML ind
    - Modificada función logout para redirigir a login.html
    - Agregada redirección automática si no hay sesión válida
 
-3. **rankings.html** y **logros.html**
+3. **logros.html**
    - Agregada verificación de sesión al cargar
    - Redirección automática a login.html si no hay sesión válida
 
-4. **rankings.js** y **logros.js**
+4. **logros.js**
    - Agregada verificación de sesión al inicio
    - Modificadas funciones logout para redirigir a login.html
    - Eliminados eventos DOMContentLoaded duplicados
@@ -45,7 +45,7 @@ Se ha implementado la separación del formulario de login en un archivo HTML ind
 ### Flujo de Autenticación
 
 1. **Acceso Directo a Páginas Protegidas:**
-   - `index.html`, `rankings.html`, `logros.html`
+   - `index.html`, `logros.html`
    - Verificación automática de sesión al cargar
    - Si no hay sesión válida → redirección a `login.html`
 
@@ -79,10 +79,8 @@ peroleta_to_PA/
 ├── index.html          # Página principal (protegida)
 ├── login.html          # Formulario de login
 ├── registro.html       # Formulario de registro
-├── rankings.html       # Rankings (protegida)
 ├── logros.html         # Logros (protegida)
 ├── script.js           # Lógica principal
-├── rankings.js         # Lógica de rankings
 ├── logros.js           # Lógica de logros
 ├── styles.css          # Estilos CSS
 ├── attractions.json    # Datos de atracciones
