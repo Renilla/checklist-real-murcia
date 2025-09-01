@@ -1277,7 +1277,7 @@ input:focus {
 
 #total-points {
   font-weight: 600;
-  color: var(--primary-blue);
+  color: var(--murcia-red);
 }
 
 .achievements {
@@ -1404,7 +1404,7 @@ input:focus {
 .modal-header h3 {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   margin: 0;
 }
 
