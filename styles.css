@@ -306,7 +306,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-xxl);
   padding: var(--spacing-lg);
   background: var(--background-secondary);
   border-radius: var(--radius-lg);
@@ -430,6 +430,8 @@ header h1 {
     grid-template-columns: 1fr;
   }
 }
+
+/*VAMOS POR AQUÍ*/
 
 /* Progress Bar */
 #progress-bar {
