@@ -172,10 +172,6 @@ function showApp() {
         // Setup logout button
         document.getElementById('logout').onclick = logout;
         
-        // Setup ranking button
-        /*
-        document.getElementById('ranking-button').onclick = goToRankings;
-        */
         // Setup achievements button
         document.getElementById('achievements-button').onclick = goToAchievements;
         
@@ -1075,11 +1071,6 @@ function renderCategoryStats() {
     
     categoryStatsContainer.appendChild(categoryStat);
   });
-}
-
-// Navigation function for rankings page
-function goToRankings() {
-  window.location.href = 'rankings.html';
 }
 
 function goToAchievements() {
