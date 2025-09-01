@@ -417,20 +417,6 @@ header h1 {
   font-weight: bold;
 }
 
-/* Stats Section */
-.stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-}
-
-@media (max-width: 768px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Progress Bar */
 #progress-bar {
   width: 100%;
