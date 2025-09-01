@@ -2179,24 +2179,10 @@ input:focus {
   
   #achievements-app header {
     flex-direction: column;
+    justify-content: center;
     gap: var(--spacing-md);
     text-align: center;
     position: relative;
-  }
-  
-  .header-left {
-    flex-direction: row;
-    gap: var(--spacing-sm);
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .header-left .gradient-title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
   }
   
   .achievements-section {
