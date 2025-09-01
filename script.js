@@ -173,8 +173,9 @@ function showApp() {
         document.getElementById('logout').onclick = logout;
         
         // Setup ranking button
+        /*
         document.getElementById('ranking-button').onclick = goToRankings;
-        
+        */
         // Setup achievements button
         document.getElementById('achievements-button').onclick = goToAchievements;
         
