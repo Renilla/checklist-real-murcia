@@ -336,7 +336,6 @@ header h1 {
   width: 50px;
   height: 65px;
   vertical-align: middle;
-  border-color: var(--murcia-red-darker);
   border-radius: var(--radius-md);
   object-fit: cover;
 }
@@ -2179,7 +2178,6 @@ input:focus {
   }
   
   #achievements-app header {
-    flex-direction: column;
     justify-content: center;
     gap: var(--spacing-md);
     text-align: center;
