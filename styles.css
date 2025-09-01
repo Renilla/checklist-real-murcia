@@ -431,8 +431,6 @@ header h1 {
   }
 }
 
-/*VAMOS POR AQUÍ*/
-
 /* Progress Bar */
 #progress-bar {
   width: 100%;
@@ -481,7 +479,7 @@ header h1 {
 }
 
 #ridden-count {
-  color: var(--primary-blue);
+  color: var(--murcia-red);
   font-weight: 600;
   font-size: 24px;
 }
@@ -615,7 +613,7 @@ header h1 {
   align-items: center;
   gap: var(--spacing-sm);
   font-weight: 600;
-  color: var(--primary-blue);
+  color: var(--murcia-red);
   margin-left: var(--spacing-xl);
   flex-shrink: 0;
   min-width: 3em;
@@ -719,8 +717,8 @@ header h1 {
 
 .achievements-btn {
   background: var(--background-tertiary);
-  color: var(--primary-blue);
-  border: 2px solid var(--primary-blue);
+  color: var(--murcia-red);
+  border: 2px solid var(--murcia-red);
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   display: flex;
@@ -733,7 +731,7 @@ header h1 {
 }
 
 .achievements-btn:hover {
-  background: var(--primary-blue);
+  background: var(--murcia-red);
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
