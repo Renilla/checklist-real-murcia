@@ -1924,7 +1924,7 @@ input:focus {
 
 #achievements-app header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg);
