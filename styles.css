@@ -318,14 +318,15 @@ header h1 {
   font-weight: 600;
   letter-spacing: -0.3px;
 }
-/*POR AQUÍ*/
+
 .gradient-title {
-  background: linear-gradient(135deg, var(--murcia-red-darker) 0%, var(--murcia-red) 50%, #007AFF 100%);
+  background: linear-gradient(135deg, var(--murcia-red-darker) 0%, #FFFFFF 50%, var(--murcia-red) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% 200%;
   animation: gradientShift 3s ease-in-out infinite;
+  font-weight: bold;
 }
 
 @keyframes gradientShift {
@@ -391,7 +392,7 @@ header h1 {
 
 #user-profile:hover {
   background: var(--background-tertiary);
-  border-color: var(--primary-blue);
+  border-color: var(--murcia-red);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px var(--shadow-medium);
 }
@@ -403,7 +404,7 @@ header h1 {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--primary-blue);
+  background: var(--murcia-red);
   color: white;
   font-size: 16px;
 }
@@ -412,6 +413,7 @@ header h1 {
   font-weight: 500;
   color: var(--text-primary);
   font-size: 14px;
+  font-weight: bold;
 }
 
 /* Stats Section */
@@ -2459,7 +2461,7 @@ input:focus {
   width: 40px;
   height: 40px;
   border: 3px solid var(--border-color);
-  border-top: 3px solid var(--primary-blue);
+  border-top: 3px solid var(--murcia-red);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto var(--spacing-lg);
