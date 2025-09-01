@@ -682,7 +682,7 @@ header h1 {
   margin-bottom: var(--spacing-lg);
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--murcia-red);
 }
 
 /* Progress Header */
@@ -696,7 +696,7 @@ header h1 {
 .progress-header h3 {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   margin: 0;
 }
 
@@ -789,8 +789,8 @@ header h1 {
 
 .help-btn {
   background: var(--background-tertiary);
-  color: var(--primary-blue);
-  border: 2px solid var(--primary-blue);
+  color: var(--murcia-red);
+  border: 2px solid var(--murcia-red);
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   display: flex;
@@ -803,7 +803,7 @@ header h1 {
 }
 
 .help-btn:hover {
-  background: var(--primary-blue);
+  background: var(--murcia-red);
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
@@ -831,7 +831,7 @@ header h1 {
 .help-section h4 {
   font-size: 18px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   margin-bottom: var(--spacing-md);
   display: flex;
   align-items: center;
