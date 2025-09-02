@@ -841,6 +841,11 @@ async function updateUserProfile() {
     showToast('La contraseña debe tener al menos 6 caracteres', 'error');
     return;
   }
+
+  if ((newPassword.value === "" || confirmPassword.value === "") && currentUser.userName === newUsername) {
+    showToast('No se han realizado cambios', 'error');
+    return;
+  }
   
   try {
     // Check if new username already exists (if username is changing)
