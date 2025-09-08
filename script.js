@@ -55,21 +55,21 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 function loadCategoryStates() {
   try {
-    const savedStates = localStorage.getItem('portaventura_category_states');
+    const savedStates = localStorage.getItem('checklist_murcia_collection_states');
     if (savedStates) {
       categoryStates = JSON.parse(savedStates);
     }
   } catch (error) {
-    console.error('Error loading category states:', error);
+    console.error('Error loading collection states:', error);
     categoryStates = {};
   }
 }
 
 function saveCategoryStates() {
   try {
-    localStorage.setItem('portaventura_category_states', JSON.stringify(categoryStates));
+    localStorage.setItem('checklist_murcia_collection_states', JSON.stringify(categoryStates));
   } catch (error) {
-    console.error('Error saving category states:', error);
+    console.error('Error saving collection states:', error);
   }
 }
 
@@ -103,15 +103,15 @@ function deleteCookie(name) {
 }
 
 function saveSession(username, password) {
-  setCookie('portaventura_session', { username, password });
+  setCookie('checklist_murcia_session', { username, password });
 }
 
 function getSavedSession() {
-  return getCookie('portaventura_session');
+  return getCookie('checklist_murcia_session');
 }
 
 function clearSession() {
-  deleteCookie('portaventura_session');
+  deleteCookie('checklist_murcia_session');
 }
 
 

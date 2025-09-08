@@ -118,15 +118,15 @@ function deleteCookie(name) {
 }
 
 function saveSession(username, password) {
-  setCookie('portaventura_session', { username, password });
+  setCookie('checklist_murcia_session', { username, password });
 }
 
 function getSavedSession() {
-  return getCookie('portaventura_session');
+  return getCookie('checklist_murcia_session');
 }
 
 function clearSession() {
-  deleteCookie('portaventura_session');
+  deleteCookie('checklist_murcia_session');
 }
 
 
