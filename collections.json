@@ -1,0 +1,71 @@
+{
+  "Liga Este 1973/74": {
+    "cromos": [
+      "Ojeda",
+      "Ponce",
+      "José",
+      "Lorenzo",
+      "Ruiz Abellán",
+      "Canito",
+      "Herrero",
+      "Chinchurreta",
+      "Abel Pérez",
+      "Sergio",
+      "Murciano",
+      "Casco",
+      "Juárez",
+      "Cristo",
+      "García Soriano",
+      "Vera Palmes"
+    ],
+    "portada": "imagesAlbumes/ligaeste1973-74.png"
+  },
+  "Campeonato de Liga 1973-1974": {
+    "cromos": [
+      "Real Murcia Equipos/Escudos/Banderas",
+      "La Condomina",
+      "Ojeda",
+      "Ponce",
+      "José",
+      "Canito",
+      "Abel Pérez",
+      "Lorenzo",
+      "Herrero",
+      "Sergio",
+      "García Soriano",
+      "Chinchurreta",
+      "Murciano",
+      "Vera Palmes",
+      "Juárez",
+      "Casco",
+      "López",
+      "Cristo",
+      "Taverna Fichajes de Última Hora"
+    ],
+    "portada": "imagesAlbumes/campeonatoLiga1973-74.png"
+  },
+  "Liga Este 1974/75": {
+    "cromos": [
+      "Ojeda",
+      "Canito",
+      "José",
+      "Laredo",
+      "Abel Pérez",
+      "Ponce",
+      "Lema",
+      "Verza",
+      "Herrero",
+      "Ruiz Abellán",
+      "Vera Palmes",
+      "Pazos",
+      "Murciano",
+      "Taverna",
+      "Etchecopar",
+      "García Soriano",
+      "Casco",
+      "Juárez",
+      "Cristo"
+    ],
+    "portada": "imagesAlbumes/ligaeste1974-75.png"
+  }
+}

@@ -6,7 +6,7 @@ let categoryStates = {}; // Para almacenar el estado de las categorías
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     // Cargar atracciones una sola vez
-    attractions = await fetch('attractions.json').then(r => r.json());
+    collections = await fetch('collections.json').then(r => r.json());
     
     // Cargar estados de categorías guardados
     loadCategoryStates();
@@ -23,9 +23,8 @@ window.addEventListener('DOMContentLoaded', async () => {
           // Sesión válida, iniciar automáticamente
           currentUser = { 
             username: savedSession.username, 
-            ...userData, 
-            ridden: userData.ridden || [],
-            rideCounts: userData.rideCounts || {}
+            ...userData,
+            collected: userData.collected || {}
           };
           
           // Cargar datos de todos los usuarios ANTES de mostrar la app
@@ -52,83 +51,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     }, 2000);
   }
 });
-
-function loadCategoryStates() {
-  try {
-    const savedStates = localStorage.getItem('checklist_murcia_collection_states');
-    if (savedStates) {
-      categoryStates = JSON.parse(savedStates);
-    }
-  } catch (error) {
-    console.error('Error loading collection states:', error);
-    categoryStates = {};
-  }
-}
-
-function saveCategoryStates() {
-  try {
-    localStorage.setItem('checklist_murcia_collection_states', JSON.stringify(categoryStates));
-  } catch (error) {
-    console.error('Error saving collection states:', error);
-  }
-}
-
-// Funciones para manejar cookies de sesión
-function setCookie(name, value, days = 30) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-  document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-}
-
-function getCookie(name) {
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) {
-      try {
-        return JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
-      } catch (error) {
-        console.error('Error parsing cookie:', error);
-        return null;
-      }
-    }
-  }
-  return null;
-}
-
-function deleteCookie(name) {
-  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
-}
-
-function saveSession(username, password) {
-  setCookie('checklist_murcia_session', { username, password });
-}
-
-function getSavedSession() {
-  return getCookie('checklist_murcia_session');
-}
-
-function clearSession() {
-  deleteCookie('checklist_murcia_session');
-}
-
-
-
-function logout() {
-  // Disconnect Firebase listener
-  dbRef.child('users').off('value');
-  
-  // Clear current user
-  currentUser = null;
-  
-  // Clear session
-  clearSession();
-  
-  // Redirect to login page
-  window.location.href = 'login.html';
-}
 
 function showApp() {
   const loadingElement = document.getElementById('loading');
@@ -163,8 +85,8 @@ function showApp() {
           await updateRanking();
         }
         
-        renderAttractions();
-        renderStats(window.allUsers);
+        //renderCollections();
+        //renderStats(window.allUsers);
         
         // Setup user profile functionality
         setupUserProfile();
@@ -195,8 +117,8 @@ function showApp() {
   }, 300);
 }
 
-function renderAttractions() {
-  const container = document.getElementById('categories-container');
+function renderCollections() {
+  const container = document.getElementById('collections-container');
   container.innerHTML = '';
   
   // Group attractions by category
@@ -358,24 +280,19 @@ function renderAttractions() {
         li.style.transform = 'translateY(0)';
       }, (categoryIndex * 100) + (attrIndex * 50));
     });
-    
     content.appendChild(attractionsList);
     categorySection.appendChild(header);
     categorySection.appendChild(content);
     container.appendChild(categorySection);
   });
-  
   document.getElementById('total-attractions').textContent = attractions.length;
-  
-
 }
 
 function toggleCategory(categorySection, categoryName) {
   const header = categorySection.querySelector('.category-header');
   const content = categorySection.querySelector('.category-content');
-  
   const isCollapsed = header.classList.contains('collapsed');
-  
+
   header.classList.toggle('collapsed');
   content.classList.toggle('collapsed');
   
@@ -479,103 +396,13 @@ async function decrementRide(index) {
   }
 }
 
-function calculatePoints(riddenIndices, rideCounts = {}) {
-  return riddenIndices.reduce((total, index) => {
-    const basePoints = attractions[index]?.points || 0;
-    const rideCount = rideCounts[index] || 0;
-    
-    // Solo dar puntos si se ha montado al menos una vez
-    if (rideCount > 0) {
-      return total + basePoints;
-    }
-    return total;
-  }, 0);
-}
-
 function calculateCrownsAndHandshakes(user, allUsers = null) {
   let crowns = 0;
-  
-  if (!allUsers || !user.ridden) {
-    return crowns;
-  }
-  
-  user.ridden.forEach(index => {
-    const rideCount = user.rideCounts?.[index] || 0;
-    if (rideCount > 0) {
-      const maxRideCount = Math.max(...Object.values(allUsers).map(u => 
-        u.rideCounts?.[index] || 0
-      ));
-      
-      const usersWithMaxCount = Object.values(allUsers).filter(u => 
-        (u.rideCounts?.[index] || 0) === maxRideCount && maxRideCount > 0
-      );
-      
-      // Si este usuario es líder de esta atracción
-      if (rideCount === maxRideCount && maxRideCount > 0) {
-        if (usersWithMaxCount.length === 1) {
-          // Corona única
-          crowns++;
-        }
-      }
-    }
-  });
   
   return crowns;
 }
 
-function calculatePointsWithBonuses(riddenIndices, rideCounts = {}, allUsers = null) {
-  let totalPoints = 0;
-  
-  riddenIndices.forEach(index => {
-    const basePoints = attractions[index]?.points || 0;
-    const rideCount = rideCounts[index] || 0;
-    
-    if (rideCount > 0) {
-      let points = basePoints;
-      
-      // Verificar si es el que más veces se ha montado
-      if (allUsers) {
-        const maxRideCount = Math.max(...Object.values(allUsers).map(user => 
-          user.rideCounts?.[index] || 0
-        ));
-        
-        const usersWithMaxCount = Object.values(allUsers).filter(user => 
-          (user.rideCounts?.[index] || 0) === maxRideCount && maxRideCount > 0
-        );
-        
-        // Si este usuario está entre los que más veces se han montado
-        if (rideCount === maxRideCount && maxRideCount > 0) {
-          // Duplicar puntos si es el único, o dividir entre los que empatan
-          if (usersWithMaxCount.length === 1) {
-            points = basePoints * 2;
-          } else {
-            // En caso de empate, todos reciben la duplicación
-            points = basePoints * 2;
-          }
-        }
-      }
-      
-      totalPoints += points;
-    }
-  });
-  
-  return totalPoints;
-}
-
 function renderStats(users = null) {
-  const riddenCount = (currentUser.ridden || []).length;
-  const totalPoints = calculatePointsWithBonuses(currentUser.ridden || [], currentUser.rideCounts || {}, users);
-  const totalAttractions = attractions.length;
-  const attractionPct = (riddenCount / totalAttractions) * 100;
-  
-  // Calculate crowns and handshakes
-  const crowns = calculateCrownsAndHandshakes(currentUser, users);
-  
-  document.getElementById('ridden-count').textContent = riddenCount;
-  document.getElementById('total-points').textContent = totalPoints;
-  document.getElementById('total-attractions').textContent = totalAttractions;
-  document.getElementById('crowns-count').textContent = crowns;
-  
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = attractionPct + '%';
   
@@ -627,6 +454,129 @@ function listenForRankingUpdates() {
       renderStats(allUsers);
     }
   });
+}
+
+function renderCategoryStats() {
+  const categoryStatsContainer = document.getElementById('category-stats');
+  if (!categoryStatsContainer) return;
+  
+  // Group attractions by category
+  const categories = {};
+  attractions.forEach((attr, index) => {
+    if (!categories[attr.category]) {
+      categories[attr.category] = {
+        name: attr.category,
+        color: attr.color,
+        total: 0,
+        completed: 0
+      };
+    }
+    categories[attr.category].total++;
+    
+    // Check if this attraction is completed
+    if (currentUser.ridden && currentUser.ridden.includes(index)) {
+      categories[attr.category].completed++;
+    }
+  });
+  
+  // Clear container
+  categoryStatsContainer.innerHTML = '';
+  
+  // Create category stat elements
+  Object.values(categories).forEach(category => {
+    const categoryStat = document.createElement('div');
+    categoryStat.className = 'category-stat';
+    
+    const colorDot = document.createElement('div');
+    colorDot.className = `category-stat-color ${category.color}`;
+    
+    const categoryCount = document.createElement('div');
+    categoryCount.className = 'category-stat-count';
+    categoryCount.textContent = `${category.completed}/${category.total}`;
+    
+    categoryStat.appendChild(colorDot);
+    categoryStat.appendChild(categoryCount);
+    
+    categoryStatsContainer.appendChild(categoryStat);
+  });
+}
+
+
+
+
+function loadCategoryStates() {
+  try {
+    const savedStates = localStorage.getItem('checklist_murcia_collection_states');
+    if (savedStates) {
+      categoryStates = JSON.parse(savedStates);
+    }
+  } catch (error) {
+    console.error('Error loading collection states:', error);
+    categoryStates = {};
+  }
+}
+
+function saveCategoryStates() {
+  try {
+    localStorage.setItem('checklist_murcia_collection_states', JSON.stringify(categoryStates));
+  } catch (error) {
+    console.error('Error saving collection states:', error);
+  }
+}
+
+// Funciones para manejar cookies de sesión
+function setCookie(name, value, days = 30) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+  document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) {
+      try {
+        return JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
+      } catch (error) {
+        console.error('Error parsing cookie:', error);
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
+function deleteCookie(name) {
+  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+}
+
+function saveSession(username, password) {
+  setCookie('checklist_murcia_session', { username, password });
+}
+
+function getSavedSession() {
+  return getCookie('checklist_murcia_session');
+}
+
+function clearSession() {
+  deleteCookie('checklist_murcia_session');
+}
+
+function logout() {
+  // Disconnect Firebase listener
+  dbRef.child('users').off('value');
+  
+  // Clear current user
+  currentUser = null;
+  
+  // Clear session
+  clearSession();
+  
+  // Redirect to login page
+  window.location.href = 'login.html';
 }
 
 // User Profile Functions
@@ -730,9 +680,6 @@ async function updateUserProfile() {
       return;
     }
     }
-    
-    // Prepare update data
-    const updateData = {};
     
     // If username is changing, we need to move the data
     if (newUsername !== currentUser.username) {
@@ -905,51 +852,6 @@ function getToastIcon(type) {
 
 function showSuccessNotification(message) {
   showToast(message, 'success');
-}
-
-function renderCategoryStats() {
-  const categoryStatsContainer = document.getElementById('category-stats');
-  if (!categoryStatsContainer) return;
-  
-  // Group attractions by category
-  const categories = {};
-  attractions.forEach((attr, index) => {
-    if (!categories[attr.category]) {
-      categories[attr.category] = {
-        name: attr.category,
-        color: attr.color,
-        total: 0,
-        completed: 0
-      };
-    }
-    categories[attr.category].total++;
-    
-    // Check if this attraction is completed
-    if (currentUser.ridden && currentUser.ridden.includes(index)) {
-      categories[attr.category].completed++;
-    }
-  });
-  
-  // Clear container
-  categoryStatsContainer.innerHTML = '';
-  
-  // Create category stat elements
-  Object.values(categories).forEach(category => {
-    const categoryStat = document.createElement('div');
-    categoryStat.className = 'category-stat';
-    
-    const colorDot = document.createElement('div');
-    colorDot.className = `category-stat-color ${category.color}`;
-    
-    const categoryCount = document.createElement('div');
-    categoryCount.className = 'category-stat-count';
-    categoryCount.textContent = `${category.completed}/${category.total}`;
-    
-    categoryStat.appendChild(colorDot);
-    categoryStat.appendChild(categoryCount);
-    
-    categoryStatsContainer.appendChild(categoryStat);
-  });
 }
 
 function goToAchievements() {
