@@ -167,8 +167,8 @@ function renderCollections() {
     cromoList.className = 'collection-cromos';
     
     data.cromos.forEach((cromo, cromoIndex) => {
-      const button = document.createElement('button');
-      button.textContent = `${globalCromoIndex}. ${cromo}`;
+      const cromoButton = document.createElement('button');
+      cromoButton.textContent = `${globalCromoIndex}. ${cromo}`;
 
       // Comprobar si ya está marcado en currentUser
       const isCollected = currentUser.collected?.[collectionName]?.includes(cromo);
@@ -271,58 +271,6 @@ async function toggleRide(index) {
     button.classList.remove('loading');
     showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
   }
-}
-
-async function incrementRide(index) {
-  const rideCounts = currentUser.rideCounts || {};
-  const currentCount = rideCounts[index] || 0;
-  
-  try {
-    rideCounts[index] = currentCount + 1;
-    
-    await dbRef.child('users/' + currentUser.username + '/rideCounts/' + index).set(rideCounts[index]);
-    currentUser.rideCounts = rideCounts;
-    
-    renderAttractions();
-    renderStats();
-    updateRanking();
-    
-    showToast('¡Añadida una vez más!', 'success');
-  } catch (error) {
-    showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
-  }
-}
-
-async function decrementRide(index) {
-  const rideCounts = currentUser.rideCounts || {};
-  const currentCount = rideCounts[index] || 0;
-  
-  if (currentCount <= 1) {
-    // Si solo queda 1, desmarcar completamente
-    await toggleRide(index);
-    return;
-  }
-  
-  try {
-    rideCounts[index] = currentCount - 1;
-    
-    await dbRef.child('users/' + currentUser.username + '/rideCounts/' + index).set(rideCounts[index]);
-    currentUser.rideCounts = rideCounts;
-    
-    renderAttractions();
-    renderStats();
-    updateRanking();
-    
-    showToast('Eliminada una vez', 'info');
-  } catch (error) {
-    showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
-  }
-}
-
-function calculateCrownsAndHandshakes(user, allUsers = null) {
-  let crowns = 0;
-  
-  return crowns;
 }
 
 function renderStats(users = null) {
