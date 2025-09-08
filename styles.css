@@ -422,7 +422,7 @@ header h1 {
 
 .user-name-display {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   font-size: 16px;
   font-weight: bold;
 }
@@ -1439,7 +1439,7 @@ input:focus {
 .form-group label {
   display: block;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--murcia-red);
   margin-bottom: var(--spacing-sm);
   font-size: 14px;
 }
