@@ -333,8 +333,8 @@ header h1 {
 }
 
 .title-icon {
-  width: 50px;
-  height: 65px;
+  width: 70px;
+  height: 85px;
   vertical-align: middle;
   border-radius: var(--radius-md);
   object-fit: cover;

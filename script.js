@@ -601,60 +601,11 @@ function renderStats(users = null) {
       ridden: data.ridden?.length || 0,
       points: calculatePointsWithBonuses(data.ridden || [], data.rideCounts || {}, users)
     })).sort((a, b) => b.points - a.points);
-
-    const ol = document.getElementById('ranking-list');
-    ol.innerHTML = '';
     
     const maxPointsRanking = ranking.length > 0 ? ranking[0].points : 0;
     
     ranking.forEach((user, index) => {
       const li = document.createElement('li');
-      
-      // Add current user highlight
-      if (currentUser && user.username === currentUser.username) {
-        li.classList.add('current-user');
-      }
-      
-      // Position badge
-      const positionBadge = document.createElement('div');
-      positionBadge.className = 'position-badge';
-      
-      if (index === 0) {
-        positionBadge.classList.add('gold');
-        positionBadge.innerHTML = '🥇';
-      } else if (index === 1) {
-        positionBadge.classList.add('silver');
-        positionBadge.innerHTML = '🥈';
-      } else if (index === 2) {
-        positionBadge.classList.add('bronze');
-        positionBadge.innerHTML = '🥉';
-      } else {
-        positionBadge.classList.add('other');
-        positionBadge.textContent = index + 1;
-      }
-      
-      // User info container
-      const userInfo = document.createElement('div');
-      userInfo.className = 'user-info';
-      
-      // Username
-      const userName = document.createElement('div');
-      userName.className = 'user-name';
-      userName.textContent = user.username;
-      
-      // User stats
-      const userStats = document.createElement('div');
-      userStats.className = 'user-stats';
-      userStats.textContent = `${user.ridden}/${attractions.length}`;
-      
-      // Points info
-      const pointsInfo = document.createElement('div');
-      pointsInfo.className = 'ranking-points';
-      pointsInfo.textContent = `${user.points} puntos`;
-      
-      userInfo.appendChild(userName);
-      userInfo.appendChild(userStats);
-      userInfo.appendChild(pointsInfo);
       
       // Progress bar
       const progressContainer = document.createElement('div');
