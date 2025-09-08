@@ -1,6 +1,6 @@
 let dbRef = firebase.database().ref();
 let currentUser = null;
-let attractions = [];
+let collections = [];
 
 // Mapeo de atracciones a nombres de logros
 const achievementMapping = {
@@ -48,7 +48,7 @@ const achievementMapping = {
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     // Cargar atracciones
-    attractions = await fetch('attractions.json').then(r => r.json());
+    collections = await fetch('collections.json').then(r => r.json());
     
     // Verificar si hay una sesión guardada
     const savedSession = getSavedSession();
@@ -128,8 +128,6 @@ function getSavedSession() {
 function clearSession() {
   deleteCookie('checklist_murcia_session');
 }
-
-
 
 function showAchievementsApp() {
   const appElement = document.getElementById('achievements-app');

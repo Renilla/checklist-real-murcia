@@ -1,7 +1,7 @@
 let dbRef = firebase.database().ref();
 let currentUser = null;
-let attractions = [];
-let categoryStates = {}; // Para almacenar el estado de las categorías
+let collections = [];
+let collectionsStates = {}; // Para almacenar el estado de las categorías
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -85,7 +85,7 @@ function showApp() {
           await updateRanking();
         }
         
-        //renderCollections();
+        renderCollections();
         //renderStats(window.allUsers);
         
         // Setup user profile functionality
@@ -121,42 +121,26 @@ function renderCollections() {
   const container = document.getElementById('collections-container');
   container.innerHTML = '';
   
-  // Group attractions by category
-  const categories = {};
-  attractions.forEach((attr, index) => {
-    if (!categories[attr.category]) {
-      categories[attr.category] = [];
-    }
-    categories[attr.category].push({ ...attr, index });
-  });
-  
   // Create category sections
-  Object.entries(categories).forEach(([categoryName, categoryAttractions], categoryIndex) => {
-    const categorySection = document.createElement('div');
-    categorySection.className = 'category-section';
-    if (categoryName === 'PA DORMIRSE') {
-      categorySection.classList.add('pa-dormirse');
-    }
+  Object.entries(collections).forEach(([collectionName, data], collectionIndex) => {
+    const collectionSection = document.createElement('div');
+    collectionSection.className = 'collection-section';
     
-    // Category header
+    // Collection header
     const header = document.createElement('div');
-    header.className = 'category-header';
-    header.onclick = () => toggleCategory(categorySection, categoryName);
+    header.className = 'collection-header';
+    header.onclick = () => toggleCategory(collectionSection, collectionName);
     
     const title = document.createElement('div');
-    title.className = 'category-title';
-    
-    const colorDot = document.createElement('div');
-    colorDot.className = `category-color ${categoryAttractions[0].color}`;
+    title.className = 'collection-title';
     
     const titleText = document.createElement('span');
-    titleText.textContent = categoryName;
+    titleText.textContent = collectionName;
     
-    title.appendChild(colorDot);
     title.appendChild(titleText);
     
     const arrow = document.createElement('div');
-    arrow.className = 'category-arrow';
+    arrow.className = 'collection-arrow';
     arrow.innerHTML = '▼';
     
     header.appendChild(title);
@@ -164,133 +148,50 @@ function renderCollections() {
     
     // Category content
     const content = document.createElement('div');
-    content.className = 'category-content';
+    content.className = 'collection-content';
     
     // Aplicar estado guardado
-    const isCollapsed = categoryStates[categoryName] === true;
+    const isCollapsed = collectionsStates[collectionName] === true;
     if (isCollapsed) {
       header.classList.add('collapsed');
       content.classList.add('collapsed');
     }
     
-    const attractionsList = document.createElement('ul');
-    attractionsList.className = 'category-attractions';
-    if (categoryName === 'PA DORMIRSE') {
-      attractionsList.classList.add('pa-dormirse');
-    }
+    const cromoList = document.createElement('ul');
+    cromoList.className = 'collection-cromos';
     
-    categoryAttractions.forEach((attr, attrIndex) => {
+    data.cromos.forEach((cromo, cromoIndex) => {
       const li = document.createElement('li');
-      const isRidden = currentUser.ridden.includes(attr.index);
-      const rideCount = currentUser.rideCounts[attr.index] || 0;
-      
-      const attractionInfo = document.createElement('div');
-      attractionInfo.className = 'attraction-info';
       
       const name = document.createElement('span');
-      name.className = 'attraction-name';
-      name.textContent = attr.name;
+      name.className = 'cromo-name';
+      name.textContent = cromo;
       
-      // Mostrar conteo de veces montadas si es mayor a 0
-      if (rideCount > 0) {
-        const rideCountBadge = document.createElement('span');
-        rideCountBadge.className = 'ride-count-badge';
-        
-        // Aplicar tema de color basado en el número de veces montadas
-        if (rideCount === 1) {
-          rideCountBadge.classList.add('bronze');
-        } else if (rideCount === 2) {
-          rideCountBadge.classList.add('silver');
-        } else if (rideCount >= 3) {
-          rideCountBadge.classList.add('gold');
-        }
-        
-        rideCountBadge.textContent = `×${rideCount}`;
-        name.appendChild(rideCountBadge);
-        
-        // Verificar si es líder de esta atracción
-        if (window.allUsers && Object.keys(window.allUsers).length > 0) {
-          const maxRideCount = Math.max(...Object.values(window.allUsers).map(user => 
-            user.rideCounts?.[attr.index] || 0
-          ));
-          
-          const usersWithMaxCount = Object.values(window.allUsers).filter(user => 
-            (user.rideCounts?.[attr.index] || 0) === maxRideCount && maxRideCount > 0
-          );
-          
-          // Si este usuario es líder (tiene el máximo y es mayor a 0)
-          if (rideCount === maxRideCount && maxRideCount > 0) {
-            const leaderBadge = document.createElement('span');
-            leaderBadge.className = usersWithMaxCount.length > 1 ? 'leader-badge tied' : 'leader-badge';
-            leaderBadge.innerHTML = usersWithMaxCount.length > 1 ? '🤝' : '👑';
-            leaderBadge.title = usersWithMaxCount.length > 1 ? 
-              `Líder empatado (${usersWithMaxCount.length} usuarios)` : 
-              'Líder de esta atracción';
-            name.appendChild(leaderBadge);
-          }
-        }
-      }
+      const hasCromo = currentUser.collected?.[collectionName]?.includes(cromo);
+
+      const button = document.createElement('button');
+      button.textContent = hasCromo ? 'Quitar' : 'Añadir';
+      button.onclick = () => toggleCromo(collectionName, cromo);
       
-      const points = document.createElement('span');
-      points.className = 'attraction-points';
-      points.textContent = `${attr.points}p`;
-      
-      attractionInfo.appendChild(name);
-      attractionInfo.appendChild(points);
-      
-      // Crear contenedor para botones
-      const buttonContainer = document.createElement('div');
-      buttonContainer.className = 'attraction-buttons';
-      
-      if (isRidden) {
-        // Botones + y - cuando está marcada
-        const minusBtn = document.createElement('button');
-        minusBtn.className = 'minus-btn';
-        minusBtn.innerHTML = '−';
-        minusBtn.onclick = () => decrementRide(attr.index);
-        
-        const plusBtn = document.createElement('button');
-        plusBtn.className = 'plus-btn';
-        plusBtn.innerHTML = '+';
-        plusBtn.onclick = () => incrementRide(attr.index);
-        
-        buttonContainer.appendChild(minusBtn);
-        buttonContainer.appendChild(plusBtn);
-      } else {
-        // Botón "Marcar" cuando no está marcada
-        const markBtn = document.createElement('button');
-        markBtn.textContent = 'Marcar';
-        markBtn.onclick = () => toggleRide(attr.index);
-        buttonContainer.appendChild(markBtn);
-      }
-      
-      li.appendChild(attractionInfo);
-      li.appendChild(buttonContainer);
-      
-      // Add staggered animation
-      li.style.opacity = '0';
-      li.style.transform = 'translateY(20px)';
-      
-      attractionsList.appendChild(li);
-      
-      // Animate in with delay
-      setTimeout(() => {
-        li.style.transition = 'all 0.3s ease-out';
-        li.style.opacity = '1';
-        li.style.transform = 'translateY(0)';
-      }, (categoryIndex * 100) + (attrIndex * 50));
+      li.appendChild(name);
+      li.appendChild(button);
+      cromoList.appendChild(li);
     });
-    content.appendChild(attractionsList);
-    categorySection.appendChild(header);
-    categorySection.appendChild(content);
-    container.appendChild(categorySection);
+
+    content.appendChild(cromoList);
+    collectionSection.appendChild(header);
+    collectionSection.appendChild(content);
+    container.appendChild(collectionSection);
   });
-  document.getElementById('total-attractions').textContent = attractions.length;
+
+  // Mostrar total de cromos
+  const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
+  document.getElementById('total-cromos').textContent = totalCromos;
 }
 
 function toggleCategory(categorySection, categoryName) {
-  const header = categorySection.querySelector('.category-header');
-  const content = categorySection.querySelector('.category-content');
+  const header = categorySection.querySelector('.collection-header');
+  const content = categorySection.querySelector('.collection-content');
   const isCollapsed = header.classList.contains('collapsed');
 
   header.classList.toggle('collapsed');
