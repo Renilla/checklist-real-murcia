@@ -135,7 +135,7 @@ function renderCollections() {
     title.className = 'collection-title';
     
     const titleText = document.createElement('span');
-    titleText.textContent = collectionName;
+    titleText.textContent = collectionName.name;
     
     title.appendChild(titleText);
     
@@ -176,6 +176,15 @@ function renderCollections() {
       li.appendChild(name);
       li.appendChild(button);
       cromoList.appendChild(li);
+
+      // Animación de entrada
+      li.style.opacity = '0';
+      li.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        li.style.transition = 'all 0.3s ease-out';
+        li.style.opacity = '1';
+        li.style.transform = 'translateY(0)';
+      }, (index * 100) + (cromoIndex * 50));
     });
 
     content.appendChild(cromoList);
