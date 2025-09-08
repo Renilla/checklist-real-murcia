@@ -135,7 +135,7 @@ function renderCollections() {
     title.className = 'collection-title';
     
     const titleText = document.createElement('span');
-    titleText.textContent = collectionName.name;
+    titleText.textContent = collectionName;
     
     title.appendChild(titleText);
     
