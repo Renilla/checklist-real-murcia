@@ -131,12 +131,18 @@ function renderCollections() {
     header.className = 'collection-header';
     header.onclick = () => toggleCategory(collectionSection, collectionName);
     
+    const img = document.createElement('img');
+    img.src = data.portada;
+    img.alt = data.nombre;
+    img.className = 'collection-cover';
+
     const title = document.createElement('div');
     title.className = 'collection-title';
-    
+
     const titleText = document.createElement('span');
-    titleText.textContent = collectionName;
+    titleText.textContent = data.nombre;
     
+    title.appendChild(img);
     title.appendChild(titleText);
     
     const arrow = document.createElement('div');

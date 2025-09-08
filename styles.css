@@ -1103,6 +1103,15 @@ input:focus {
   gap: var(--spacing-md);
 }
 
+.collection-cover {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
 .category-arrow {
   font-size: 20px;
   color: var(--text-secondary);
