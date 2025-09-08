@@ -167,12 +167,8 @@ function renderCollections() {
     cromoList.className = 'collection-cromos';
     
     data.cromos.forEach((cromo, cromoIndex) => {
-      const li = document.createElement('li');
-
-      // Crear botón que contenga el nombre y número global
-      const cromoButton = document.createElement('button');
-      cromoButton.className = 'cromo-button';
-      cromoButton.textContent = `${globalCromoIndex}. ${cromo}`;
+      const button = document.createElement('button');
+      button.textContent = `${globalCromoIndex}. ${cromo}`;
 
       // Comprobar si ya está marcado en currentUser
       const isCollected = currentUser.collected?.[collectionName]?.includes(cromo);
