@@ -114,8 +114,6 @@ function clearSession() {
   deleteCookie('checklist_murcia_session');
 }
 
-
-
 function logout() {
   // Disconnect Firebase listener
   dbRef.child('users').off('value');
@@ -366,8 +364,6 @@ function renderAttractions() {
   });
   
   document.getElementById('total-attractions').textContent = attractions.length;
-  
-
 }
 
 function toggleCategory(categorySection, categoryName) {
@@ -493,41 +489,6 @@ function calculatePoints(riddenIndices, rideCounts = {}) {
   }, 0);
 }
 
-function calculateCrownsAndHandshakes(user, allUsers = null) {
-  let crowns = 0;
-  let handshakes = 0;
-  
-  if (!allUsers || !user.ridden) {
-    return { crowns, handshakes };
-  }
-  
-  user.ridden.forEach(index => {
-    const rideCount = user.rideCounts?.[index] || 0;
-    if (rideCount > 0) {
-      const maxRideCount = Math.max(...Object.values(allUsers).map(u => 
-        u.rideCounts?.[index] || 0
-      ));
-      
-      const usersWithMaxCount = Object.values(allUsers).filter(u => 
-        (u.rideCounts?.[index] || 0) === maxRideCount && maxRideCount > 0
-      );
-      
-      // Si este usuario es líder de esta atracción
-      if (rideCount === maxRideCount && maxRideCount > 0) {
-        if (usersWithMaxCount.length === 1) {
-          // Corona única
-          crowns++;
-        } else {
-          // Handshake por empate
-          handshakes++;
-        }
-      }
-    }
-  });
-  
-  return { crowns, handshakes };
-}
-
 function calculatePointsWithBonuses(riddenIndices, rideCounts = {}, allUsers = null) {
   let totalPoints = 0;
   
@@ -574,13 +535,12 @@ function renderStats(users = null) {
   const attractionPct = (riddenCount / totalAttractions) * 100;
   
   // Calculate crowns and handshakes
-  const { crowns, handshakes } = calculateCrownsAndHandshakes(currentUser, users);
+  const { crowns } = calculateCrowns(currentUser, users);
   
   document.getElementById('ridden-count').textContent = riddenCount;
   document.getElementById('total-points').textContent = totalPoints;
   document.getElementById('total-attractions').textContent = totalAttractions;
   document.getElementById('crowns-count').textContent = crowns;
-  document.getElementById('handshakes-count').textContent = handshakes;
   
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = attractionPct + '%';
@@ -594,6 +554,10 @@ function renderStats(users = null) {
   
   // Render category stats
   renderCategoryStats();
+}
+
+function calculateCrowns(user, allUsers = null) {
+  let crowns = 0;
 }
 
 async function updateRanking() {
