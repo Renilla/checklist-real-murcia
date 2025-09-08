@@ -167,7 +167,11 @@ function renderCollections() {
     cromoList.className = 'collection-cromos';
     
     data.cromos.forEach((cromo, cromoIndex) => {
+      const li = document.createElement('li');
+
+      // Crear botón que contenga el nombre y número global
       const cromoButton = document.createElement('button');
+      cromoButton.className = 'cromo-button';
       cromoButton.textContent = `${globalCromoIndex}. ${cromo}`;
 
       // Comprobar si ya está marcado en currentUser
@@ -273,6 +277,7 @@ async function toggleRide(index) {
   }
 }
 
+
 function renderStats(users = null) {
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = attractionPct + '%';
@@ -371,9 +376,6 @@ function renderCategoryStats() {
     categoryStatsContainer.appendChild(categoryStat);
   });
 }
-
-
-
 
 function loadCategoryStates() {
   try {
