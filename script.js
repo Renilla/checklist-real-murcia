@@ -120,8 +120,9 @@ function showApp() {
 function renderCollections() {
   const container = document.getElementById('collections-container');
   container.innerHTML = '';
-  
-  // Create category sections
+
+  let globalCromoIndex = 1; // contador global de cromos
+
   Object.entries(collections).forEach(([collectionName, data], collectionIndex) => {
     const collectionSection = document.createElement('div');
     collectionSection.className = 'collection-section';
@@ -131,20 +132,20 @@ function renderCollections() {
     header.className = 'collection-header';
     header.onclick = () => toggleCategory(collectionSection, collectionName);
     
+    const title = document.createElement('div');
+    title.className = 'collection-title';
+    
+    const titleText = document.createElement('span');
+    titleText.textContent = data.nombre; // nombre de la colección
+    title.appendChild(titleText);
+    
+    // Imagen portada
     const img = document.createElement('img');
     img.src = data.portada;
     img.alt = data.nombre;
     img.className = 'collection-cover';
+    title.insertBefore(img, titleText); // imagen antes del nombre
 
-    const title = document.createElement('div');
-    title.className = 'collection-title';
-
-    const titleText = document.createElement('span');
-    titleText.textContent = data.nombre;
-    
-    title.appendChild(img);
-    title.appendChild(titleText);
-    
     const arrow = document.createElement('div');
     arrow.className = 'collection-arrow';
     arrow.innerHTML = '▼';
@@ -156,7 +157,6 @@ function renderCollections() {
     const content = document.createElement('div');
     content.className = 'collection-content';
     
-    // Aplicar estado guardado
     const isCollapsed = collectionsStates[collectionName] === true;
     if (isCollapsed) {
       header.classList.add('collapsed');
@@ -168,20 +168,41 @@ function renderCollections() {
     
     data.cromos.forEach((cromo, cromoIndex) => {
       const li = document.createElement('li');
-      
-      const name = document.createElement('span');
-      name.className = 'cromo-name';
-      name.textContent = cromo;
-      
-      const hasCromo = currentUser.collected?.[collectionName]?.includes(cromo);
 
-      const button = document.createElement('button');
-      button.textContent = hasCromo ? 'Quitar' : 'Añadir';
-      button.onclick = () => toggleCromo(collectionName, cromo);
-      
-      li.appendChild(name);
-      li.appendChild(button);
+      // Crear botón que contenga el nombre y número global
+      const cromoButton = document.createElement('button');
+      cromoButton.className = 'cromo-button';
+      cromoButton.textContent = `${globalCromoIndex}. ${cromo}`;
+
+      // Comprobar si ya está marcado en currentUser
+      const isCollected = currentUser.collected?.[collectionName]?.includes(cromo);
+      if (isCollected) {
+        cromoButton.classList.add('collected'); // aplicamos estilo tachado
+      }
+
+      // Evento click para marcar/desmarcar
+      cromoButton.onclick = () => {
+        cromoButton.classList.toggle('collected');
+
+        // Opcional: actualizar currentUser.collected
+        if (!currentUser.collected) currentUser.collected = {};
+        if (!currentUser.collected[collectionName]) currentUser.collected[collectionName] = [];
+
+        if (cromoButton.classList.contains('collected')) {
+          // marcar cromo
+          if (!currentUser.collected[collectionName].includes(cromo)) {
+            currentUser.collected[collectionName].push(cromo);
+          }
+        } else {
+          // desmarcar cromo
+          currentUser.collected[collectionName] = currentUser.collected[collectionName].filter(c => c !== cromo);
+        }
+      };
+
+      li.appendChild(cromoButton);
       cromoList.appendChild(li);
+
+      globalCromoIndex++;
     });
 
     content.appendChild(cromoList);
@@ -190,7 +211,6 @@ function renderCollections() {
     container.appendChild(collectionSection);
   });
 
-  // Mostrar total de cromos
   const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
   document.getElementById('total-cromos').textContent = totalCromos;
 }
