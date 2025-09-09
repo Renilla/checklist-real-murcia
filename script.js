@@ -166,6 +166,14 @@ function renderCollections() {
     const cromoBlock = document.createElement('div');
     cromoBlock.className = 'cromo-block';
 
+    data.cromos.forEach((cromo) => {
+      const li = document.createElement('li');
+
+      cromoList.appendChild(li);
+
+      globalCromoIndex++;
+    });
+
     content.appendChild(cromoBlock);
     collectionSection.appendChild(header);
     collectionSection.appendChild(content);
