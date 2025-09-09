@@ -175,6 +175,20 @@ function renderCollections() {
       checkbox.className = 'cromo-checkbox';
       checkbox.checked = currentUser.collected?.[collectionName]?.includes(cromo) || false;
 
+      checkbox.onchange = () => {
+        if (!currentUser.collected) currentUser.collected = {};
+        if (!currentUser.collected[collectionName]) currentUser.collected[collectionName] = [];
+
+        if (checkbox.checked) {
+          if (!currentUser.collected[collectionName].includes(cromo)) {
+            currentUser.collected[collectionName].push(cromo);
+          }
+        } else {
+          currentUser.collected[collectionName] =
+            currentUser.collected[collectionName].filter(c => c !== cromo);
+        }
+      };
+
       const label = document.createElement('label');
       label.htmlFor = checkbox.id;
       label.className = 'cromo-item';
