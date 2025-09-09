@@ -166,40 +166,38 @@ function renderCollections() {
     const cromoList = document.createElement('ul');
     cromoList.className = 'collection-cromos';
     
-    data.cromos.forEach((cromo, cromoIndex) => {
+    data.cromos.forEach((cromo) => {
       const li = document.createElement('li');
 
-      // Crear botón que contenga el nombre y número global
-      const cromoButton = document.createElement('button');
-      cromoButton.className = 'cromo-button';
-      cromoButton.textContent = `${globalCromoIndex}. ${cromo}`;
+      // Crear checkbox con número y nombre
+      const label = document.createElement('label');
+      label.className = 'cromo-label';
 
-      // Comprobar si ya está marcado en currentUser
-      const isCollected = currentUser.collected?.[collectionName]?.includes(cromo);
-      if (isCollected) {
-        cromoButton.classList.add('collected'); // aplicamos estilo tachado
-      }
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = currentUser.collected?.[collectionName]?.includes(cromo) || false;
 
-      // Evento click para marcar/desmarcar
-      cromoButton.onclick = () => {
-        cromoButton.classList.toggle('collected');
-
-        // Opcional: actualizar currentUser.collected
+      checkbox.onchange = () => {
         if (!currentUser.collected) currentUser.collected = {};
         if (!currentUser.collected[collectionName]) currentUser.collected[collectionName] = [];
 
-        if (cromoButton.classList.contains('collected')) {
-          // marcar cromo
+        if (checkbox.checked) {
           if (!currentUser.collected[collectionName].includes(cromo)) {
             currentUser.collected[collectionName].push(cromo);
           }
         } else {
-          // desmarcar cromo
-          currentUser.collected[collectionName] = currentUser.collected[collectionName].filter(c => c !== cromo);
+          currentUser.collected[collectionName] =
+            currentUser.collected[collectionName].filter(c => c !== cromo);
         }
       };
 
-      li.appendChild(cromoButton);
+      const text = document.createElement('span');
+      text.textContent = `${globalCromoIndex}. ${cromo}`;
+
+      label.appendChild(checkbox);
+      label.appendChild(text);
+
+      li.appendChild(label);
       cromoList.appendChild(li);
 
       globalCromoIndex++;
