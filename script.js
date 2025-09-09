@@ -167,6 +167,8 @@ function renderCollections() {
     cromoBlock.className = 'cromo-block';
 
     data.cromos.forEach((cromo) => {
+      const li = document.createElement('li');
+
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.id = `${collectionName}-${cromo}`;
@@ -192,8 +194,9 @@ function renderCollections() {
       label.className = 'cromo-item';
       label.textContent = `${globalCromoIndex}. ${cromo}`;
 
-      cromoBlock.appendChild(checkbox);
-      cromoBlock.appendChild(label);
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      cromoList.appendChild(li);
 
       globalCromoIndex++;
     });
