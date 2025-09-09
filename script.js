@@ -169,6 +169,19 @@ function renderCollections() {
     data.cromos.forEach((cromo) => {
       const li = document.createElement('li');
 
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = `${collectionName}-${cromo}`;
+      checkbox.className = 'cromo-checkbox';
+      checkbox.checked = currentUser.collected?.[collectionName]?.includes(cromo) || false;
+
+      const label = document.createElement('label');
+      label.htmlFor = checkbox.id;
+      label.className = 'cromo-item';
+      label.textContent = `${globalCromoIndex}. ${cromo}`;
+
+      li.appendChild(checkbox);
+      li.appendChild(label);
       cromoList.appendChild(li);
 
       globalCromoIndex++;
