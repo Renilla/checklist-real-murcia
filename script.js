@@ -1,7 +1,7 @@
 let dbRef = firebase.database().ref();
 let currentUser = null;
 let collections = [];
-let collectionsStates = {}; // Para almacenar el estado de las categorías
+let collectionStates = {}; // Para almacenar el estado de las categorías
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -157,7 +157,7 @@ function renderCollections() {
     const content = document.createElement('div');
     content.className = 'collection-content';
     
-    const isCollapsed = collectionsStates[collectionName] === true;
+    const isCollapsed = collectionStates[collectionName] === true;
     if (isCollapsed) {
       header.classList.add('collapsed');
       content.classList.add('collapsed');
