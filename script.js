@@ -543,6 +543,10 @@ async function updateUserProfile() {
     showToast('La contraseña debe tener al menos 6 caracteres', 'error');
     return;
   }
+
+  if(logout()) {
+    return;
+  }
   
   try {
     // Check if new username already exists (if username is changing)
