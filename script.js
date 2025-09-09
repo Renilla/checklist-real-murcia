@@ -121,7 +121,8 @@ function renderCollections() {
   const container = document.getElementById('collections-container');
   container.innerHTML = '';
 
-  let globalCromoIndex = 1;
+  // Numeración global
+  let globalIndex = 1;
 
   Object.entries(collections).forEach(([collectionName, data]) => {
     const collectionSection = document.createElement('div');
@@ -163,8 +164,22 @@ function renderCollections() {
     }
 
     // Contenedor único de cromos
-    const cromoBlock = document.createElement('div');
+    const cromoBlock = document.createElement('ul');
     cromoBlock.className = 'cromo-block';
+
+    data.cromos.forEach((cromo, index) => {
+      const li = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = progresoGuardado[nombreColeccion]?.[index] || false;
+
+      li.appendChild(checkbox);
+      const span = document.createElement('span');
+      span.textContent = `${globalIndex++}. ${cromo}`;
+      span.style.fontWeight = 'bold';
+      li.appendChild(span);
+      ul.appendChild(li);
+    });
 
     content.appendChild(cromoBlock);
     collectionSection.appendChild(header);
