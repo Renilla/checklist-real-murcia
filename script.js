@@ -167,7 +167,7 @@ function renderCollections() {
     cromoList.className = 'collection-cromos';
     
     data.cromos.forEach((cromo) => {
-      const li = document.createElement('li');
+      //const li = document.createElement('li');
 
       // Checkbox oculto + label como botón
       const checkbox = document.createElement('input');
