@@ -130,7 +130,7 @@ function renderCollections() {
     // Collection header
     const header = document.createElement('div');
     header.className = 'collection-header';
-    header.onclick = () => toggleCategory(collectionSection, collectionName);
+    header.onclick = () => toggleCollection(collectionSection, collectionName);
     
     const title = document.createElement('div');
     title.className = 'collection-title';
@@ -215,16 +215,16 @@ function renderCollections() {
   document.getElementById('total-cromos').textContent = totalCromos;
 }
 
-function toggleCategory(categorySection, categoryName) {
-  const header = categorySection.querySelector('.collection-header');
-  const content = categorySection.querySelector('.collection-content');
+function toggleCollection(collectionSection, collectionName) {
+  const header = collectionSection.querySelector('.collection-header');
+  const content = collectionSection.querySelector('.collection-content');
   const isCollapsed = header.classList.contains('collapsed');
 
   header.classList.toggle('collapsed');
   content.classList.toggle('collapsed');
   
   // Guardar el nuevo estado
-  categoryStates[categoryName] = !isCollapsed;
+  collectionStates[collectionName] = !isCollapsed;
   saveCategoryStates();
 }
 
