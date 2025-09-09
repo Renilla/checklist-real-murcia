@@ -167,20 +167,6 @@ function renderCollections() {
     const cromoBlock = document.createElement('ul');
     cromoBlock.className = 'cromo-block';
 
-    data.cromos.forEach((cromo, index) => {
-      const li = document.createElement('li');
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = progresoGuardado[nombreColeccion]?.[index] || false;
-
-      li.appendChild(checkbox);
-      const span = document.createElement('span');
-      span.textContent = `${globalIndex++}. ${cromo}`;
-      span.style.fontWeight = 'bold';
-      li.appendChild(span);
-      ul.appendChild(li);
-    });
-
     content.appendChild(cromoBlock);
     collectionSection.appendChild(header);
     collectionSection.appendChild(content);
