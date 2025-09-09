@@ -1294,8 +1294,6 @@ input:focus {
   box-shadow: 0 2px 8px var(--shadow-light);
 }
 
-
-
 /* Ranking Points Update */
 .ranking-points {
   font-size: 14px;
@@ -1331,6 +1329,39 @@ input:focus {
     font-size: 11px;
     min-width: 25px;
   }
+}
+
+/*CROMOS*/
+/* Ocultar checkbox */
+.cromo-checkbox {
+  display: none;
+}
+
+/* Estilo base del "botón" */
+.cromo-label {
+  display: inline-block;
+  width: 160px;           /* ajusta según necesites */
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  border: 2px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+/* Efecto hover */
+.cromo-label:hover {
+  background-color: #ddd;
+}
+
+/* Cuando está marcado */
+.cromo-checkbox:checked + .cromo-label {
+  background-color: #333; /* gris oscuro */
+  color: #fff;
+  text-decoration: line-through;
 }
 
 .pa-dormirse .category-content {
