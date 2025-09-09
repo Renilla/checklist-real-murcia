@@ -121,55 +121,52 @@ function renderCollections() {
   const container = document.getElementById('collections-container');
   container.innerHTML = '';
 
-  let globalCromoIndex = 1; // contador global de cromos
+  let globalCromoIndex = 1;
 
-  Object.entries(collections).forEach(([collectionName, data], collectionIndex) => {
+  Object.entries(collections).forEach(([collectionName, data]) => {
     const collectionSection = document.createElement('div');
     collectionSection.className = 'collection-section';
-    
-    // Collection header
+
+    // Encabezado
     const header = document.createElement('div');
     header.className = 'collection-header';
     header.onclick = () => toggleCollection(collectionSection, collectionName);
-    
+
     const title = document.createElement('div');
     title.className = 'collection-title';
-    
+
     const titleText = document.createElement('span');
-    titleText.textContent = data.nombre; // nombre de la colección
+    titleText.textContent = data.nombre;
     title.appendChild(titleText);
-    
-    // Imagen portada
+
     const img = document.createElement('img');
     img.src = data.portada;
     img.alt = data.nombre;
     img.className = 'collection-cover';
-    title.insertBefore(img, titleText); // imagen antes del nombre
+    title.insertBefore(img, titleText);
 
     const arrow = document.createElement('div');
     arrow.className = 'collection-arrow';
     arrow.innerHTML = '▼';
-    
+
     header.appendChild(title);
     header.appendChild(arrow);
-    
-    // Category content
+
+    // Contenido de la colección
     const content = document.createElement('div');
     content.className = 'collection-content';
-    
-    const isCollapsed = collectionStates[collectionName] === true;
+
+    const isCollapsed = collectionStates?.[collectionName] === true;
     if (isCollapsed) {
       header.classList.add('collapsed');
       content.classList.add('collapsed');
     }
-    
-    const cromoList = document.createElement('ul');
-    cromoList.className = 'collection-cromos';
-    
-    data.cromos.forEach((cromo) => {
-      //const li = document.createElement('li');
 
-      // Checkbox oculto + label como botón
+    // Contenedor único de cromos
+    const cromoBlock = document.createElement('div');
+    cromoBlock.className = 'cromo-block';
+
+    data.cromos.forEach((cromo) => {
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.id = `${collectionName}-${cromo}`;
@@ -192,17 +189,16 @@ function renderCollections() {
 
       const label = document.createElement('label');
       label.htmlFor = checkbox.id;
-      label.className = 'cromo-label';
+      label.className = 'cromo-item';
       label.textContent = `${globalCromoIndex}. ${cromo}`;
 
-      li.appendChild(checkbox);
-      li.appendChild(label);
-      cromoList.appendChild(li);
+      cromoBlock.appendChild(checkbox);
+      cromoBlock.appendChild(label);
 
       globalCromoIndex++;
     });
 
-    content.appendChild(cromoList);
+    content.appendChild(cromoBlock);
     collectionSection.appendChild(header);
     collectionSection.appendChild(content);
     container.appendChild(collectionSection);
@@ -211,6 +207,7 @@ function renderCollections() {
   const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
   document.getElementById('total-cromos').textContent = totalCromos;
 }
+
 
 function toggleCollection(collectionSection, collectionName) {
   const header = collectionSection.querySelector('.collection-header');
