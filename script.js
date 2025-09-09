@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     collections = await fetch('collections.json').then(r => r.json());
     
     // Cargar estados de categorías guardados
-    loadCategoryStates();
+    loadCollectionStates();
     
     // Verificar si hay una sesión guardada
     const savedSession = getSavedSession();
@@ -225,7 +225,7 @@ function toggleCollection(collectionSection, collectionName) {
   
   // Guardar el nuevo estado
   collectionStates[collectionName] = !isCollapsed;
-  saveCategoryStates();
+  saveCollectionStates();
 }
 
 async function toggleRide(index) {
@@ -377,21 +377,21 @@ function renderCategoryStats() {
   });
 }
 
-function loadCategoryStates() {
+function loadCollectionStates() {
   try {
     const savedStates = localStorage.getItem('checklist_murcia_collection_states');
     if (savedStates) {
-      categoryStates = JSON.parse(savedStates);
+      collectionStates = JSON.parse(savedStates);
     }
   } catch (error) {
     console.error('Error loading collection states:', error);
-    categoryStates = {};
+    collectionStates = {};
   }
 }
 
-function saveCategoryStates() {
+function saveCollectionStates() {
   try {
-    localStorage.setItem('checklist_murcia_collection_states', JSON.stringify(categoryStates));
+    localStorage.setItem('checklist_murcia_collection_states', JSON.stringify(collectionStates));
   } catch (error) {
     console.error('Error saving collection states:', error);
   }
