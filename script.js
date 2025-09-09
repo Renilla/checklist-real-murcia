@@ -229,9 +229,8 @@ function toggleCollection(collectionSection, collectionName) {
 }
 
 async function toggleRide(index) {
-  const ridden = currentUser.ridden || [];
-  const rideCounts = currentUser.rideCounts || {};
-  const idx = ridden.indexOf(index);
+  const collected = currentUser.collected || [];
+  const idx = collected.indexOf(index);
   
   // Add loading state
   const button = event.target;
@@ -243,30 +242,26 @@ async function toggleRide(index) {
   try {
     if (idx >= 0) {
       // Desmarcar: eliminar de ridden y resetear conteo
-      ridden.splice(idx, 1);
-      delete rideCounts[index];
+      collected.splice(idx, 1);
     } else {
       // Marcar: añadir a ridden y establecer conteo inicial a 1
-      ridden.push(index);
-      rideCounts[index] = 1;
+      collected.push(index);
     }
     
     // Actualizar ambos campos en la base de datos
     await dbRef.child('users/' + currentUser.username).update({
-      ridden: ridden,
-      rideCounts: rideCounts
+      collected: collected
     });
     
     // Actualizar el usuario local
-    currentUser.ridden = ridden;
-    currentUser.rideCounts = rideCounts;
+    currentUser.collected = collected;
     
     // Success animation
     button.classList.remove('loading');
     button.classList.add('success-animation');
     
     setTimeout(() => {
-      renderAttractions();
+      renderCollections();
       renderStats();
       updateRanking(); // Update ranking immediately after ride toggle
     }, 200);
@@ -277,20 +272,19 @@ async function toggleRide(index) {
   }
 }
 
-
 function renderStats(users = null) {
   const progressFill = document.getElementById('progress-fill');
-  progressFill.style.width = attractionPct + '%';
+  progressFill.style.width = cromosPct + '%';
   
   // Add complete class if progress is 100%
-  if (attractionPct >= 100) {
+  if (cromosPct >= 100) {
     progressFill.classList.add('complete');
   } else {
     progressFill.classList.remove('complete');
   }
   
-  // Render category stats
-  renderCategoryStats();
+  // Render collection stats
+  renderCollectionStats();
 }
 
 async function updateRanking() {
@@ -310,7 +304,7 @@ async function updateRanking() {
     
     // Re-renderizar atracciones para actualizar emoticonos si la app está visible
     if (!document.getElementById('app').classList.contains('hidden')) {
-      renderAttractions();
+      renderCollections();
     }
   } catch (error) {
     console.error('Error updating ranking:', error);
@@ -332,7 +326,7 @@ function listenForRankingUpdates() {
   });
 }
 
-function renderCategoryStats() {
+function renderCollectionStats() {
   const categoryStatsContainer = document.getElementById('category-stats');
   if (!categoryStatsContainer) return;
   

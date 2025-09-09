@@ -26,8 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           currentUser = { 
             username: savedSession.username, 
             ...userData, 
-            ridden: userData.ridden || [],
-            rideCounts: userData.rideCounts || {}
+            collected: userData.collected || []
           };
           
           showAchievementsApp();
