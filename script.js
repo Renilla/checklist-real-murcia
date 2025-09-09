@@ -561,12 +561,11 @@ async function updateUserProfile() {
       // Copy ALL current user data to new username
       const currentUserData = {
         password: newPassword || currentUser.password,
-        ridden: currentUser.ridden || [],
-        rideCounts: currentUser.rideCounts || {},
+        collected: currentUser.collected || [],
         // Preserve any other user data that might exist
         ...Object.fromEntries(
           Object.entries(currentUser).filter(([key]) => 
-            !['username', 'password', 'ridden', 'rideCounts'].includes(key)
+            !['username', 'password', 'collected'].includes(key)
           )
         )
       };
