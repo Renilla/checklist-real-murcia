@@ -169,12 +169,11 @@ function renderCollections() {
     data.cromos.forEach((cromo) => {
       const li = document.createElement('li');
 
-      // Crear checkbox con número y nombre
-      const label = document.createElement('label');
-      label.className = 'cromo-label';
-
+      // Checkbox oculto + label como botón
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
+      checkbox.id = `${collectionName}-${cromo}`;
+      checkbox.className = 'cromo-checkbox';
       checkbox.checked = currentUser.collected?.[collectionName]?.includes(cromo) || false;
 
       checkbox.onchange = () => {
@@ -191,12 +190,12 @@ function renderCollections() {
         }
       };
 
-      const text = document.createElement('span');
-      text.textContent = `${globalCromoIndex}. ${cromo}`;
+      const label = document.createElement('label');
+      label.htmlFor = checkbox.id;
+      label.className = 'cromo-label';
+      label.textContent = `${globalCromoIndex}. ${cromo}`;
 
-      label.appendChild(checkbox);
-      label.appendChild(text);
-
+      li.appendChild(checkbox);
       li.appendChild(label);
       cromoList.appendChild(li);
 
