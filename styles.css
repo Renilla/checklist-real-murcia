@@ -1337,29 +1337,31 @@ input:focus {
   display: none;
 }
 
-/* Estilo base del "botón" */
-.cromo-label {
-  display: inline-block;
-  width: 160px;           /* ajusta según necesites */
-  padding: 10px;
-  margin: 5px;
-  text-align: center;
-  border: 2px solid #444;
+.cromo-block {
+  background: #f9f9f9;     /* fondo único */
+  border: 1px solid #ccc;
   border-radius: 8px;
-  cursor: pointer;
-  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.cromo-item {
+  display: block;
+  text-align: center;
+  padding: 8px;
   font-weight: bold;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-/* Efecto hover */
-.cromo-label:hover {
-  background-color: #ddd;
+/* efecto hover */
+.cromo-item:hover {
+  background: #eee;
 }
 
-/* Cuando está marcado */
-.cromo-checkbox:checked + .cromo-label {
-  background-color: #333; /* gris oscuro */
+/* cuando se selecciona */
+.cromo-checkbox:checked + .cromo-item {
+  background-color: #333;
   color: #fff;
   text-decoration: line-through;
 }
