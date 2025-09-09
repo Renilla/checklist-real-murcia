@@ -4,50 +4,13 @@ let collections = [];
 
 // Mapeo de atracciones a nombres de logros
 const achievementMapping = {
-  "Furius Baco": "Mono Loco",
-  "Serpiente Emplumada": "Quetzalcóatl",
-  "Dragon Khan": "Domador de dragones",
-  "Stampida": "Colono pionero",
-  "Templo del Fuego": "Homo Erectus",
-  "Estació del Nord": "Ruta de la seda",
-  "Wild Buffalos": "Cowboy experto",
-  "Shambhala": "Escalador del Himalaya",
-  "Hurakan Condor": "Chamán",
-  "Carousel": "Americano",
-  "Kon-tiki Wave": "Capitán Cook",
-  "Tutuki Splash": "Maestro de lava",
-  "Junior Red Force": "Caballino Cagado",
-  "Tami Tami": "Tiki",
-  "Street Mission": "Detective jefe",
-  "Angkor": "Francotirador",
-  "Racing Legends": "Carrerista",
-  "Maranello Grand Race": "Piloto",
-  "Coco Piloto": "Pecador de cocos",
-  "Grand Canyon Rapids": "Colorao",
-  "Silver River Flume": "El Tronco",
-  "El Diablo – Tren de la Mina": "El Diavlo",
-  "Tea Cups": "Hora del Té",
-  "Potrillos": "Jinete",
-  "Tomahawk": "Jefe de la tribu",
-  "Crazy Barrels": "Minero",
-  "Thrill Towers": "Pistón Loco",
-  "Red Force": "Caballino Dopado",
-  "Granja de Elmo": "Granjero",
-  "Uncharted": "Nathan Drake",
-  "El Secreto de los Mayas": "Guía",
-  "Laberinto Blacksmith": "Investigador",
-  "Port de la Drassana": "Magallanes",
-  "Magic Fish": "Pescador",
-  "Kiddie Dragons": "Dragoncito",
-  "Volpaiute": "Nativo americano",
-  "Buffalo Rodeo": "Cowboy principiante",
-  "Cobra Imperial": "Domador del Emperador",
-  "Yucatán": "Mariachi"
+  "Liga Este 1973/74": "Liga Este 1973/74",
+  "Campeonato de Liga 1973-1974": "Campeonato de Liga 1973-1974"
 };
 
 window.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Cargar atracciones
+    // Cargar colecciones
     collections = await fetch('collections.json').then(r => r.json());
     
     // Verificar si hay una sesión guardada
@@ -157,15 +120,15 @@ function renderAchievements() {
   achievementsList.innerHTML = '';
   
   // Filtrar atracciones que tienen logros definidos
-  const achievementsWithMapping = attractions.filter((attraction, index) => {
-    return achievementMapping[attraction.name] !== undefined;
+  const achievementsWithMapping = collections.filter((collection, index) => {
+    return achievementMapping[collection.name] !== undefined;
   });
   
   // Crear array de logros con información de estado
-  const achievementsData = achievementsWithMapping.map((attraction, index) => {
-    const originalIndex = attractions.findIndex(a => a.name === attraction.name);
-    const rideCount = currentUser.rideCounts[originalIndex] || 0;
-    const achievementName = achievementMapping[attraction.name];
+  const achievementsData = achievementsWithMapping.map((collection, index) => {
+    const originalIndex = collections.findIndex(a => a.name === collection.name);
+    const collected = currentUser.collected[originalIndex] || 0;
+    const achievementName = achievementMapping[collection.name];
     
     // Determinar el estado del logro y prioridad para ordenamiento
     let medalClass = 'locked';
@@ -173,22 +136,22 @@ function renderAchievements() {
     let medalText = 'Bloqueado';
     let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro, 4 = diamante
 
-    if (rideCount >= 4) {
+    if (collected >= 4) {
       medalClass = 'diamond';
       medalIcon = '💎';
       medalText = 'Diamante';
       priority = 4;
-    } else if (rideCount >= 3) {
+    } else if (collected >= 3) {
       medalClass = 'gold';
       medalIcon = '🥇';
       medalText = 'Oro';
       priority = 3;
-    } else if (rideCount >= 2) {
+    } else if (collected >= 2) {
       medalClass = 'silver';
       medalIcon = '🥈';
       medalText = 'Plata';
       priority = 2;
-    } else if (rideCount >= 1) {
+    } else if (collected >= 1) {
       medalClass = 'bronze';
       medalIcon = '🥉';
       medalText = 'Bronce';
@@ -196,8 +159,8 @@ function renderAchievements() {
     }
     
     return {
-      attraction,
-      rideCount,
+      collection,
+      collected,
       achievementName,
       medalClass,
       medalIcon,
@@ -244,8 +207,8 @@ function renderAchievementStats() {
   const statsContainer = document.getElementById('achievements-stats');
   if (!statsContainer) return;
   
-  const achievementsWithMapping = attractions.filter(attraction => {
-    return achievementMapping[attraction.name] !== undefined;
+  const achievementsWithMapping = collections.filter(collection => {
+    return achievementMapping[collection.name] !== undefined;
   });
   
   let totalAchievements = achievementsWithMapping.length;
@@ -255,17 +218,17 @@ function renderAchievementStats() {
   let goldMedals = 0;
   let diamondMedals = 0;
   
-  achievementsWithMapping.forEach(attraction => {
-    const originalIndex = attractions.findIndex(a => a.name === attraction.name);
-    const rideCount = currentUser.rideCounts[originalIndex] || 0;
+  achievementsWithMapping.forEach(collection => {
+    const originalIndex = collections.findIndex(a => a.name === collection.name);
+    const collected = currentUser.collected[originalIndex] || 0;
     
-    if (rideCount >= 1) {
+    if (collected >= 1) {
       unlockedAchievements++;
-      if (rideCount >= 4) {
+      if (collected >= 4) {
         diamondMedals++;
-      } else if (rideCount >= 3) {
+      } else if (collected >= 3) {
         goldMedals++;
-      } else if (rideCount >= 2) {
+      } else if (collected >= 2) {
         silverMedals++;
       } else {
         bronzeMedals++;
@@ -523,8 +486,7 @@ async function updateUserProfile() {
       // Copy current user data to new username
       const currentUserData = {
         password: newPassword || currentUser.password,
-        ridden: currentUser.ridden || [],
-        rideCounts: currentUser.rideCounts || {}
+        collected: currentUser.collected || []
       };
       
       // Set new user data
