@@ -442,6 +442,8 @@ function logout() {
   // Disconnect Firebase listener
   dbRef.child('users').off('value');
   
+  closeProfileModal();
+
   // Clear current user
   currentUser = null;
   
@@ -541,10 +543,6 @@ async function updateUserProfile() {
   
   if (newPassword && newPassword.length < 6) {
     showToast('La contraseña debe tener al menos 6 caracteres', 'error');
-    return;
-  }
-
-  if(logout()) {
     return;
   }
   
