@@ -166,41 +166,6 @@ function renderCollections() {
     const cromoBlock = document.createElement('div');
     cromoBlock.className = 'cromo-block';
 
-    data.cromos.forEach((cromo) => {
-      const li = document.createElement('li');
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = `${collectionName}-${cromo}`;
-      checkbox.className = 'cromo-checkbox';
-      checkbox.checked = currentUser.collected?.[collectionName]?.includes(cromo) || false;
-
-      checkbox.onchange = () => {
-        if (!currentUser.collected) currentUser.collected = {};
-        if (!currentUser.collected[collectionName]) currentUser.collected[collectionName] = [];
-
-        if (checkbox.checked) {
-          if (!currentUser.collected[collectionName].includes(cromo)) {
-            currentUser.collected[collectionName].push(cromo);
-          }
-        } else {
-          currentUser.collected[collectionName] =
-            currentUser.collected[collectionName].filter(c => c !== cromo);
-        }
-      };
-
-      const label = document.createElement('label');
-      label.htmlFor = checkbox.id;
-      label.className = 'cromo-item';
-      label.textContent = `${globalCromoIndex}. ${cromo}`;
-
-      li.appendChild(checkbox);
-      li.appendChild(label);
-      cromoList.appendChild(li);
-
-      globalCromoIndex++;
-    });
-
     content.appendChild(cromoBlock);
     collectionSection.appendChild(header);
     collectionSection.appendChild(content);

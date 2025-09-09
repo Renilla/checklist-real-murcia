@@ -776,7 +776,7 @@ header h1 {
 }
 
 /* Help Button Styles */
-.attractions-header {
+.collections-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1185,13 +1185,13 @@ input:focus {
 }
 
 /* Category Progress */
-.category-progress {
+.collection-progress {
   margin-top: var(--spacing-lg);
   padding-top: var(--spacing-lg);
   border-top: 1px solid var(--border-color);
 }
 
-.category-progress h4 {
+.collection-progress h4 {
   font-size: 16px;
   font-weight: 600;
   color: var(--murcia-red);
@@ -1222,29 +1222,6 @@ input:focus {
   border-color: var(--primary-blue);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px var(--shadow-light);
-}
-
-.category-stat-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.category-stat-color.green {
-  background: var(--category-green);
-}
-
-.category-stat-color.yellow {
-  background: var(--category-yellow);
-}
-
-.category-stat-color.orange {
-  background: var(--category-orange);
-}
-
-.category-stat-color.red {
-  background: var(--category-red);
 }
 
 .category-stat-info {
@@ -1331,14 +1308,6 @@ input:focus {
     font-size: 11px;
     min-width: 25px;
   }
-}
-
-.pa-dormirse .category-content {
-  max-height: 2000px;
-}
-
-.pa-dormirse .category-content.collapsed {
-  max-height: 0;
 }
 
 /* Modal Styles */
@@ -1608,13 +1577,6 @@ input:focus {
     flex-direction: column;
   }
   
-  .ranking-header {
-    flex-direction: row;
-    gap: var(--spacing-sm);
-    align-items: center;
-    justify-content: space-between;
-  }
-  
   .progress-header {
     flex-direction: row;
     gap: var(--spacing-sm);
@@ -1622,16 +1584,11 @@ input:focus {
     justify-content: space-between;
   }
   
-  .ranking-btn {
-    align-self: center;
-    margin-top: -30px;
-  }
-  
   .achievements-btn {
     align-self: center;
   }
   
-  .attractions-header {
+  .collections-header {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-md);
@@ -1751,130 +1708,12 @@ input:focus {
   }
 }
 
-/* Nuevos estilos para la funcionalidad de conteo de veces montadas */
-.ride-count-badge {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  margin-left: 8px;
-  display: inline-block;
-}
-
-/* Tema bronce para x1 */
-.ride-count-badge.bronze {
-  color: #B8860B;
-  background: rgba(184, 134, 11, 0.2);
-  border: 1px solid rgba(184, 134, 11, 0.5);
-  box-shadow: 0 1px 3px rgba(184, 134, 11, 0.2);
-}
-
-/* Tema plateado para x2 */
-.ride-count-badge.silver {
-  color: #A9A9A9;
-  background: rgba(169, 169, 169, 0.2);
-  border: 1px solid rgba(169, 169, 169, 0.5);
-  box-shadow: 0 1px 3px rgba(169, 169, 169, 0.2);
-}
-
-/* Tema dorado para x3 o más */
-.ride-count-badge.gold {
-  color: #FFA500;
-  background: rgba(255, 165, 0, 0.2);
-  border: 1px solid rgba(255, 165, 0, 0.5);
-  box-shadow: 0 1px 3px rgba(255, 165, 0, 0.2);
-}
-
-.leader-badge {
-  font-size: 14px;
-  margin-left: 6px;
-  display: inline-block;
-  animation: crownGlow 2s ease-in-out infinite alternate;
-  cursor: help;
-}
-
-.leader-badge.tied {
-  animation: handshakeGlow 2s ease-in-out infinite alternate;
-}
-
 @keyframes crownGlow {
   0% {
     filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
   }
   100% {
     filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
-  }
-}
-
-@keyframes handshakeGlow {
-  0% {
-    filter: drop-shadow(0 0 2px rgba(52, 199, 89, 0.5));
-  }
-  100% {
-    filter: drop-shadow(0 0 6px rgba(52, 199, 89, 0.8));
-  }
-}
-
-.attraction-buttons {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.minus-btn, .plus-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 0;
-  min-width: unset;
-  transition: all var(--transition-fast);
-}
-
-.minus-btn {
-  background: var(--danger-red);
-  color: white;
-}
-
-.minus-btn:hover {
-  background: #D70015;
-  transform: scale(1.05);
-}
-
-.plus-btn {
-  background: var(--success-green);
-  color: white;
-}
-
-.plus-btn:hover {
-  background: #28A745;
-  transform: scale(1.05);
-}
-
-/* Responsive para los nuevos botones */
-@media (max-width: 768px) {
-  .attraction-buttons {
-    gap: 6px;
-  }
-  
-  .minus-btn, .plus-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-  }
-  
-  .ride-count-badge {
-    font-size: 11px;
-    padding: 1px 5px;
-  }
-  
-  .leader-badge {
-    font-size: 12px;
-    margin-left: 4px;
   }
 }
 
