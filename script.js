@@ -169,7 +169,29 @@ function renderCollections() {
 
     data.cromos.forEach(cromo => {
       const li = document.createElement('li');
-      li.textContent = `${globalIndex}. ${cromo.nombre}`;
+
+      // Crear checkbox
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = `cromo-${globalIndex}`;
+
+      // Crear etiqueta del cromo
+      const label = document.createElement('label');
+      label.htmlFor = checkbox.id;
+
+      // Si los cromos son objetos con "nombre"
+      if (typeof cromo === 'object' && cromo !== null) {
+        label.textContent = `${globalIndex}. ${cromo.nombre}`;
+      } 
+      // Si los cromos son strings directamente
+      else {
+        label.textContent = `${globalIndex}. ${cromo}`;
+      }
+
+      // Insertar en el <li>
+      li.appendChild(checkbox);
+      li.appendChild(label);
+
       cromoBlock.appendChild(li);
       globalIndex++;
     });
