@@ -1129,30 +1129,20 @@ input:focus {
 }
 
 /*CROMOS*/
-.collection-cromos {
-  padding: 0 var(--spacing-xl) var(--spacing-xl);
+.cromo-item {
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.3s;
 }
 
-.collection-cromos li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-md) 0;
-  border-bottom: 1px solid var(--border-color);
-  transition: all var(--transition-fast);
+.cromo-item.checked {
+  background-color: #e0e0e0;  /* gris */
 }
 
-.collection-cromos li:last-child {
-  border-bottom: none;
+.cromo-item.checked label {
+  text-decoration: line-through;
+  color: #555; /* texto más apagado */
 }
-
-.collection-cromos li:hover {
-  background: var(--background-tertiary);
-  margin: 0 calc(-1 * var(--spacing-xl));
-  padding-left: var(--spacing-xl);
-  padding-right: var(--spacing-xl);
-}
-
 
 .attraction-info {
   display: flex;
@@ -1288,16 +1278,6 @@ input:focus {
   
   .collection-title {
     font-size: 18px;
-  }
-  
-  .collection-cromos {
-    padding: 0 var(--spacing-lg) var(--spacing-lg);
-  }
-  
-  .collection-cromos li:hover {
-    margin: 0 calc(-1 * var(--spacing-lg));
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
   }
   
   .cromo-name {
