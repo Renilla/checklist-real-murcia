@@ -171,22 +171,26 @@ function renderCollections() {
       const li = document.createElement('li');
       li.className = 'cromo-item';
 
-      // Crear checkbox
+      // Crear label que contendrá tanto el checkbox como el texto
+      const label = document.createElement('label');
+      label.className = 'cromo-label';
+
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.id = `cromo-${collectionName}-${globalIndex}`;
 
-      // Crear etiqueta del cromo
-      const label = document.createElement('label');
-      label.htmlFor = checkbox.id;
-
+      // Texto del cromo
+      const span = document.createElement('span');
       if (typeof cromo === 'object' && cromo !== null) {
-        label.textContent = `${globalIndex}. ${cromo}`;
+        span.textContent = `${globalIndex}. ${cromo.nombre}`;
       } else {
-        label.textContent = `${globalIndex}. ${cromo}`;
+        span.textContent = `${globalIndex}. ${cromo}`;
       }
 
-      // Evento: cuando se marque, añadimos o quitamos la clase
+      // Insertamos checkbox + texto dentro del label
+      label.appendChild(checkbox);
+      label.appendChild(span);
+
+      // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           li.classList.add('checked');
@@ -195,10 +199,7 @@ function renderCollections() {
         }
       });
 
-      // Insertar en el <li>
-      li.appendChild(checkbox);
       li.appendChild(label);
-
       cromoBlock.appendChild(li);
       globalIndex++;
     });

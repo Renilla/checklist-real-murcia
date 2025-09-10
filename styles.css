@@ -1112,7 +1112,7 @@ input:focus {
   flex-shrink: 0;
 }
 
-.category-arrow {
+.collection-arrow {
   font-size: 20px;
   color: var(--text-secondary);
   transition: transform var(--transition-fast);
