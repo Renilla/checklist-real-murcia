@@ -1122,6 +1122,10 @@ input:focus {
   max-height: 1000px;
   overflow: hidden;
   transition: max-height var(--transition-normal);
+  padding-bottom: 12px;
+  list-style: none;      /* quita viñetas del ul */
+  padding: 0;            /* resetea sangría */
+  margin: 0;
 }
 
 .collection-content.collapsed {
@@ -1130,8 +1134,9 @@ input:focus {
 
 /*CROMOS*/
 .cromo-item {
+  list-style-type: none;
   margin: 8px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 2px solid #ddd;
   background: #fff;
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
