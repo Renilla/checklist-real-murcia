@@ -1130,9 +1130,9 @@ input:focus {
 
 /*CROMOS*/
 .cromo-item {
-  margin: 8px 0;
+  margin: 8px 12px;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
   background: #fff;
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
   cursor: pointer;
