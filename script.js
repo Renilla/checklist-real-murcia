@@ -171,24 +171,8 @@ function renderCollections() {
       const li = document.createElement('li');
       li.className = 'cromo-item';
 
-      // Crear label que contendrá tanto el checkbox como el texto
-      const label = document.createElement('label');
-      label.className = 'cromo-label';
-
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-
-      // Texto del cromo
-      const span = document.createElement('span');
-      if (typeof cromo === 'object' && cromo !== null) {
-        span.textContent = `${globalIndex}. ${cromo.nombre}`;
-      } else {
-        span.textContent = `${globalIndex}. ${cromo}`;
-      }
-
-      // Insertamos checkbox + texto dentro del label
-      label.appendChild(checkbox);
-      label.appendChild(span);
 
       // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
@@ -199,9 +183,15 @@ function renderCollections() {
         }
       });
 
+      // Insertamos checkbox + texto dentro del label
+      li.appendChild(checkbox);
+      const span = document.createElement('span');
+      span.textContent = `${globalIndex++}. ${cromo}`;
+      span.style.fontWeight = 'bold';
+      li.appendChild(span);
+
       li.appendChild(label);
       cromoBlock.appendChild(li);
-      globalIndex++;
     });
 
     content.appendChild(cromoBlock);
