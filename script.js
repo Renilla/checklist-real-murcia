@@ -214,6 +214,7 @@ function renderCollections() {
   document.getElementById('total-cromos').textContent = totalCromos;
 }
 
+
 function toggleCollection(collectionSection, collectionName) {
   const header = collectionSection.querySelector('.collection-header');
   const content = collectionSection.querySelector('.collection-content');
@@ -227,7 +228,6 @@ function toggleCollection(collectionSection, collectionName) {
   saveCollectionStates();
 }
 
-/*TODO: MODIFICAR FUNCIÓN*/
 async function toggleRide(index) {
   const collected = currentUser.collected || [];
   const idx = collected.indexOf(index);
@@ -240,6 +240,14 @@ async function toggleRide(index) {
   }
   
   try {
+    if (idx >= 0) {
+      // Desmarcar: eliminar de ridden y resetear conteo
+      collected.splice(idx, 1);
+    } else {
+      // Marcar: añadir a ridden y establecer conteo inicial a 1
+      collected.push(index);
+    }
+    
     // Actualizar ambos campos en la base de datos
     await dbRef.child('users/' + currentUser.username).update({
       collected: collected
@@ -254,7 +262,8 @@ async function toggleRide(index) {
     
     setTimeout(() => {
       renderCollections();
-      //renderStats();
+      renderStats();
+      updateRanking(); // Update ranking immediately after ride toggle
     }, 200);
     
   } catch (error) {
@@ -278,7 +287,45 @@ function renderStats(users = null) {
   renderCollectionStats();
 }
 
-/*TODO: MODIFICAR FUNCIÓN*/
+async function updateRanking() {
+  try {
+    const snapshot = await dbRef.child('users').get();
+    const allUsers = snapshot.val() || {};
+    
+    // Hacer disponible globalmente para el renderizado
+    window.allUsers = allUsers;
+    
+    if (currentUser && allUsers[currentUser.username]) {
+      currentUser.ridden = allUsers[currentUser.username].ridden || [];
+      currentUser.rideCounts = allUsers[currentUser.username].rideCounts || {};
+    }
+    
+    renderStats(allUsers);
+    
+    // Re-renderizar atracciones para actualizar emoticonos si la app está visible
+    if (!document.getElementById('app').classList.contains('hidden')) {
+      renderCollections();
+    }
+  } catch (error) {
+    console.error('Error updating ranking:', error);
+  }
+}
+
+function listenForRankingUpdates() {
+  dbRef.child('users').on('value', snapshot => {
+    const allUsers = snapshot.val() || {};
+    
+    // Hacer disponible globalmente para el renderizado
+    window.allUsers = allUsers;
+    
+    if (currentUser && allUsers[currentUser.username]) {
+      currentUser.ridden = allUsers[currentUser.username].ridden || [];
+      currentUser.rideCounts = allUsers[currentUser.username].rideCounts || {};
+      renderStats(allUsers);
+    }
+  });
+}
+
 function renderCollectionStats() {
   const categoryStatsContainer = document.getElementById('category-stats');
   if (!categoryStatsContainer) return;
