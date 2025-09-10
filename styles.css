@@ -1162,6 +1162,10 @@ input:focus {
   transform: scale(1.01);
 }
 
+.cromo-item:last-child {
+  margin-bottom: 12px;
+}
+
 /* Estado cuando está marcado */
 .cromo-item.checked {
   background-color: #e0e0e0;  /* gris */
