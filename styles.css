@@ -1119,7 +1119,7 @@ input:focus {
 }
 
 .collection-content {
-  max-height: 1000px;
+  /*max-height: 1000px;*/
   overflow: hidden;
   transition: max-height var(--transition-normal);
   padding-bottom: 12px;
