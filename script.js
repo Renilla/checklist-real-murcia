@@ -193,7 +193,7 @@ function renderCollections() {
 
       // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
-        toggleCromo(globalIndex);
+        //toggleCromo(globalIndex);
         if (isCollected) {
           li.classList.add('checked');
         } else {
