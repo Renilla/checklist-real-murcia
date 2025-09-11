@@ -210,9 +210,6 @@ function renderCollections() {
     collectionSection.appendChild(content);
     container.appendChild(collectionSection);
   });
-
-  const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
-  document.getElementById('total-cromos').textContent = totalCromos;
 }
 
 
@@ -235,10 +232,10 @@ async function toggleCromo(index) {
   
   try {
     if (idx >= 0) {
-      // Desmarcar: eliminar de ridden y resetear conteo
+      // Desmarcar: eliminar de collected y resetear conteo
       collected.splice(idx, 1);
     } else {
-      // Marcar: añadir a ridden y establecer conteo inicial a 1
+      // Marcar: añadir a collected y establecer conteo inicial a 1
       collected.push(index);
     }
     
@@ -267,6 +264,11 @@ async function toggleCromo(index) {
 }
 
 function renderStats(users = null) {
+  const collectedCount = (currentUser.collected || []).length;
+  const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
+  document.getElementById('collected-count').textContent = collectedCount;
+  document.getElementById('total-cromos').textContent = totalCromos;
+
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = cromosPct + '%';
   
@@ -290,8 +292,7 @@ async function updateRanking() {
     window.allUsers = allUsers;
     
     if (currentUser && allUsers[currentUser.username]) {
-      currentUser.ridden = allUsers[currentUser.username].ridden || [];
-      currentUser.rideCounts = allUsers[currentUser.username].rideCounts || {};
+      currentUser.collected = allUsers[currentUser.username].collected || [];
     }
     
     renderStats(allUsers);
@@ -313,8 +314,7 @@ function listenForRankingUpdates() {
     window.allUsers = allUsers;
     
     if (currentUser && allUsers[currentUser.username]) {
-      currentUser.ridden = allUsers[currentUser.username].ridden || [];
-      currentUser.rideCounts = allUsers[currentUser.username].rideCounts || {};
+      currentUser.collected = allUsers[currentUser.username].collected || [];
       renderStats(allUsers);
     }
   });
@@ -324,7 +324,7 @@ function renderCollectionStats() {
   const categoryStatsContainer = document.getElementById('category-stats');
   if (!categoryStatsContainer) return;
   
-  // Group attractions by category
+  // Group cromos by collection
   const categories = {};
   attractions.forEach((attr, index) => {
     if (!categories[attr.category]) {
@@ -338,7 +338,7 @@ function renderCollectionStats() {
     categories[attr.category].total++;
     
     // Check if this attraction is completed
-    if (currentUser.ridden && currentUser.ridden.includes(index)) {
+    if (currentUser.collected && currentUser.collected.includes(index)) {
       categories[attr.category].completed++;
     }
   });

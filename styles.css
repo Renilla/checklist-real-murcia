@@ -1204,7 +1204,7 @@ input:focus {
 }
 
 /* Points Display */
-.rides-info {
+.cromos-info {
   font-size: 14px;
   color: var(--text-secondary);
   margin-top: var(--spacing-xs);
