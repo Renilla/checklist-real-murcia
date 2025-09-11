@@ -171,12 +171,20 @@ function renderCollections() {
       const li = document.createElement('li');
       li.className = 'cromo-item';
 
+      const isCollected = currentUser.collected.includes(globalIndex);
+
       // Crear label que contendrá tanto el checkbox como el texto
       const label = document.createElement('label');
       label.className = 'cromo-label';
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
+
+      // Marcarlo si ya está en collected
+      if (isCollected) {
+        checkbox.checked = true;
+        li.classList.add('checked');
+      }
 
       // Texto del cromo
       const span = document.createElement('span');
@@ -274,7 +282,7 @@ function renderStats(users = null) {
   progressFill.style.width = cromosPct + '%';
   
   // Add complete class if progress is 100%
-  if (cromosPct >= 0) {
+  if (cromosPct === 100) {
     progressFill.classList.add('complete');
   } else {
     progressFill.classList.remove('complete');
