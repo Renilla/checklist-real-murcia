@@ -120,14 +120,14 @@ function renderAchievements() {
   
   // Filtrar atracciones que tienen logros definidos
   const achievementsWithMapping = collections.filter((collection, index) => {
-    return achievementMapping[collection.name] !== undefined;
+    return achievementMapping[collection.nombre] !== undefined;
   });
   
   // Crear array de logros con información de estado
   const achievementsData = achievementsWithMapping.map((collection, index) => {
-    const originalIndex = collections.findIndex(a => a.name === collection.name);
+    const originalIndex = collections.findIndex(a => a.name === collection.nombre);
     const collected = currentUser.collected[originalIndex] || 0;
-    const achievementName = achievementMapping[collection.name];
+    const achievementName = achievementMapping[collection.nombre];
     
     // Determinar el estado del logro y prioridad para ordenamiento
     let medalClass = 'locked';
@@ -207,7 +207,7 @@ function renderAchievementStats() {
   if (!statsContainer) return;
   
   const achievementsWithMapping = collections.filter(collection => {
-    return achievementMapping[collection.name] !== undefined;
+    return achievementMapping[collection.nombre] !== undefined;
   });
   
   let totalAchievements = achievementsWithMapping.length;
