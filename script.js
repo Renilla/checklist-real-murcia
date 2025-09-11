@@ -192,6 +192,7 @@ function renderCollections() {
 
       // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
+        toggleCromo(globalIndex);
         if (checkbox.checked) {
           li.classList.add('checked');
         } else {
@@ -228,15 +229,15 @@ function toggleCollection(collectionSection, collectionName) {
   saveCollectionStates();
 }
 
-async function toggleRide(index) {
+async function toggleCromo(index) {
   const collected = currentUser.collected || [];
   const idx = collected.indexOf(index);
   
   // Add loading state
-  const button = event.target;
-  if (button) {
-    button.classList.add('loading');
-    button.textContent = '...';
+  const checkbox = event.target;
+  if (checkbox) {
+    checkbox.classList.add('loading');
+    checkbox.textContent = '...';
   }
   
   try {
@@ -257,17 +258,17 @@ async function toggleRide(index) {
     currentUser.collected = collected;
     
     // Success animation
-    button.classList.remove('loading');
-    button.classList.add('success-animation');
+    checkbox.classList.remove('loading');
+    checkbox.classList.add('success-animation');
     
     setTimeout(() => {
       renderCollections();
-      renderStats();
-      updateRanking(); // Update ranking immediately after ride toggle
+      //renderStats();
+      //updateRanking(); // Update ranking immediately after ride toggle
     }, 200);
     
   } catch (error) {
-    button.classList.remove('loading');
+    checkbox.classList.remove('loading');
     showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
   }
 }
