@@ -474,7 +474,7 @@ header h1 {
   text-align: center;
 }
 
-#cromos-count {
+#collected-count {
   color: var(--murcia-red);
   font-weight: 600;
   font-size: 24px;
@@ -483,6 +483,7 @@ header h1 {
 #total-cromos {
   color: var(--murcia-red-darker);
   font-weight: 600;
+  font-size: 24px;
 }
 
 /* Ranking List */
