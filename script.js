@@ -321,25 +321,24 @@ function listenForRankingUpdates() {
 }
 
 function renderCollectionStats() {
-  const categoryStatsContainer = document.getElementById('category-stats');
-  if (!categoryStatsContainer) return;
+  const collectionStatsContainer = document.getElementById('collectio-stats');
+  if (!collectionStatsContainer) return;
   
   // Group cromos by collection
-  const categories = {};
-  attractions.forEach((attr, index) => {
-    if (!categories[attr.category]) {
-      categories[attr.category] = {
-        name: attr.category,
-        color: attr.color,
+  const collections = {};
+  cromos.forEach((cromo, index) => {
+    if (!collections[cromo.collection]) {
+      collections[cromo.collection] = {
+        name: cromo.collection,
         total: 0,
         completed: 0
       };
     }
-    categories[attr.category].total++;
+    collections[cromo.collection].total++;
     
     // Check if this attraction is completed
     if (currentUser.collected && currentUser.collected.includes(index)) {
-      categories[attr.category].completed++;
+      collections[cromo.collection].completed++;
     }
   });
   
