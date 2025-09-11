@@ -1136,7 +1136,7 @@ input:focus {
 .cromo-item {
   list-style-type: none;
   margin: 8px 12px;
-  border-radius: 20px;
+  border-radius: 15px;
   border: 2px solid #ddd;
   background: #fff;
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;

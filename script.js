@@ -233,13 +233,6 @@ async function toggleCromo(index) {
   const collected = currentUser.collected || [];
   const idx = collected.indexOf(index);
   
-  // Add loading state
-  const checkbox = event.target;
-  if (checkbox) {
-    checkbox.classList.add('loading');
-    checkbox.textContent = '...';
-  }
-  
   try {
     if (idx >= 0) {
       // Desmarcar: eliminar de ridden y resetear conteo
@@ -258,13 +251,13 @@ async function toggleCromo(index) {
     currentUser.collected = collected;
     
     // Success animation
-    checkbox.classList.remove('loading');
-    checkbox.classList.add('success-animation');
+    //checkbox.classList.remove('loading');
+    //checkbox.classList.add('success-animation');
     
     setTimeout(() => {
       renderCollections();
-      //renderStats();
-      //updateRanking(); // Update ranking immediately after ride toggle
+      renderStats();
+      updateRanking(); // Update ranking immediately after ride toggle
     }, 200);
     
   } catch (error) {
