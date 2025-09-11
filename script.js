@@ -170,8 +170,7 @@ function renderCollections() {
     data.cromos.forEach(cromo => {
       const li = document.createElement('li');
       li.className = 'cromo-item';
-
-      const isCollected = currentUser.collected.includes(globalIndex);
+      const isCollected = currentUser.collected.includes(cromo.index);
 
       // Crear label que contendrá tanto el checkbox como el texto
       const label = document.createElement('label');
@@ -179,12 +178,6 @@ function renderCollections() {
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-
-      // Marcarlo si ya está en collected
-      if (isCollected) {
-        checkbox.checked = true;
-        li.classList.add('checked');
-      }
 
       // Texto del cromo
       const span = document.createElement('span');
@@ -201,7 +194,7 @@ function renderCollections() {
       // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
         toggleCromo(globalIndex);
-        if (checkbox.checked) {
+        if (isCollected) {
           li.classList.add('checked');
         } else {
           li.classList.remove('checked');
@@ -255,10 +248,6 @@ async function toggleCromo(index) {
     // Actualizar el usuario local
     currentUser.collected = collected;
     
-    // Success animation
-    //checkbox.classList.remove('loading');
-    //checkbox.classList.add('success-animation');
-    
     setTimeout(() => {
       renderCollections();
       renderStats();
@@ -266,7 +255,6 @@ async function toggleCromo(index) {
     }, 200);
     
   } catch (error) {
-    checkbox.classList.remove('loading');
     showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
   }
 }
