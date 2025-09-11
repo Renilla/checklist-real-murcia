@@ -474,15 +474,15 @@ header h1 {
   text-align: center;
 }
 
-#ridden-count {
+#cromos-count {
   color: var(--murcia-red);
   font-weight: 600;
   font-size: 24px;
 }
 
-#total-attractions {
-  color: var(--text-secondary);
-  font-weight: 500;
+#total-cromos {
+  color: var(--murcia-red-darker);
+  font-weight: 600;
 }
 
 /* Ranking List */
