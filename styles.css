@@ -583,27 +583,6 @@ header h1 {
   gap: var(--spacing-xs);
 }
 
-/* Progress Bar for Ranking */
-.ranking-progress {
-  width: 60px;
-  height: 6px;
-  background: var(--background-tertiary);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-.ranking-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
-  border-radius: 3px;
-  transition: width var(--transition-slow) ease-out;
-}
-
-.ranking-progress-fill.complete {
-  background: linear-gradient(90deg, var(--success-green), #28A745);
-}
-
 /* Score Display */
 .score-display {
   display: flex;

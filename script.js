@@ -268,12 +268,13 @@ function renderStats(users = null) {
   const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
   document.getElementById('collected-count').textContent = collectedCount;
   document.getElementById('total-cromos').textContent = totalCromos;
+  const cromosPct = (collectedCount / totalCromos) * 100;
 
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = cromosPct + '%';
   
   // Add complete class if progress is 100%
-  if (cromosPct >= 100) {
+  if (cromosPct >= 0) {
     progressFill.classList.add('complete');
   } else {
     progressFill.classList.remove('complete');
