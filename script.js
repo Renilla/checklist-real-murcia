@@ -193,12 +193,12 @@ function renderCollections() {
 
       // Evento: marcar/desmarcar cambia el estilo del li
       checkbox.addEventListener('change', () => {
-        //toggleCromo(globalIndex);
         if (checkbox.checked) {
           li.classList.add('checked');
         } else {
           li.classList.remove('checked');
         }
+        toggleCromo(cromo.index, checkbox.checked).catch(err => console.error("Error al actualizar:", err));
       });
 
       li.appendChild(label);
@@ -227,10 +227,29 @@ function toggleCollection(collectionSection, collectionName) {
   saveCollectionStates();
 }
 
-async function toggleCromo(index) {
+async function toggleCromo(cromoId, checked) {
   const collected = currentUser.collected || [];
-  const idx = collected.indexOf(index);
   
+  if(checked){
+    if(!collected.includes(cromoId)) {
+      collected.push(cromoId);
+    }
+  }
+  else {
+    const idx = collected.indexOf(cromoId);
+    if (idx !== -1) {
+      collected.splice(idx, 1);
+    }
+  }
+
+  currentUser.collected = collected;
+
+  setTimeout(() => {
+    renderCollections();
+    renderStats();
+    updateRanking();
+  }, 200);
+  /*
   try {
     if (idx >= 0) {
       // Desmarcar: eliminar de collected y resetear conteo
@@ -251,12 +270,13 @@ async function toggleCromo(index) {
     setTimeout(() => {
       renderCollections();
       renderStats();
-      updateRanking(); // Update ranking immediately after ride toggle
+      updateRanking();
     }, 200);
     
   } catch (error) {
     showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
   }
+  */
 }
 
 function renderStats(users = null) {
