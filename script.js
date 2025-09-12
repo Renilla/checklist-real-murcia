@@ -194,6 +194,8 @@ function renderCollections() {
         li.classList.remove('checked');
       }
 
+      checkbox.onclick = () => toggleCromo(cromo.index);
+
       li.appendChild(label);
       cromoBlock.appendChild(li);
       globalIndex++;
@@ -220,20 +222,10 @@ function toggleCollection(collectionSection, collectionName) {
   saveCollectionStates();
 }
 
-async function toggleCromo(li, checkbox, cromoId) {
-  if(checkbox.checked){
-    li.classList.add('checked');
-  }
-  else {
-    li.classList.remove('checked');
-  }
+async function toggleCromo(index) {
+  const collected = currentUser.collected || [];
+  const idx = collected.indexOf(index);
 
-  setTimeout(() => {
-    renderCollections();
-    renderStats();
-    updateRanking();
-  }, 200);
-  /*
   try {
     if (idx >= 0) {
       // Desmarcar: eliminar de collected y resetear conteo
@@ -260,7 +252,6 @@ async function toggleCromo(li, checkbox, cromoId) {
   } catch (error) {
     showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
   }
-  */
 }
 
 function renderStats(users = null) {
