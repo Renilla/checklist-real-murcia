@@ -180,10 +180,6 @@ function renderCollections() {
       checkbox.type = 'checkbox';
       checkbox.checked = isCollected; // inicializar estado
 
-        if (isCollected) {
-         li.classList.add('checked');
-        }
-
       const span = document.createElement('span');
       span.textContent = `${globalIndex}. ${cromo.nombre ?? cromo}`;
       
@@ -191,20 +187,12 @@ function renderCollections() {
       label.appendChild(checkbox);
       label.appendChild(span);
 
-      // Evento: marcar/desmarcar cambia el estilo del li
-      /*
-      checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-          li.classList.add('checked');
-        } else {
-          li.classList.remove('checked');
-        }
-      });
-      */
-
-      checkbox.addEventListener('change', () => {
-        toggleCromo(li, checkbox, cromo.index);
-      });
+      if (isCollected) {
+        li.classList.add('checked');
+      }
+      else {
+        li.classList.remove('checked');
+      }
 
       li.appendChild(label);
       cromoBlock.appendChild(li);
