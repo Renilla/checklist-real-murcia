@@ -180,6 +180,10 @@ function renderCollections() {
       checkbox.type = 'checkbox';
       checkbox.checked = isCollected; // inicializar estado
 
+        if (isCollected) {
+         li.classList.add('checked');
+        }
+
       const span = document.createElement('span');
       span.textContent = `${globalIndex}. ${cromo.nombre ?? cromo}`;
       
