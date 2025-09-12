@@ -207,19 +207,24 @@ function renderCollections() {
       });
       */
 
+      const collected = currentUser.collected || [];
+
       checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           li.classList.add('checked');
-          if (!currentUser.collected.includes(cromo.index)) {
-            currentUser.collected.push(cromo.index);
+          if (!collected.includes(cromo.index)) {
+            collected.push(cromo.index);
           }
         } else {
           li.classList.remove('checked');
-          currentUser.collected = currentUser.collected.filter(i => i !== cromo.index);
+          collected.splice(idx, 1);
         }
         update(ref(db, 'users/' + currentUser.id), {
-          collected: currentUser.collected
+          collected: collected
         });
+
+        // Actualizar el usuario local
+        currentUser.collected = collected;
       });
 
       li.appendChild(label);
