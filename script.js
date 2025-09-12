@@ -178,27 +178,48 @@ function renderCollections() {
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
+      checkbox.checked = isCollected; // inicializar estado
 
+      const span = document.createElement('span');
+      span.textContent = `${globalIndex}. ${cromo.nombre ?? cromo}`;
       // Texto del cromo
+      /*
       const span = document.createElement('span');
       if (typeof cromo === 'object' && cromo !== null) {
         span.textContent = `${globalIndex}. ${cromo.nombre}`;
       } else {
         span.textContent = `${globalIndex}. ${cromo}`;
       }
+      */
 
       // Insertamos checkbox + texto dentro del label
       label.appendChild(checkbox);
       label.appendChild(span);
 
       // Evento: marcar/desmarcar cambia el estilo del li
+      /*
       checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           li.classList.add('checked');
         } else {
           li.classList.remove('checked');
         }
-        toggleCromo(cromo.index, checkbox.checked).catch(err => console.error("Error al actualizar:", err));
+      });
+      */
+
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          li.classList.add('checked');
+          if (!currentUser.collected.includes(cromo.index)) {
+            currentUser.collected.push(cromo.index);
+          }
+        } else {
+          li.classList.remove('checked');
+          currentUser.collected = currentUser.collected.filter(i => i !== cromo.index);
+        }
+        update(ref(db, 'users/' + currentUser.id), {
+          collected: currentUser.collected
+        });
       });
 
       li.appendChild(label);
