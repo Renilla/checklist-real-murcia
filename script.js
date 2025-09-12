@@ -250,7 +250,7 @@ async function toggleCromo(index) {
     }, 200);
     
   } catch (error) {
-    showToast('Error al actualizar. Inténtalo de nuevo.', 'error');
+    showToast('Error al actualizar. Inténtalo de nuevo.', 'error', console.error);
   }
 }
 
