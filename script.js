@@ -182,16 +182,7 @@ function renderCollections() {
 
       const span = document.createElement('span');
       span.textContent = `${globalIndex}. ${cromo.nombre ?? cromo}`;
-      // Texto del cromo
-      /*
-      const span = document.createElement('span');
-      if (typeof cromo === 'object' && cromo !== null) {
-        span.textContent = `${globalIndex}. ${cromo.nombre}`;
-      } else {
-        span.textContent = `${globalIndex}. ${cromo}`;
-      }
-      */
-
+      
       // Insertamos checkbox + texto dentro del label
       label.appendChild(checkbox);
       label.appendChild(span);
@@ -207,24 +198,8 @@ function renderCollections() {
       });
       */
 
-      const collected = currentUser.collected || [];
-
       checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-          li.classList.add('checked');
-          if (!collected.includes(cromo.index)) {
-            collected.push(cromo.index);
-          }
-        } else {
-          li.classList.remove('checked');
-          collected.splice(idx, 1);
-        }
-        update(ref(db, 'users/' + currentUser.id), {
-          collected: collected
-        });
-
-        // Actualizar el usuario local
-        currentUser.collected = collected;
+        toggleCromo(li, checkbox, cromo.index);
       });
 
       li.appendChild(label);
@@ -253,22 +228,13 @@ function toggleCollection(collectionSection, collectionName) {
   saveCollectionStates();
 }
 
-async function toggleCromo(cromoId, checked) {
-  const collected = currentUser.collected || [];
-  
-  if(checked){
-    if(!collected.includes(cromoId)) {
-      collected.push(cromoId);
-    }
+async function toggleCromo(li, checkbox, cromoId) {
+  if(checkbox.checked){
+    li.classList.add('checked');
   }
   else {
-    const idx = collected.indexOf(cromoId);
-    if (idx !== -1) {
-      collected.splice(idx, 1);
-    }
+    li.classList.remove('checked');
   }
-
-  currentUser.collected = collected;
 
   setTimeout(() => {
     renderCollections();
