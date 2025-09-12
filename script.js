@@ -245,8 +245,8 @@ async function toggleCromo(index) {
     
     setTimeout(() => {
       renderCollections();
-      renderStats();
-      updateRanking();
+      //renderStats();
+      //updateRanking();
     }, 200);
     
   } catch (error) {
