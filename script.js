@@ -3,6 +3,23 @@ let currentUser = null;
 let collections = [];
 let collectionStates = {}; // Para almacenar el estado de las categorías
 
+function sanitizeCollected(value) {
+  if (Array.isArray(value)) {
+    return value
+      .filter(v => v !== undefined && v !== null)
+      .map(v => Number(v))
+      .filter((v, i, a) => Number.isFinite(v) && a.indexOf(v) === i)
+      .sort((a, b) => a - b);
+  }
+  if (value && typeof value === 'object') {
+    return Object.keys(value)
+      .map(k => Number(k))
+      .filter((v, i, a) => Number.isFinite(v) && a.indexOf(v) === i)
+      .sort((a, b) => a - b);
+  }
+  return [];
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     // Cargar atracciones una sola vez
@@ -24,7 +41,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           currentUser = { 
             username: savedSession.username, 
             ...userData,
-            collected: userData.collected || {}
+            collected: sanitizeCollected(userData.collected)
           };
           
           // Cargar datos de todos los usuarios ANTES de mostrar la app
@@ -170,7 +187,8 @@ function renderCollections() {
     data.cromos.forEach(cromo => {
       const li = document.createElement('li');
       li.className = 'cromo-item';
-      const isCollected = currentUser.collected.includes(cromo.index);
+      const cardIndex = globalIndex;
+      const isCollected = (currentUser.collected || []).includes(cardIndex);
 
       // Crear label que contendrá tanto el checkbox como el texto
       const label = document.createElement('label');
@@ -181,7 +199,7 @@ function renderCollections() {
       checkbox.checked = isCollected; // inicializar estado
 
       const span = document.createElement('span');
-      span.textContent = `${globalIndex}. ${cromo.nombre ?? cromo}`;
+      span.textContent = `${globalIndex}. ${typeof cromo === 'string' ? cromo : (cromo.nombre ?? '')}`;
       
       // Insertamos checkbox + texto dentro del label
       label.appendChild(checkbox);
@@ -194,7 +212,7 @@ function renderCollections() {
         li.classList.remove('checked');
       }
 
-      checkbox.onclick = () => toggleCromo(cromo.index);
+      label.onclick = (e) => { e.preventDefault(); toggleCromo(cardIndex); };
 
       li.appendChild(label);
       cromoBlock.appendChild(li);
@@ -227,6 +245,7 @@ async function toggleCromo(index) {
   const idx = collected.indexOf(index);
 
   try {
+    const marking = idx < 0;
     if (idx >= 0) {
       // Desmarcar: eliminar de collected y resetear conteo
       collected.splice(idx, 1);
@@ -235,22 +254,28 @@ async function toggleCromo(index) {
       collected.push(index);
     }
     
+    const sanitized = sanitizeCollected(collected);
+    
     // Actualizar ambos campos en la base de datos
     await dbRef.child('users/' + currentUser.username).update({
-      collected: collected
+      collected: sanitized
     });
     
     // Actualizar el usuario local
-    currentUser.collected = collected;
+    currentUser.collected = sanitized;
     
     setTimeout(() => {
       renderCollections();
       //renderStats();
       //updateRanking();
     }, 200);
+
+    // Notificación de éxito
+    showToast(marking ? 'Cromo marcado' : 'Cromo desmarcado', 'success');
     
   } catch (error) {
-    showToast(console.error, 'error');
+    console.error('Error al actualizar cromo:', error);
+    showToast('Error al guardar el cromo. Inténtalo de nuevo.', 'error');
   }
 }
 
@@ -284,7 +309,7 @@ async function updateRanking() {
     window.allUsers = allUsers;
     
     if (currentUser && allUsers[currentUser.username]) {
-      currentUser.collected = allUsers[currentUser.username].collected || [];
+      currentUser.collected = sanitizeCollected(allUsers[currentUser.username].collected);
     }
     
     renderStats(allUsers);
@@ -306,7 +331,7 @@ function listenForRankingUpdates() {
     window.allUsers = allUsers;
     
     if (currentUser && allUsers[currentUser.username]) {
-      currentUser.collected = allUsers[currentUser.username].collected || [];
+      currentUser.collected = sanitizeCollected(allUsers[currentUser.username].collected);
       renderStats(allUsers);
     }
   });
