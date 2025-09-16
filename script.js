@@ -141,10 +141,12 @@ function updatePercentaje() {
   const cromosUser = (currentUser.collected || []).length;
   const pct = Math.round((cromosUser / totalCromos) * 100);
 
+  /*
   const pctDisplay = document.getElementById('pct-collection');
   pctDisplay.textContent = pct + "%";
-
+  */
   // Actualizar círculo
+  /*
   const progressCircle = document.querySelector('.circular-progress .progress');
   if (progressCircle) {
     const radio = progressCircle.r.baseVal.value;
@@ -152,6 +154,7 @@ function updatePercentaje() {
     const offset = circunferencia - (pct / 100) * circunferencia;
     progressCircle.style.strokeDashoffset = offset;
   }
+  */
 }
 
 function renderCollections() {

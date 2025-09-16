@@ -374,7 +374,6 @@ header h1 {
 
 .floating-user-profile {
   position: fixed;
-  width: 170px;       /* ajusta según necesites */
   top: 24px;
   right: 24px;
   display: flex;
@@ -447,41 +446,6 @@ header h1 {
 
 .user-collection {
   width: 40px; /* Ajusta al tamaño que quieras */
-}
-
-.circular-progress {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-
-.circular-progress svg {
-  transform: rotate(-90deg);
-}
-
-.circular-progress circle {
-  fill: none;
-  stroke-linecap: round;
-}
-
-.circular-progress .bg {
-  stroke: #ddd;
-}
-
-.circular-progress .progress {
-  stroke: var(--murcia-red);
-  stroke-dasharray: 163;      /* 2πr ≈ 2*3.14*26 */
-  stroke-dashoffset: 163;     /* Inicialmente vacío */
-  transition: stroke-dashoffset 0.5s;
-}
-
-.circular-progress span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-weight: bold;
-  font-size: 14px;            /* Tamaño más pequeño */
 }
 
 /* Progress Bar */
@@ -1576,29 +1540,6 @@ input:focus {
 
 /* Mobile Responsive for User Profile */
 @media (max-width: 768px) {
-  .floating-user-profile {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--radius-md);
-    background: var(--background-secondary);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 20px var(--shadow-medium);
-    z-index: 100;
-    backdrop-filter: blur(10px);
-    opacity: 0;
-  }
-  
-  .user-name-display {
-    display: none;
-  }
-  
   .circular-progress {
     display: none;
   }
