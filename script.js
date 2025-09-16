@@ -279,12 +279,42 @@ async function toggleCromo(index) {
   }
 }
 
+function calculateCrowns(user) {
+  if (!user.collected) return 0;
+  
+  let crowns = 0;
+  let globalIndex = 1;
+
+  collections.forEach(col => {
+    const total = col.cromos.length;
+
+    // Los índices globales de esta colección
+    const colIndices = Array.from(
+      { length: total },
+      (_, i) => globalIndex + i
+    );
+
+    // ¿El usuario tiene todos esos índices?
+    const completed = colIndices.every(idx => user.collected.includes(idx));
+
+    if (completed) crowns++;
+
+    // Avanzar el globalIndex para la siguiente colección
+    globalIndex += total;
+  });
+
+  return crowns;
+}
+
 function renderStats(users = null) {
   const collectedCount = (currentUser.collected || []).length;
   const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
   document.getElementById('collected-count').textContent = collectedCount;
   document.getElementById('total-cromos').textContent = totalCromos;
   const cromosPct = (collectedCount / totalCromos) * 100;
+
+  const crowns = calculateCrowns(currentUser);
+  document.getElementById('crowns-count').textContent = crowns;
 
   const progressFill = document.getElementById('progress-fill');
   progressFill.style.width = cromosPct + '%';
