@@ -53,12 +53,11 @@
       <div class="user-progress">
         <svg width="50" height="50" viewBox="0 0 36 36">
           <!-- Círculo de fondo -->
-          <circle cx="18" cy="18" r="16" stroke="#eee" stroke-width="4" fill="none"/>
+          <circle class="progress-bg" cx="18" cy="18" r="16"/>
           <!-- Círculo de progreso -->
-          <circle id="pct-circle" cx="18" cy="18" r="16" stroke="#4caf50" stroke-width="4" fill="none"
-                  stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+          <circle id="progress-circle" class="progress-circle" cx="18" cy="18" r="16"/>
           <!-- Texto de porcentaje -->
-          <text id="pct-text" x="18" y="22" text-anchor="middle" font-size="9" fill="#000">0%</text>
+          <text id="progress-text" class="progress-text" x="18" y="19">0%</text>
         </svg>
       </div>
       

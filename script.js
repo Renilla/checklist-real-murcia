@@ -141,11 +141,11 @@ function updatePercentaje() {
   const cromosUser = (currentUser.collected || []).length;
   const pct = Math.round((cromosUser / totalCromos) * 100);
 
-  const pctDisplay = document.getElementById('pct-text');
+  const pctDisplay = document.getElementById('progress-text');
   pctDisplay.textContent = pct + "%";
 
   // Actualizar círculo
-  const progressCircle = document.getElementById('pct-circle');
+  const progressCircle = document.getElementById('progress-circle');
   const radio = progressCircle.r.baseVal.value;
   const circunferencia = 2 * Math.PI * radio;
   const offset = circunferencia - (pct / 100) * circunferencia;
