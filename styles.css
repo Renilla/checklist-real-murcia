@@ -1576,10 +1576,33 @@ input:focus {
 
 /* Mobile Responsive for User Profile */
 @media (max-width: 768px) {
+  .floating-user-profile {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: var(--background-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+  }
+  
   .user-name-display {
     display: none;
   }
   
+  .circular-progress {
+    display: none;
+  }
+
   .floating-user-profile {
     position: fixed;
     top: var(--spacing-md);
