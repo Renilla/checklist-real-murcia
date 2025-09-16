@@ -88,6 +88,8 @@ function showApp() {
       const userNameDisplay = document.getElementById('user-name-display');
       if (currentUser && userNameDisplay) {
         userNameDisplay.textContent = currentUser.username;
+
+        updatePercentaje();
       }
       // Show profile by removing visibility hidden and adding visible class
       userProfile.style.visibility = 'visible';
@@ -132,6 +134,24 @@ function showApp() {
       }
     }, 300);
   }, 300);
+}
+
+function updatePercentaje() {
+  const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
+  const cromosUser = (currentUser.collected || []).length;
+  const pct = Math.round((cromosUser / totalCromos) * 100);
+
+  const pctDisplay = document.getElementById('pct-collection');
+  pctDisplay.textContent = pct + "%";
+
+  // Actualizar círculo
+  const progressCircle = document.querySelector('.circular-progress .progress');
+  if (progressCircle) {
+    const radio = progressCircle.r.baseVal.value;
+    const circunferencia = 2 * Math.PI * radio;
+    const offset = circunferencia - (pct / 100) * circunferencia;
+    progressCircle.style.strokeDashoffset = offset;
+  }
 }
 
 function renderCollections() {
@@ -328,6 +348,8 @@ function renderStats(users = null) {
   
   // Render collection stats
   renderCollectionStats();
+
+  updatePercentaje();
 }
 
 async function updateRanking() {
