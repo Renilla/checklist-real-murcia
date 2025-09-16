@@ -103,7 +103,7 @@ function showApp() {
         }
         
         renderCollections();
-        //renderStats(window.allUsers);
+        renderStats(window.allUsers);
         
         // Setup user profile functionality
         setupUserProfile();
@@ -266,8 +266,8 @@ async function toggleCromo(index) {
     
     setTimeout(() => {
       renderCollections();
-      //renderStats();
-      //updateRanking();
+      renderStats();
+      updateRanking();
     }, 200);
 
     // Notificación de éxito
@@ -338,46 +338,44 @@ function listenForRankingUpdates() {
 }
 
 function renderCollectionStats() {
-  const collectionStatsContainer = document.getElementById('collectio-stats');
-  if (!collectionStatsContainer) return;
+  const statsContainer = document.getElementById('collection-stats');
+  if (!statsContainer) return;
   
-  // Group cromos by collection
-  const collections = {};
-  cromos.forEach((cromo, index) => {
-    if (!collections[cromo.collection]) {
-      collections[cromo.collection] = {
-        name: cromo.collection,
-        total: 0,
-        completed: 0
-      };
-    }
-    collections[cromo.collection].total++;
-    
-    // Check if this attraction is completed
-    if (currentUser.collected && currentUser.collected.includes(index)) {
-      collections[cromo.collection].completed++;
-    }
-  });
-  
-  // Clear container
-  categoryStatsContainer.innerHTML = '';
-  
-  // Create category stat elements
-  Object.values(categories).forEach(category => {
-    const categoryStat = document.createElement('div');
-    categoryStat.className = 'category-stat';
-    
+  // Limpiar el contenedor
+  statsContainer.innerHTML = '';
+
+  let globalIndex = 1;
+
+  // Recorrer las colecciones
+  Object.entries(collections).forEach(([key, col]) => {
+    const total = col.cromos.length;
+
+    // Contar cuántos cromos de esta colección están en collected
+    const completed = col.cromos.filter(() => {
+      const id = globalIndex++;
+      return currentUser.collected && currentUser.collected.includes(id);
+    }).length;
+
+    // Crear el elemento de la estadística
+    const stat = document.createElement('div');
+    stat.className = 'collection-stat';
+
     const colorDot = document.createElement('div');
-    colorDot.className = `category-stat-color ${category.color}`;
-    
-    const categoryCount = document.createElement('div');
-    categoryCount.className = 'category-stat-count';
-    categoryCount.textContent = `${category.completed}/${category.total}`;
-    
-    categoryStat.appendChild(colorDot);
-    categoryStat.appendChild(categoryCount);
-    
-    categoryStatsContainer.appendChild(categoryStat);
+    colorDot.className = 'collection-stat-color';
+
+    const label = document.createElement('div');
+    label.className = 'collection-stat-name';
+    label.textContent = `${col.nombre}:`;
+
+    const count = document.createElement('div');
+    count.className = 'collection-stat-count';
+    count.textContent = `${completed}/${total}`;
+
+    stat.appendChild(colorDot);
+    stat.appendChild(label);
+    stat.appendChild(count);
+
+    statsContainer.appendChild(stat);
   });
 }
 
