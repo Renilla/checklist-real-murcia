@@ -586,6 +586,11 @@ header h1 {
   min-width: 0;
 }
 
+.user-progress {
+  width: 50px;
+  height: 50px;
+}
+
 .user-name {
   font-weight: 600;
   color: var(--text-primary);
@@ -1540,16 +1545,12 @@ input:focus {
 
 /* Mobile Responsive for User Profile */
 @media (max-width: 768px) {
-  .circular-progress {
+  .user-info {
     display: none;
   }
 
-  .floating-user-profile {
-    position: fixed;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    padding: var(--spacing-sm);
-    z-index: 1000;
+  .user-progress {
+    display: none;
   }
   
   #user-profile {
