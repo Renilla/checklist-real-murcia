@@ -199,7 +199,6 @@ function renderAchievements() {
       </div>
       <div class="achievement-info">
         <h4 class="achievement-name">${achievement.achievementName}</h4>
-        <p class="achievement-attraction">${achievement.collection.nombre}</p>
         <p class="achievement-progress">Completado el ${achievement.pct}% de la colección</p>
       </div>
     `;

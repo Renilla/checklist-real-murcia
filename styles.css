@@ -507,76 +507,6 @@ header h1 {
   font-size: 24px;
 }
 
-/* Ranking List */
-#ranking-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-#ranking-list li {
-  background: var(--background-secondary);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all var(--transition-fast);
-  position: relative;
-  overflow: hidden;
-}
-
-#ranking-list li:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px var(--shadow-light);
-  border-color: var(--primary-blue);
-}
-
-/* Ranking Position Badge */
-.ranking-position {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  flex: 1;
-  min-width: 0;
-}
-
-.position-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
-  color: white;
-  flex-shrink: 0;
-}
-
-.position-badge.gold {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-}
-
-.position-badge.silver {
-  background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
-  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
-}
-
-.position-badge.bronze {
-  background: linear-gradient(135deg, #CD7F32, #B8860B);
-  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
-}
-
-.position-badge.other {
-  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
-}
-
 /* User Info */
 .user-info {
   display: flex;
@@ -663,24 +593,6 @@ header h1 {
   letter-spacing: 0.5px;
 }
 
-/* Current User Highlight */
-#ranking-list li.current-user {
-  background: linear-gradient(135deg, rgba(0, 122, 255, 0.05), rgba(90, 200, 250, 0.05));
-  border-color: var(--primary-blue);
-  box-shadow: 0 2px 12px rgba(0, 122, 255, 0.1);
-}
-
-#ranking-list li.current-user::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--primary-blue);
-  border-radius: 0 2px 2px 0;
-}
-
 /* Trophy Icon for Top 3 */
 .trophy-icon {
   font-size: 16px;
@@ -688,17 +600,7 @@ header h1 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  #ranking-list li {
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  
-  .position-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-  
+@media (max-width: 768px) {    
   .user-name {
     font-size: 14px;
   }
@@ -728,21 +630,6 @@ header h1 {
   font-size: 20px;
   font-weight: 600;
   color: var(--murcia-red);
-  margin: 0;
-}
-
-/* Ranking Header */
-.ranking-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: var(--spacing-lg);
-}
-
-.ranking-header h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary);
   margin: 0;
 }
 
@@ -1309,13 +1196,6 @@ input:focus {
   background: var(--background-secondary);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px var(--shadow-light);
-}
-
-/* Ranking Points Update */
-.ranking-points {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: var(--spacing-xs);
 }
 
 /* Responsive Design for Categories */
@@ -1959,7 +1839,7 @@ input:focus {
 .achievement-stat:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--shadow-light);
-  border-color: var(--primary-blue);
+  border-color: var(--murcia-red);
 }
 
 .stat-icon {
