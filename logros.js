@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             collected: userData.collected || []
           };
           
+          updatePercentaje();
           showAchievementsApp();
           return;
         }
@@ -120,14 +121,16 @@ function renderAchievements() {
   
   // Filtrar atracciones que tienen logros definidos
   const achievementsWithMapping = collections.filter((collection, index) => {
-    return achievementMapping[collection.name] !== undefined;
+    return achievementMapping[collection.nombre] !== undefined;
   });
   
   // Crear array de logros con información de estado
   const achievementsData = achievementsWithMapping.map((collection, index) => {
-    const originalIndex = collections.findIndex(a => a.name === collection.name);
+    const originalIndex = collections.findIndex(a => a.nombre === collection.nombre);
     const collected = currentUser.collected[originalIndex] || 0;
-    const achievementName = achievementMapping[collection.name];
+    const totalCromos = collection.cromos.length;
+    const pct = totalCromos > 0 ? ((collected / totalCromos) * 100).toFixed(2) : "0.00";
+    const achievementName = achievementMapping[collection.nombre];
     
     // Determinar el estado del logro y prioridad para ordenamiento
     let medalClass = 'locked';
@@ -135,22 +138,22 @@ function renderAchievements() {
     let medalText = 'Bloqueado';
     let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro, 4 = diamante
 
-    if (collected >= 4) {
+    if (pct === 100) {
       medalClass = 'diamond';
       medalIcon = '💎';
       medalText = 'Diamante';
       priority = 4;
-    } else if (collected >= 3) {
+    } else if (pct >= 75) {
       medalClass = 'gold';
       medalIcon = '🥇';
       medalText = 'Oro';
       priority = 3;
-    } else if (collected >= 2) {
+    } else if (pct >= 50) {
       medalClass = 'silver';
       medalIcon = '🥈';
       medalText = 'Plata';
       priority = 2;
-    } else if (collected >= 1) {
+    } else if (pct >= 25) {
       medalClass = 'bronze';
       medalIcon = '🥉';
       medalText = 'Bronce';
@@ -161,13 +164,14 @@ function renderAchievements() {
       collection,
       collected,
       achievementName,
+      pct,
       medalClass,
       medalIcon,
       medalText,
       priority
     };
   });
-  
+
   // Ordenar logros: primero los desbloqueados (por prioridad descendente), luego los bloqueados
   achievementsData.sort((a, b) => {
     // Si ambos están bloqueados o ambos desbloqueados, mantener orden original
@@ -193,8 +197,8 @@ function renderAchievements() {
       </div>
       <div class="achievement-info">
         <h4 class="achievement-name">${achievement.achievementName}</h4>
-        <p class="achievement-attraction">${achievement.attraction.name}</p>
-        <p class="achievement-progress">Montado ${achievement.rideCount} veces</p>
+        <p class="achievement-attraction">${achievement.collection.nombre}</p>
+        <p class="achievement-progress">Completado el ${achievement.pct} de la colección</p>
       </div>
     `;
     
@@ -207,7 +211,7 @@ function renderAchievementStats() {
   if (!statsContainer) return;
   
   const achievementsWithMapping = collections.filter(collection => {
-    return achievementMapping[collection.name] !== undefined;
+    return achievementMapping[collection.nombre] !== undefined;
   });
   
   let totalAchievements = achievementsWithMapping.length;
@@ -218,16 +222,18 @@ function renderAchievementStats() {
   let diamondMedals = 0;
   
   achievementsWithMapping.forEach(collection => {
-    const originalIndex = collections.findIndex(a => a.name === collection.name);
+    const originalIndex = collections.findIndex(a => a.nombre === collection.nombre);
     const collected = currentUser.collected[originalIndex] || 0;
+    const totalCromos = collection.cromos.length;
+    const pct = totalCromos > 0 ? ((collected / totalCromos) * 100).toFixed(2) : "0.00";
     
-    if (collected >= 1) {
+    if (pct >= 25) {
       unlockedAchievements++;
-      if (collected >= 4) {
+      if (collected === 100) {
         diamondMedals++;
-      } else if (collected >= 3) {
+      } else if (collected >= 75) {
         goldMedals++;
-      } else if (collected >= 2) {
+      } else if (collected >= 50) {
         silverMedals++;
       } else {
         bronzeMedals++;
@@ -235,7 +241,7 @@ function renderAchievementStats() {
     }
   });
   
-  const completionPercentage = totalAchievements > 0 ? Math.round((unlockedAchievements / totalAchievements) * 100) : 0;
+  const completionPercentage = totalAchievements > 0 ? ((unlockedAchievements / totalAchievements) * 100).toFixed(2) : "0.00";  
   
   statsContainer.innerHTML = `
     <div class="achievement-stat">
@@ -281,6 +287,22 @@ function renderAchievementStats() {
       </div>
     </div>
   `;
+}
+
+function updatePercentaje() {
+  const totalCromos = Object.values(collections).reduce((sum, col) => sum + col.cromos.length, 0);
+  const cromosUser = (currentUser.collected || []).length;
+  const pct = Math.round((cromosUser / totalCromos) * 100);
+
+  const pctDisplay = document.getElementById('progress-text');
+  pctDisplay.textContent = pct + "%";
+
+  // Actualizar círculo
+  const progressCircle = document.getElementById('progress-circle');
+  const radio = progressCircle.r.baseVal.value;
+  const circunferencia = 2 * Math.PI * radio;
+  const offset = circunferencia - (pct / 100) * circunferencia;
+  progressCircle.style.strokeDashoffset = offset;
 }
 
 function setupUserProfile() {
