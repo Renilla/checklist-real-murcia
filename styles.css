@@ -1859,7 +1859,7 @@ input:focus {
 .achievement-item:hover {
   transform: translateX(4px);
   box-shadow: 0 2px 8px var(--shadow-light);
-  border-color: var(--primary-blue);
+  border-color: var(--murcia-red);
 }
 
 .achievement-medal {

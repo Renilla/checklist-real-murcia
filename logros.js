@@ -119,26 +119,29 @@ function renderAchievements() {
   
   achievementsList.innerHTML = '';
   
-  // Filtrar atracciones que tienen logros definidos
-  const achievementsWithMapping = collections.filter((collection, index) => {
-    return achievementMapping[collection.nombre] !== undefined;
-  });
-  
-  // Crear array de logros con información de estado
-  const achievementsData = achievementsWithMapping.map((collection, index) => {
-    const originalIndex = collections.findIndex(a => a.nombre === collection.nombre);
-    const collected = currentUser.collected[originalIndex] || 0;
+  const achievementsWithMapping = collections.filter(
+    collection => achievementMapping[collection.nombre] !== undefined
+  );
+
+  let globalIndex = 1; // contador global de cromos
+
+  const achievementsData = achievementsWithMapping.map(collection => {
+    const checked = collection.cromos.filter(() => {
+      const id = globalIndex++;
+      return currentUser.collected && currentUser.collected.includes(id);
+    }).length;
+
     const totalCromos = collection.cromos.length;
-    const pct = totalCromos > 0 ? ((collected / totalCromos) * 100).toFixed(2) : "0.00";
+    const pct = totalCromos > 0 ? ((checked / totalCromos) * 100).toFixed(2) : "0.00";
     const achievementName = achievementMapping[collection.nombre];
-    
-    // Determinar el estado del logro y prioridad para ordenamiento
+
+    // Medallas
     let medalClass = 'locked';
     let medalIcon = '🔒';
     let medalText = 'Bloqueado';
-    let priority = 0; // 0 = bloqueado, 1 = bronce, 2 = plata, 3 = oro, 4 = diamante
+    let priority = 0;
 
-    if (pct === 100) {
+    if (pct == 100) {
       medalClass = 'diamond';
       medalIcon = '💎';
       medalText = 'Diamante';
@@ -159,10 +162,9 @@ function renderAchievements() {
       medalText = 'Bronce';
       priority = 1;
     }
-    
+
     return {
       collection,
-      collected,
       achievementName,
       pct,
       medalClass,
@@ -198,7 +200,7 @@ function renderAchievements() {
       <div class="achievement-info">
         <h4 class="achievement-name">${achievement.achievementName}</h4>
         <p class="achievement-attraction">${achievement.collection.nombre}</p>
-        <p class="achievement-progress">Completado el ${achievement.pct} de la colección</p>
+        <p class="achievement-progress">Completado el ${achievement.pct}% de la colección</p>
       </div>
     `;
     
@@ -209,53 +211,61 @@ function renderAchievements() {
 function renderAchievementStats() {
   const statsContainer = document.getElementById('achievements-stats');
   if (!statsContainer) return;
-  
-  const achievementsWithMapping = collections.filter(collection => {
-    return achievementMapping[collection.nombre] !== undefined;
-  });
-  
+
+  const achievementsWithMapping = collections.filter(
+    collection => achievementMapping[collection.nombre] !== undefined
+  );
+
   let totalAchievements = achievementsWithMapping.length;
   let unlockedAchievements = 0;
   let bronzeMedals = 0;
   let silverMedals = 0;
   let goldMedals = 0;
   let diamondMedals = 0;
-  
+
+  let globalIndex = 0; // contador global de cromos
+
   achievementsWithMapping.forEach(collection => {
-    const originalIndex = collections.findIndex(a => a.nombre === collection.nombre);
-    const collected = currentUser.collected[originalIndex] || 0;
+    const checked = collection.cromos.filter(() => {
+      const id = globalIndex++;
+      return currentUser.collected && currentUser.collected.includes(id);
+    }).length;
+
     const totalCromos = collection.cromos.length;
-    const pct = totalCromos > 0 ? ((collected / totalCromos) * 100).toFixed(2) : "0.00";
-    
+    const pct = totalCromos > 0 ? ((checked / totalCromos) * 100).toFixed(2) : "0.00";
+
     if (pct >= 25) {
       unlockedAchievements++;
-      if (collected === 100) {
+      if (pct == 100) {
         diamondMedals++;
-      } else if (collected >= 75) {
+      } else if (pct >= 75) {
         goldMedals++;
-      } else if (collected >= 50) {
+      } else if (pct >= 50) {
         silverMedals++;
       } else {
         bronzeMedals++;
       }
     }
   });
-  
-  const completionPercentage = totalAchievements > 0 ? ((unlockedAchievements / totalAchievements) * 100).toFixed(2) : "0.00";  
-  
+
+  const completionPercentage =
+    totalAchievements > 0
+      ? ((unlockedAchievements / totalAchievements) * 100).toFixed(2)
+      : "0.00";
+
   statsContainer.innerHTML = `
     <div class="achievement-stat">
       <div class="stat-icon">🏆</div>
       <div class="stat-info">
         <div class="stat-value">${unlockedAchievements}/${totalAchievements}</div>
-        <div class="stat-label">Logros desbloqueados</div>
+        <div class="stat-label">Logros conseguidos</div>
       </div>
     </div>
     <div class="achievement-stat">
       <div class="stat-icon">📊</div>
       <div class="stat-info">
         <div class="stat-value">${completionPercentage}%</div>
-        <div class="stat-label">Progreso total</div>
+        <div class="stat-label">Progreso total de logros</div>
       </div>
     </div>
     <div class="achievement-stat">
