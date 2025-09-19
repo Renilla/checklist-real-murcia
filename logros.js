@@ -5,7 +5,15 @@ let collections = [];
 // Mapeo de atracciones a nombres de logros
 const achievementMapping = {
   "Liga Este 1973/74": "Liga Este 1973/74",
-  "Campeonato de Liga 1973-1974": "Campeonato de Liga 1973-1974"
+  "Campeonato de Liga 1973-1974": "Campeonato de Liga 1973-1974",
+  "Liga Este 2003/04": "Liga Este 2003/04",
+  "Liga Este 2007/08": "Liga Este 2007/08",
+  "Liga Este 2008/09": "Liga Este 2008/09",
+  "Liga Este 2009/10": "Liga Este 2009/10",
+  "Liga Este 2011/12": "Liga Este 2011/12",
+  "Liga Este 2012/13": "Liga Este 2012/13",
+  "Liga Este 2013/14": "Liga Este 2013/14",
+  "Liga Este 2014/15": "Liga Este 2014/15"
 };
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -222,7 +230,7 @@ function renderAchievementStats() {
   let goldMedals = 0;
   let diamondMedals = 0;
 
-  let globalIndex = 0; // contador global de cromos
+  let globalIndex = 1; // contador global de cromos
 
   achievementsWithMapping.forEach(collection => {
     const checked = collection.cromos.filter(() => {

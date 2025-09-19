@@ -45,5 +45,107 @@
       "Taverna - Fichajes de Última Hora"
     ],
     "portada": "imagesAlbumes/campeonatoLiga1973-74.png"
+  },
+  {
+    "nombre": "Liga Este 2003/04",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Entrenador Joaquín Peiro",
+      "Valero",
+      "Maciel",
+      "Pedro Largo",
+      "Cuadrado",
+      "Carrero",
+      "Clavero",
+      "Juanma",
+      "Acciari",
+      "Julio Álvarez",
+      "Albiol",
+      "Setvalls",
+      "Gómez",
+      "Isach",
+      "Richi",
+      "David Karanka",
+      "Luis García",
+      "Quintana",
+      "Sánchez Broto",
+      "Michel",
+      "Fredi",
+      "Roberto",
+      "Loeschbor",
+      "Carreras",
+      "Roteta - Últimos Fichajes",
+      "Esnaider - Últimos Fichajes",
+      "Juanmi - Últimos Fichajes",
+      "Jensen - Últimos Fichajes",
+      "Alineación Murcia - La Razón",
+      "Cuadrado Nutella"
+    ],
+    "portada": "imagesAlbumes/ligaeste2003-04.png"
+  },
+  {
+    "nombre": "Liga Este 2007/08",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Entrenador Lucas Alcaraz",
+      "Notario",
+      "Carini",
+      "Pignol",
+      "Cuadrado",
+      "Ochoa",
+      "César Arzo",
+      "Paco Peña",
+      "Marañón",
+      "Abel",
+      "Bruno",
+      "Pablo García",
+      "Richi",
+      "Pedro León",
+      "Gallardo",
+      "De Lucas",
+      "Jofre",
+      "Regueiro",
+      "Iván Alonso",
+      "Iñigo Vélez",
+      "Henok Goitom",
+      "Mejía - Últimos Fichajes",
+      "Curro Torres - Últimos Fichajes",
+      "Baiano - Últimos Fichajes",
+      "Movilla - Últimos Fichajes",
+      "De Coz - Mercado de Invierno",
+      "Rosinei - Mercado de Invierno",
+      "Kabous - Mercado de Invierno"
+    ],
+    "portada": "imagesAlbumes/ligaeste2007-08.png"
+  },
+  {
+    "nombre": "Liga Este 2008/09",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2008-09.png"
+  },
+  {
+    "nombre": "Liga Este 2009/10",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2009-10.png"
+  },
+  {
+    "nombre": "Liga Este 2011/12",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2011-12.png"
+  },
+  {
+    "nombre": "Liga Este 2012/13",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2012-13.png"
+  },
+  {
+    "nombre": "Liga Este 2013/14",
+    "cromos": ["Liga Adelante - Escudo Real Murcia/Numancia"],
+    "portada": "imagesAlbumes/ligaeste2013-14.png"
+  },
+  {
+    "nombre": "Liga Este 2014/15",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2014-15.png"
   }
 ]
