@@ -1785,6 +1785,45 @@ input:focus {
   border: 2px solid #32a9cd;
 }
 
+.completion-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 5px 5px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  line-height: 1;
+  color: white;
+  font-weight: bold;
+}
+
+.completion-badge.bronze {
+  color: #CD7F32;
+  background: rgba(205, 127, 50, 0.2);
+  border: 2px solid rgba(205, 127, 50, 0.5);
+  box-shadow: 0 1px 3px rgba(205, 127, 50, 0.2);
+}
+
+.completion-badge.silver {
+  color: #C0C0C0;
+  background: rgba(192, 192, 192, 0.2);
+  border: 2px solid rgba(192, 192, 192, 0.5);
+  box-shadow: 0 1px 3px rgba(192, 192, 192, 0.2);
+}
+
+.completion-badge.gold {
+  color: #FFA500;
+  background: rgba(255, 165, 0, 0.2);
+  border: 2px solid rgba(255, 165, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(255, 165, 0, 0.2);
+}
+
+.completion-badge.diamond {
+  color: #00BFFF;
+  background: rgba(0, 191, 255, 0.2);
+  border: 2px solid rgba(0, 191, 255, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 191, 255, 0.2);
+}
+
 .medal-icon {
   font-size: 20px;
   line-height: 1;

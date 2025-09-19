@@ -173,7 +173,52 @@ function renderCollections() {
 
     const titleText = document.createElement('span');
     titleText.textContent = data.nombre;
-    title.appendChild(titleText);
+
+    // Calcular porcentaje de completitud
+    const totalCromos = data.cromos.length;
+    const collectedCromos = data.cromos.filter((_, i) =>
+      (currentUser.collected || []).includes(
+        // el índice global de ese cromo
+        Object.values(collections)
+          .slice(0, Object.keys(collections).indexOf(collectionName))
+          .reduce((acc, col) => acc + col.cromos.length, 0) + i + 1
+      )
+    ).length;
+
+    const porcentaje = Math.round((collectedCromos / totalCromos) * 100);
+
+    // Elegir símbolo según porcentaje
+    if (porcentaje >= 25) {
+      let symbol = "";
+      let badgeClass = "";
+
+      if (porcentaje === 100) {
+        symbol = "💎";
+        badgeClass = "diamond";
+      }
+      else if (porcentaje >= 75) {
+        symbol = "🥇";
+        badgeClass = "gold";
+      }
+      else if (porcentaje >= 50) {
+        symbol = "🥈";
+        badgeClass = "silver";
+      }
+      else {
+        symbol = "🥉";
+        badgeClass = "bronze";
+      }
+
+      const completionSymbol = document.createElement('span');
+      completionSymbol.textContent = symbol;
+      completionSymbol.className = `completion-badge ${badgeClass}`;
+      completionSymbol.title = `${porcentaje}% completado`;
+
+      title.appendChild(titleText);
+      title.appendChild(completionSymbol);
+    } else {
+      title.appendChild(titleText);
+    }
 
     const img = document.createElement('img');
     img.src = data.portada;
