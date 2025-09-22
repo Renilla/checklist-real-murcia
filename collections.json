@@ -24,8 +24,8 @@
   {
     "nombre": "Campeonato de Liga 1973-1974",
     "cromos": [
-      "Real Murcia Equipos/Escudos/Banderas",
-      "La Condomina",
+      "Equipos/Escudos/Banderas - Real Murcia",
+      "Equipos/Escudos/Banderas - La Condomina",
       "Ojeda",
       "Ponce",
       "José",
@@ -45,6 +45,57 @@
       "Taverna - Fichajes de Última Hora"
     ],
     "portada": "imagesAlbumes/campeonatoLiga1973-74.png"
+  },
+  {
+    "nombre": "Liga Este 1974/75",
+    "cromos": [
+      "Ojeda",
+      "Canito",
+      "José",
+      "Laredo",
+      "Abel Pérez",
+      "Ponce",
+      "Lema",
+      "Verza",
+      "Herrero",
+      "Ruiz Abellán",
+      "Vera Palmes",
+      "Pazos",
+      "Murciano",
+      "Taverna",
+      "Etchecopar",
+      "García Soriano",
+      "Casco",
+      "Juárez",
+      "Cristo"
+    ],
+    "portada": "imagesAlbumes/ligaeste1974-75.png"
+  },
+  {
+    "nombre": "Liga Este 1980/81",
+    "cromos": [
+      "Echevarría",
+      "Cuenca",
+      "Picazo",
+      "Campello",
+      "Chazarreta",
+      "Sebastiá",
+      "Capa",
+      "Vidaña",
+      "Ruiz",
+      "Naharro",
+      "Camino",
+      "Sebas",
+      "García Murcia",
+      "Amorós",
+      "Abad",
+      "Sotelo",
+      "García Fernández - Últimos Fichajes",
+      "Alabanda - Últimos Fichajes",
+      "Albiol - Últimos Fichajes",
+      "Salamanca - Últimos Fichajes"
+    ],
+    "portada": "imagesAlbumes/ligaeste1980-81.png"
   },
   {
     "nombre": "Liga Este 2003/04",
