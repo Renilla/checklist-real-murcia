@@ -1031,6 +1031,11 @@
     "portada": "imagesAlbumes/ligaeste2013-14.png"
   },
   {
+    "nombre": "Megacracks 2013/14",
+    "cromos": ["Escudo Real Murcia"],
+    "portada": "imagesAlbumes/megacracks2013-14.png"
+  },
+  {
     "nombre": "Las Fichas de la Liga 2014",
     "cromos": [
       "Escudo Real Murcia",
