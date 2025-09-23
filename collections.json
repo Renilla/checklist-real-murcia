@@ -192,6 +192,31 @@
     "portada": "imagesAlbumes/ligaeste1986-87.png"
   },
   {
+    "nombre": "Panini Spanish Liga 1986/87",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Entrenador Vicente Campillo",
+      "Equipo Real Murcia 1",
+      "Equipo Real Murcia 2",
+      "Amador",
+      "Nuñez",
+      "Tendillo",
+      "Vidaña",
+      "Juanjo",
+      "Pérez García",
+      "Sánchez",
+      "Brasi",
+      "Guina",
+      "Parra",
+      "Manolo",
+      "Timoumi",
+      "Moyano",
+      "Mejías",
+      "Bergara"
+    ],
+    "portada": "imagesAlbumes/paniniLiga1986-87.png"
+  },
+  {
     "nombre": "Liga Este 1987/88",
     "cromos": [
       "Escudo",
@@ -218,6 +243,31 @@
       "Brown - Últimos Fichajes"
     ],
     "portada": "imagesAlbumes/ligaeste1987-88.png"
+  },
+  {
+    "nombre": "Panini Spanish Liga 1987/88",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Equipo Real Murcia 1",
+      "Equipo Real Murcia 2",
+      "Antonio Fernández Benítez",
+      "Amador Lorenzo",
+      "Manuel Núñez",
+      "José Costa",
+      "José Luis Brown",
+      "Jose Sánchez Vidaña",
+      "Ángel Pérez García",
+      "José Vicente Sánchez",
+      "Pascual Luna Parra",
+      "Francisco Botella",
+      "José Luis Ruda",
+      "Javier Ibeas",
+      "Recesvinto Casero 'Reces'",
+      "Salvador Mejías",
+      "Manuel Sánchez 'Manolo'",
+      "Eugenio Sánchez"
+    ],
+    "portada": "imagesAlbumes/paniniLiga1987-88.png"
   },
   {
     "nombre": "Liga Este 1988/89",
@@ -251,6 +301,76 @@
       "Clos - Últimos Fichajes"
     ],
     "portada": "imagesAlbumes/ligaeste1988-89.png"
+  },
+  {
+    "nombre": "Panini Spanish Liga 1988/89",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Equipo Real Murcia 1",
+      "Equipo Real Murcia 2",
+      "Entrenador Antal Dunai",
+      "Amador Lorenzo",
+      "Javier Ibeas",
+      "José Luis Brown",
+      "Juan José Díaz 'Juanjo'",
+      "José Costa",
+      "Ángel Pérez García",
+      "José Manuel Martínez 'Manolo'",
+      "Francisco J. Rey 'Javi Rey'",
+      "Francisco Botella",
+      "José Manuel Mejías I",
+      "Pedro Cordero",
+      "Eugenio Sánchez",
+      "Salvador Mejías II",
+      "Francisco Clos"
+    ],
+    "portada": "imagesAlbumes/paniniLiga1988-89.png"
+  },
+  {
+    "nombre": "Panini Spanish Liga 1989/90",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Equipo Real Murcia 1",
+      "Equipo Real Murcia 2"
+    ],
+    "portada": "imagesAlbumes/paniniLiga1989-90.png"
+  },
+  {
+    "nombre": "Mundicromo Real Murcia CF 2000/01",
+    "cromos": [
+      "Joaquín Romeu (Presidente)",
+      "La Condomina/Nueva Condomina",
+      "Plantilla Real Murcia",
+      "Pepe Mel",
+      "Diezma",
+      "Viña",
+      "Sanmiguel",
+      "Juanma",
+      "Carrero",
+      "Timpani",
+      "Vaqueriza",
+      "Matito",
+      "Meloño",
+      "Méndez I",
+      "Méndez II",
+      "Santis",
+      "Ciani",
+      "Godino",
+      "Monteagudo",
+      "Figueroa",
+      "Kortina",
+      "Aguilar",
+      "Quique Torres",
+      "Alfonso",
+      "Artigas",
+      "Iván López",
+      "Tonelotto",
+      "Alfaro",
+      "Loreto",
+      "Zarate",
+      "Luis Gil"
+    ],
+    "portada": "imagesAlbumes/mundicromoRealMurcia2000-01.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2001",
@@ -338,6 +458,85 @@
     "portada": "imagesAlbumes/megafichas2003-04.png"
   },
   {
+    "nombre": "El Juego de la Liga 2003/04",
+    "cromos": [
+      "Juanmi",
+      "Juanma",
+      "Carrero",
+      "Pedro Largo",
+      "Clavero",
+      "Maciel",
+      "Acciari",
+      "Michel",
+      "David Karanka",
+      "Iban Cuadrado",
+      "Richi"
+    ],
+    "portada": "imagesAlbumes/juegoLiga2003-04.png"
+  },
+  {
+    "nombre": "Superliga de Estrellas 2003/04",
+    "cromos": [
+      "Escudo",
+      "Alineación",
+      "Juanmi",
+      "Maciel",
+      "Loeschbor",
+      "Cuadrado",
+      "Pedro Largo",
+      "Roteta",
+      "Carreras",
+      "Juanma",
+      "Acciari",
+      "Roberto",
+      "Julio Álvarez",
+      "Fredi",
+      "Michel",
+      "Jensen",
+      "Richi",
+      "Luis García",
+      "Esnaider",
+      "Sánchez Broto"
+    ],
+    "portada": "imagesAlbumes/superligaEstrellas2003-04.png"
+  },
+  {
+    "nombre": "Top Liga 2003/04",
+    "cromos": [
+      "Bonano",
+      "Valero",
+      "Loeschbor",
+      "Luis García",
+      "Acciari",
+      "Gancedo",
+      "Juárez",
+      "Cuadrado/Iván Angulo/David Karanka/Richi"
+    ],
+    "portada": "imagesAlbumes/topLiga2003-04.png"
+  },
+  {
+    "nombre": "Panini Liga Cracks 2003/04",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Bonano",
+      "Juanma",
+      "Hurtado",
+      "Loeschbor",
+      "Cuadrado",
+      "Clavero",
+      "Acciari",
+      "Gancedo",
+      "Julio Álvarez",
+      "Fredi",
+      "Richi",
+      "Luis García",
+      "Michel",
+      "David Karanka",
+      "Esnaider"
+    ],
+    "portada": "imagesAlbumes/paniniCracks2003-04.png"
+  },
+  {
     "nombre": "Las Fichas de la Liga 2004",
     "cromos": [
       "Escudo",
@@ -383,52 +582,99 @@
     "portada": "imagesAlbumes/fichasLiga2004.png"
   },
   {
-    "nombre": "Superliga de Estrellas 2003/04",
-    "cromos": [
-      "Escudo",
-      "Alineación",
-      "Juanmi",
-      "Maciel",
-      "Loeschbor",
-      "Cuadrado",
-      "Pedro Largo",
-      "Roteta",
-      "Carreras",
-      "Juanma",
-      "Acciari",
-      "Roberto",
-      "Julio Álvarez",
-      "Fredi",
-      "Michel",
-      "Jensen",
-      "Richi",
-      "Luis García",
-      "Esnaider",
-      "Sánchez Broto"
-    ],
-    "portada": "imagesAlbumes/superligaEstrellas2003-04.png"
-  },
-  {
-    "nombre": "Top Liga 2003/04",
-    "cromos": [
-      "Bonano",
-      "Valero",
-      "Loeschbor",
-      "Luis García",
-      "Acciari",
-      "Gancedo",
-      "Juárez",
-      "Cuadrado/Iván Angulo/David Karanka/Richi"
-    ],
-    "portada": "imagesAlbumes/topLiga2003-04.png"
-  },
-  {
     "nombre": "Megacracks 2004/05",
     "cromos": [
       "Escudo Real Murcia",
       "Acciari"
     ],
     "portada": "imagesAlbumes/megacracks2004-05.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2005",
+    "cromos": [
+      "Escudo Murcia",
+      "Índice Murcia",
+      "Juanmi",
+      "Juanma",
+      "Maciel",
+      "Sietes",
+      "Valera",
+      "Cuadrado",
+      "Carrera",
+      "Acciari",
+      "Medina",
+      "Michel",
+      "Pulido",
+      "Munteanu",
+      "Julio Álvarez",
+      "Richi",
+      "David Karanka",
+      "Iván Alonso"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2005.png"
+  },
+  {
+    "nombre": "Megacracks 2005/06",
+    "cromos": ["Escudo Real Murcia"],
+    "portada": "imagesAlbumes/megacracks2005-06.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2006",
+    "cromos": [
+      "Escudo Murcia",
+      "Índice",
+      "Juanmi",
+      "Corona",
+      "Cuadrado",
+      "Juanma",
+      "Pignol",
+      "Acciari",
+      "Carrera",
+      "Julio Álvarez",
+      "Michel",
+      "Pedro León",
+      "Pulido",
+      "Samuel",
+      "P. Sierra",
+      "D. Alonso",
+      "Iván Alonso",
+      "M. Kreuz",
+      "Richi"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2006.png"
+  },
+  {
+    "nombre": "Megacracks 2006/07",
+    "cromos": ["Escudo Real Murcia"],
+    "portada": "imagesAlbumes/megacracks2006-07.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2007",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Plantilla Murcia",
+      "Notario",
+      "Juanma",
+      "Marañón",
+      "Ochoa",
+      "Paco Peña",
+      "Cuadrado",
+      "Ramón",
+      "Pignol",
+      "Abel",
+      "Pablo Ruiz",
+      "Samuel",
+      "Jofre",
+      "Pedro León",
+      "Iván Alonso",
+      "Aranda",
+      "Antoñito",
+      "Tato",
+      "Richi",
+      "Gallardo",
+      "A. Martín"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2007.png"
   },
   {
     "nombre": "Liga Este 2007/08",
@@ -466,9 +712,204 @@
     "portada": "imagesAlbumes/ligaeste2007-08.png"
   },
   {
+    "nombre": "Megacracks 2007/08",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Notario",
+      "Carini",
+      "Pignol",
+      "Cuadrado",
+      "Ochoa",
+      "César Arzo",
+      "Paco Peña",
+      "Marañón",
+      "Curro Torres",
+      "Abel",
+      "Pablo García",
+      "De Lucas",
+      "Richi",
+      "Pedro León",
+      "Regueiro",
+      "Gallardo",
+      "Jofre",
+      "Iñigo Vélez",
+      "Henok Goitom",
+      "Iván Alonso",
+      "Mejía - Últimos Fichajes",
+      "Baiano - Últimos Fichajes",
+      "Movilla - Últimos Fichajes"
+    ],
+    "portada": "imagesAlbumes/megacracks2007-08.png"
+  },
+  {
+    "nombre": "Ediciones Estadio Liga 2007/08",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Entrenador Lucas Alcaraz",
+      "Notario",
+      "Carini",
+      "Pignol",
+      "Cuadrado",
+      "Ochoa",
+      "Paco Peña",
+      "Marañón",
+      "César Arzo",
+      "Richi",
+      "De Lucas",
+      "Regueiro",
+      "Bruno",
+      "Pedro León",
+      "Gallardo",
+      "Jofre",
+      "Iván Alonso",
+      "Henok Goitom",
+      "Mejía - Últimos Fichajes",
+      "Baiano - Últimos Fichajes"
+    ],
+    "portada": "imagesAlbumes/estadio2007-08.png"
+  },
+  {
+    "nombre": "Minimag Liga 2007/08",
+    "cromos": [
+      "Notario",
+      "Cuadrado",
+      "Juanma",
+      "Ochoa",
+      "Mejía",
+      "Paco Peña",
+      "Pignol",
+      "Abel",
+      "Jofre",
+      "Pedro León",
+      "Pablo García",
+      "Regueiro",
+      "Cesar Arzo",
+      "Gallardo",
+      "De Lucas",
+      "Baiano",
+      "Henok Goitom",
+      "Iván Alonso",
+      "Richi"
+    ],
+    "portada": "imagesAlbumes/minimag2007-08.png"
+  },
+  {
+    "nombre": "Panini Play Liga 2007/08",
+    "cromos": [
+      "Notario",
+      "Curro Torres",
+      "Mejía",
+      "César Arzo",
+      "Pablo García",
+      "Movilla",
+      "De Lucas",
+      "Regueiro",
+      "Henok Goitom",
+      "Baiano",
+      "Iván Alonso"
+    ],
+    "portada": "imagesAlbumes/playLiga2007-08.png"
+  },
+  {
+    "nombre": "El Juego de la Liga 2007/08",
+    "cromos": [
+      "César Arzo",
+      "De Lucas",
+      "Baiano",
+      "Henok Goitom",
+      "Iván Alonso",
+      "Jofre",
+      "Mejía",
+      "Notario",
+      "Pablo García",
+      "Paco Peña",
+      "Pignol"
+    ],
+    "portada": "imagesAlbumes/juegoLiga2007-08.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2008",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Plantilla",
+      "Himno",
+      "Entrenador Lucas Alcaraz",
+      "Notario",
+      "Carini",
+      "Pignol",
+      "Marañón",
+      "Cuadrado",
+      "Ochoa",
+      "Paco Peña",
+      "César Arzo",
+      "Mejía",
+      "Abel",
+      "Pablo García",
+      "Bruno",
+      "De Lucas",
+      "Richi",
+      "Gallardo",
+      "Baiano",
+      "Jofre",
+      "Iván Alonso",
+      "Henok Goitom",
+      "Iñigo Vélez",
+      "Iban Cuadrado El Capitán",
+      "Notario El Crack",
+      "Iván Alonso El Mejor",
+      "Curro Torres",
+      "Regueiro",
+      "Movilla",
+      "Notario TOP Platinum/Brillantes/Security",
+      "Paco Peña TOP Platinum/Brillantes/Security",
+      "Regueiro TOP Platinum/Brillantes/Security",
+      "De Coz",
+      "Rosinei",
+      "Aquino"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2008.png"
+  },
+  {
     "nombre": "Liga Este 2008/09",
     "cromos": ["Liga Adelante - Escudo Real Murcia"],
     "portada": "imagesAlbumes/ligaeste2008-09.png"
+  },
+  {
+    "nombre": "Megacracks 2008/09",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Iván Alonso"
+    ],
+    "portada": "imagesAlbumes/megacracks2008-09.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2009",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Plantilla Murcia",
+      "Alberto",
+      "Paco Peña",
+      "Lillo",
+      "Ochoa",
+      "De Coz",
+      "Mejía",
+      "Cuellar",
+      "Guerrero",
+      "Núñez",
+      "Bruno",
+      "Dialiba",
+      "Capdevila",
+      "De Lucas",
+      "Aquino",
+      "Despotovic",
+      "Iván Alonso",
+      "Sikora",
+      "Elia",
+      "Marañón",
+      "Movilla",
+      "Montoro"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2009.png"
   },
   {
     "nombre": "Liga Este 2009/10",
@@ -476,9 +917,76 @@
     "portada": "imagesAlbumes/ligaeste2009-10.png"
   },
   {
+    "nombre": "Las Fichas de la Liga 2010",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Nueva Condomina",
+      "Campos",
+      "Elía",
+      "Óscar Sánchez",
+      "Ochoa",
+      "Sergio Fernández",
+      "De Coz",
+      "Iñaki Bea",
+      "Bruno",
+      "Albiol",
+      "Luque",
+      "Pereyra",
+      "Mario Rosas",
+      "Capdevila",
+      "Isaac Jové",
+      "Pedro",
+      "Natalio",
+      "Kike",
+      "Índice",
+      "Sergio Fernández Superstar",
+      "Aquino",
+      "Mejía",
+      "Alberto Cifuentes",
+      "Pico",
+      "Sergio",
+      "Aguilera",
+      "José González",
+      "Chando"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2010.png"
+  },
+  {
     "nombre": "Liga Este 2011/12",
     "cromos": ["Liga Adelante - Escudo Real Murcia"],
     "portada": "imagesAlbumes/ligaeste2011-12.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2012",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Nueva Condomina",
+      "Iñaki Alonso",
+      "Alberto",
+      "Mario Marín",
+      "Molinero",
+      "Oriol",
+      "Iván Amaya",
+      "Jorge",
+      "Óscar Sánchez",
+      "Aguilera",
+      "Cerrajería",
+      "Iturra",
+      "Emilio Sánchez",
+      "Richi",
+      "Isaac",
+      "Sutil",
+      "Kike",
+      "Índice",
+      "Iturra Superstar",
+      "Sutil Superstar",
+      "Nico",
+      "Pedro",
+      "Borja",
+      "Chando",
+      "Ruso"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2012.png"
   },
   {
     "nombre": "Liga Este 2012/13",
@@ -486,9 +994,72 @@
     "portada": "imagesAlbumes/ligaeste2012-13.png"
   },
   {
+    "nombre": "Las Fichas de la Liga 2013",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Nueva Condomina",
+      "Gustavo Siviero",
+      "Javi Jiménez",
+      "Molinero",
+      "Tagliafico",
+      "Mauro Dos Santos",
+      "Óscar Sánchez",
+      "Matilla",
+      "Emilio Sánchez",
+      "Nico Martínez",
+      "Nafti",
+      "Jonathan",
+      "Sutil",
+      "Cristian",
+      "Índice",
+      "Tagliafico Superstar",
+      "Cristian García Superstar",
+      "Acciari",
+      "Higinio",
+      "Onésimo",
+      "Eddy Silvestre",
+      "Kike García",
+      "Saúl Berjón",
+      "Pifarré",
+      "Catalá"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2013.png"
+  },
+  {
     "nombre": "Liga Este 2013/14",
     "cromos": ["Liga Adelante - Escudo Real Murcia/Numancia"],
     "portada": "imagesAlbumes/ligaeste2013-14.png"
+  },
+  {
+    "nombre": "Las Fichas de la Liga 2014",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Nueva Condomina",
+      "Julio Velázquez",
+      "Casto",
+      "Molinero",
+      "Mauro",
+      "Albiol",
+      "Acciari",
+      "Malonga",
+      "Dorca",
+      "Toribio",
+      "Iván Moreno",
+      "Tete",
+      "Wellington Silva",
+      "Kike",
+      "Índice",
+      "Acciari Superstar",
+      "Kike Superstar",
+      "Truyols",
+      "Óscar Sánchez",
+      "Saúl Berjón",
+      "Fernando",
+      "Álex Martínez",
+      "Alcalá",
+      "Dani Bautista"
+    ],
+    "portada": "imagesAlbumes/fichasLiga2014.png"
   },
   {
     "nombre": "Liga Este 2014/15",
