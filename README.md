@@ -1,4 +1,4 @@
-# Checklist de Cromos del Ciudad de Murcia
+# Checklist de Cromos del Real Murcia
 
 ## Cambios Recientes - Separación del Login
 
