@@ -72,6 +72,34 @@
     "portada": "imagesAlbumes/ligaeste1974-75.png"
   },
   {
+    "nombre": "Campeonato de Liga 1974-1975",
+    "cromos": [
+      "Ojeda",
+      "Oregui",
+      "Ponce",
+      "José",
+      "Abel Pérez",
+      "Canito",
+      "Herrero",
+      "Pazos",
+      "Ruiz Abellán",
+      "Murciano",
+      "Vera Palmes",
+      "Taverna",
+      "García Soriano",
+      "Juárez",
+      "Verza",
+      "Casco",
+      "Escudo/Ojeda/Oregui/Ponce",
+      "Murciano/José/Abel Pérez/Pazos",
+      "G. Soriano/Canito/Ruiz Abellán/Herrero",
+      "Vera Palmes/Verza/Juárez/Taberna",
+      "Dick Van Dijk - Fichajes de Última Hora",
+      "Laredo - Fichajes de Última Hora"
+    ],
+    "portada": "imagesAlbumes/campeonatoLiga1974-75.png"
+  },
+  {
     "nombre": "Liga Este 1980/81",
     "cromos": [
       "Echevarría",
@@ -710,6 +738,18 @@
       "Kabous - Mercado de Invierno"
     ],
     "portada": "imagesAlbumes/ligaeste2007-08.png"
+  },
+  {
+    "nombre": "Chicle Liga 2007/08",
+    "cromos": [
+      "Notario/Curro Torres",
+      "Mejía/César Arzo",
+      "Paco Peña/Pablo García",
+      "Movilla/Richi",
+      "De Lucas/Regueiro",
+      "Iván Alonso/Baiano"
+    ],
+    "portada": "imagesAlbumes/chiclesLiga2007-08.png"
   },
   {
     "nombre": "Megacracks 2007/08",
