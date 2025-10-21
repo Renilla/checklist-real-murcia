@@ -622,22 +622,14 @@
     "cromos": [
       "Escudo Real Murcia",
       "Índice Murcia",
-      "Juanmi",
-      "Juanma",
-      "Maciel",
-      "Sietes",
-      "Valera",
-      "Cuadrado",
-      "Carrera",
-      "Acciari",
-      "Medina",
-      "Michel",
-      "Pulido",
-      "Munteanu",
-      "Julio Álvarez",
-      "Richi",
-      "David Karanka",
-      "Iván Alonso"
+      "Juanmi/Juanma",
+      "Maciel/Sietes",
+      "Valera/Cuadrado",
+      "Carrera/Acciari",
+      "Medina/Michel",
+      "Pulido/Munteanu",
+      "Julio Álvarez/Richi",
+      "David Karanka/Iván Alonso"
     ],
     "portada": "imagesAlbumes/fichasLiga2005.png"
   },
@@ -961,7 +953,7 @@
     "cromos": [
       "Escudo Real Murcia",
       "Nueva Condomina",
-      "Campos",
+      "Entrenador Campos",
       "Elía",
       "Óscar Sánchez",
       "Ochoa",
@@ -986,7 +978,7 @@
       "Pico",
       "Sergio",
       "Aguilera",
-      "José González",
+      "Entrenador José González",
       "Chando"
     ],
     "portada": "imagesAlbumes/fichasLiga2010.png"
@@ -1001,7 +993,7 @@
     "cromos": [
       "Escudo Real Murcia",
       "Nueva Condomina",
-      "Iñaki Alonso",
+      "Entrenador Iñaki Alonso",
       "Alberto",
       "Mario Marín",
       "Molinero",
@@ -1038,7 +1030,7 @@
     "cromos": [
       "Escudo Real Murcia",
       "Nueva Condomina",
-      "Gustavo Siviero",
+      "Entrenador Gustavo Siviero",
       "Javi Jiménez",
       "Molinero",
       "Tagliafico",
@@ -1080,7 +1072,7 @@
     "cromos": [
       "Escudo Real Murcia",
       "Nueva Condomina",
-      "Julio Velázquez",
+      "Entrenador Julio Velázquez",
       "Casto",
       "Molinero",
       "Mauro",
