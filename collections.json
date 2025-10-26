@@ -565,6 +565,27 @@
     "portada": "imagesAlbumes/paniniCracks2003-04.png"
   },
   {
+    "nombre": "Panini Liga 2003/04 Stacks",
+    "cromos": [
+      "Juanmi",
+      "Juanma",
+      "Iban Cuadrado",
+      "Loeschbor",
+      "Roteta",
+      "Carreras",
+      "Maciel",
+      "Acciari",
+      "Romero",
+      "Michel",
+      "Fredi",
+      "Jensen",
+      "Luis García",
+      "Richi",
+      "Esnaider"
+    ],
+    "portada": "imagesAlbumes/stacks2003-04.png"
+  },
+  {
     "nombre": "Las Fichas de la Liga 2004",
     "cromos": [
       "Escudo Real Murcia",
