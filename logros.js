@@ -28,6 +28,7 @@ const achievementMapping = {
   "Superliga de Estrellas 2003/04": "Superliga de Estrellas 2003/04",
   "Top Liga 2003/04": "Top Liga 2003/04",
   "Panini Liga Cracks 2003/04": "Panini Liga Cracks 2003/04",
+  "Panini Liga 2003/04 Stacks": "Panini Liga 2003/04 Stacks",
   "Las Fichas de la Liga 2004": "Las Fichas de la Liga 2004",
   "Megacracks 2004/05": "Megacracks 2004/05",
   "Las Fichas de la Liga 2005": "Las Fichas de la Liga 2005",
