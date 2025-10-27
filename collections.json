@@ -631,14 +631,6 @@
     "portada": "imagesAlbumes/fichasLiga2004.png"
   },
   {
-    "nombre": "Megacracks 2004/05",
-    "cromos": [
-      "Escudo Real Murcia",
-      "Acciari"
-    ],
-    "portada": "imagesAlbumes/megacracks2004-05.png"
-  },
-  {
     "nombre": "Las Fichas de la Liga 2005",
     "cromos": [
       "Escudo Real Murcia",
@@ -655,9 +647,12 @@
     "portada": "imagesAlbumes/fichasLiga2005.png"
   },
   {
-    "nombre": "Megacracks 2005/06",
-    "cromos": ["Escudo Real Murcia"],
-    "portada": "imagesAlbumes/megacracks2005-06.png"
+    "nombre": "Megacracks 2004/05",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Acciari"
+    ],
+    "portada": "imagesAlbumes/megacracks2004-05.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2006",
@@ -685,9 +680,9 @@
     "portada": "imagesAlbumes/fichasLiga2006.png"
   },
   {
-    "nombre": "Megacracks 2006/07",
+    "nombre": "Megacracks 2005/06",
     "cromos": ["Escudo Real Murcia"],
-    "portada": "imagesAlbumes/megacracks2006-07.png"
+    "portada": "imagesAlbumes/megacracks2005-06.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2007",
@@ -716,6 +711,11 @@
       "A. Martín"
     ],
     "portada": "imagesAlbumes/fichasLiga2007.png"
+  },
+  {
+    "nombre": "Megacracks 2006/07",
+    "cromos": ["Escudo Real Murcia"],
+    "portada": "imagesAlbumes/megacracks2006-07.png"
   },
   {
     "nombre": "Liga Este 2007/08",
@@ -923,19 +923,6 @@
     "portada": "imagesAlbumes/fichasLiga2008.png"
   },
   {
-    "nombre": "Liga Este 2008/09",
-    "cromos": ["Liga Adelante - Escudo Real Murcia"],
-    "portada": "imagesAlbumes/ligaeste2008-09.png"
-  },
-  {
-    "nombre": "Megacracks 2008/09",
-    "cromos": [
-      "Escudo Real Murcia",
-      "Iván Alonso"
-    ],
-    "portada": "imagesAlbumes/megacracks2008-09.png"
-  },
-  {
     "nombre": "Las Fichas de la Liga 2009",
     "cromos": [
       "Escudo Real Murcia",
@@ -965,9 +952,17 @@
     "portada": "imagesAlbumes/fichasLiga2009.png"
   },
   {
-    "nombre": "Liga Este 2009/10",
+    "nombre": "Liga Este 2008/09",
     "cromos": ["Liga Adelante - Escudo Real Murcia"],
-    "portada": "imagesAlbumes/ligaeste2009-10.png"
+    "portada": "imagesAlbumes/ligaeste2008-09.png"
+  },
+  {
+    "nombre": "Megacracks 2008/09",
+    "cromos": [
+      "Escudo Real Murcia",
+      "Iván Alonso"
+    ],
+    "portada": "imagesAlbumes/megacracks2008-09.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2010",
@@ -1005,9 +1000,9 @@
     "portada": "imagesAlbumes/fichasLiga2010.png"
   },
   {
-    "nombre": "Liga Este 2011/12",
+    "nombre": "Liga Este 2009/10",
     "cromos": ["Liga Adelante - Escudo Real Murcia"],
-    "portada": "imagesAlbumes/ligaeste2011-12.png"
+    "portada": "imagesAlbumes/ligaeste2009-10.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2012",
@@ -1042,9 +1037,9 @@
     "portada": "imagesAlbumes/fichasLiga2012.png"
   },
   {
-    "nombre": "Liga Este 2012/13",
+    "nombre": "Liga Este 2011/12",
     "cromos": ["Liga Adelante - Escudo Real Murcia"],
-    "portada": "imagesAlbumes/ligaeste2012-13.png"
+    "portada": "imagesAlbumes/ligaeste2011-12.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2013",
@@ -1079,14 +1074,9 @@
     "portada": "imagesAlbumes/fichasLiga2013.png"
   },
   {
-    "nombre": "Liga Este 2013/14",
-    "cromos": ["Liga Adelante - Escudo Real Murcia/Numancia"],
-    "portada": "imagesAlbumes/ligaeste2013-14.png"
-  },
-  {
-    "nombre": "Megacracks 2013/14",
-    "cromos": ["Escudo Real Murcia"],
-    "portada": "imagesAlbumes/megacracks2013-14.png"
+    "nombre": "Liga Este 2012/13",
+    "cromos": ["Liga Adelante - Escudo Real Murcia"],
+    "portada": "imagesAlbumes/ligaeste2012-13.png"
   },
   {
     "nombre": "Las Fichas de la Liga 2014",
@@ -1118,6 +1108,16 @@
       "Dani Bautista"
     ],
     "portada": "imagesAlbumes/fichasLiga2014.png"
+  },
+  {
+    "nombre": "Liga Este 2013/14",
+    "cromos": ["Liga Adelante - Escudo Real Murcia/Numancia"],
+    "portada": "imagesAlbumes/ligaeste2013-14.png"
+  },
+  {
+    "nombre": "Megacracks 2013/14",
+    "cromos": ["Escudo Real Murcia"],
+    "portada": "imagesAlbumes/megacracks2013-14.png"
   },
   {
     "nombre": "Liga Este 2014/15",
